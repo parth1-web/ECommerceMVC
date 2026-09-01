@@ -1,0 +1,64 @@
+﻿@model List<ECommerceMVC.Models.CategoryViewModel>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="container mt-5">
+
+    <div class="text-center mb-5">
+
+        <h1>Our Categories</h1>
+
+        <p class="text-muted">
+            Explore our traditional Nepali homemade achar.
+        </p>
+
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center">
+            No categories are currently available.
+        </div>
+    }
+    else
+    {
+        <div class="row">
+
+            @foreach (var category in Model)
+            {
+                <div class="col-md-4 mb-4">
+
+                    <div class="card shadow-sm h-100">
+
+                        <div class="card-body">
+
+                            <h4 class="card-title">
+                                @category.Name
+                            </h4>
+
+                            <p class="card-text text-muted">
+                                @category.Description
+                            </p>
+
+                            <a asp-controller="Categories"
+                               asp-action="Details"
+                               asp-route-id="@category.Id"
+                               class="btn btn-primary">
+
+                                View Category
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+
+</div>

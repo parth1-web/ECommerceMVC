@@ -1,0 +1,121 @@
+﻿
+@model ECommerceMVC.Models.Api.EsewaInitiateResponseDto
+
+@{
+    ViewData["Title"] = "Redirecting to eSewa";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-7">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body text-center p-5">
+
+                    <h2 class="mb-3">
+                        Redirecting to eSewa
+                    </h2>
+
+                    <p class="text-muted mb-4">
+                        Please wait while we redirect you
+                        to the eSewa payment page.
+                    </p>
+
+                    <div class="spinner-border mb-4"
+                         role="status">
+
+                        <span class="visually-hidden">
+                            Loading...
+                        </span>
+
+                    </div>
+
+                    <p class="small text-muted">
+                        Order #@Model.OrderId
+                    </p>
+
+                    <p class="fw-bold">
+                        Amount:
+                        Rs. @Model.Amount.ToString("N2")
+                    </p>
+
+
+                    <form id="esewaForm"
+                          method="POST"
+                          action="@Model.PaymentUrl">
+
+                        <input type="hidden"
+                               name="amount"
+                               value="@Model.FormData.Amount" />
+
+                        <input type="hidden"
+                               name="tax_amount"
+                               value="@Model.FormData.TaxAmount" />
+
+                        <input type="hidden"
+                               name="total_amount"
+                               value="@Model.FormData.TotalAmount" />
+
+                        <input type="hidden"
+                               name="transaction_uuid"
+                               value="@Model.FormData.TransactionUuid" />
+
+                        <input type="hidden"
+                               name="product_code"
+                               value="@Model.FormData.ProductCode" />
+
+                        <input type="hidden"
+                               name="product_service_charge"
+                               value="@Model.FormData.ProductServiceCharge" />
+
+                        <input type="hidden"
+                               name="product_delivery_charge"
+                               value="@Model.FormData.ProductDeliveryCharge" />
+
+                        <input type="hidden"
+                               name="success_url"
+                               value="@Model.FormData.SuccessUrl" />
+
+                        <input type="hidden"
+                               name="failure_url"
+                               value="@Model.FormData.FailureUrl" />
+
+                        <input type="hidden"
+                               name="signed_field_names"
+                               value="@Model.FormData.SignedFieldNames" />
+
+                        <input type="hidden"
+                               name="signature"
+                               value="@Model.FormData.Signature" />
+
+                        <noscript>
+                            <button type="submit"
+                                    class="btn btn-primary">
+                                Continue to eSewa
+                            </button>
+                        </noscript>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        document.getElementById("esewaForm").submit();
+
+    });
+</script>
+

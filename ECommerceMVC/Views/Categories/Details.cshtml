@@ -1,0 +1,57 @@
+﻿@model ECommerceMVC.Models.CategoryViewModel
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h1 class="card-title">
+                        @Model.Name
+                    </h1>
+
+                    <p class="lead mt-3">
+                        @Model.Description
+                    </p>
+
+                    <p class="text-muted">
+                        Traditional Nepali homemade products
+                    </p>
+
+                    <div class="mt-4">
+
+                        <a asp-controller="Products"
+                           asp-action="Index"
+                           class="btn btn-primary">
+
+                            View Products
+
+                        </a>
+
+                        <a asp-controller="Categories"
+                           asp-action="Index"
+                           class="btn btn-outline-secondary">
+
+                            Back to Categories
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

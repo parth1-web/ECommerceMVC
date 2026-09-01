@@ -1,0 +1,189 @@
+﻿@model List<ECommerceMVC.Models.Api.OrderDto>
+
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+<div class="container py-5">
+
+    <!-- ============================================== -->
+    <!-- PAGE HEADER -->
+    <!-- ============================================== -->
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h1 class="mb-1">
+                My Orders
+            </h1>
+
+            <p class="text-muted mb-0">
+                View and manage your orders.
+            </p>
+        </div>
+
+        <a asp-controller="Products"
+           asp-action="Index"
+           class="btn btn-outline-primary">
+
+            Continue Shopping
+
+        </a>
+
+    </div>
+
+
+    <!-- ============================================== -->
+    <!-- ORDERS -->
+    <!-- ============================================== -->
+    @if (Model == null || !Model.Any())
+    {
+        <div class="card shadow-sm">
+
+            <div class="card-body text-center py-5">
+
+                <div class="display-4 mb-3">
+                    📦
+                </div>
+
+                <h4>
+                    No Orders Yet
+                </h4>
+
+                <p class="text-muted">
+                    You haven't placed any orders yet.
+                </p>
+
+                <a asp-controller="Products"
+                   asp-action="Index"
+                   class="btn btn-primary">
+
+                    Start Shopping
+
+                </a>
+
+            </div>
+
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+
+            @foreach (var order in Model)
+            {
+                <div class="col-12">
+
+                    <div class="card shadow-sm">
+
+                        <!-- ====================================== -->
+                        <!-- ORDER HEADER -->
+                        <!-- ====================================== -->
+
+                        <div class="card-header">
+
+                            <div class="row align-items-center">
+
+                                <div class="col-md-6">
+
+                                    <strong>
+                                        Order #@order.Id
+                                    </strong>
+
+                                </div>
+
+                                <div class="col-md-6 text-md-end">
+
+                                    <span class="text-muted">
+                                        @order.OrderDate.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ====================================== -->
+                        <!-- ORDER BODY -->
+                        <!-- ====================================== -->
+
+                        <div class="card-body">
+
+                            <div class="row align-items-center">
+
+                                <!-- STATUS -->
+
+                                <div class="col-md-4 mb-3 mb-md-0">
+
+                                    <small class="text-muted d-block">
+                                        Status
+                                    </small>
+
+                                    @if (order.Status == 1)
+                                    {
+                                        <span class="badge bg-warning text-dark">
+                                            Pending
+                                        </span>
+                                    }
+                                    else if (order.Status == 6)
+                                    {
+                                        <span class="badge bg-danger">
+                                            Cancelled
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">
+                                            @order.Status
+                                        </span>
+                                    }
+
+                                </div>
+
+
+                                <!-- TOTAL -->
+
+                                <div class="col-md-4 mb-3 mb-md-0">
+
+                                    <small class="text-muted d-block">
+                                        Total
+                                    </small>
+
+                                    <strong class="text-success">
+                                        Rs.
+                                        @order.TotalAmount.ToString("N2")
+                                    </strong>
+
+                                </div>
+
+
+                                <!-- ACTIONS -->
+
+                                <div class="col-md-4 text-md-end">
+
+                                    <a asp-controller="Orders"
+                                       asp-action="Details"
+                                       asp-route-id="@order.Id"
+                                       class="btn btn-primary">
+
+                                        View Details
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+
+</div>

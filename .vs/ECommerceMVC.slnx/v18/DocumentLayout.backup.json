@@ -1,0 +1,1006 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\payment\\esewaredirect.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\payment\\esewaredirect.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\controllers\\paymentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\services\\paymentapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\services\\paymentapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\services\\ipaymentapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\services\\ipaymentapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\api\\esewainitiateresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\api\\esewainitiateresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\controllers\\checkoutcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\payment\\select.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\payment\\select.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\api\\khaltiinitiateresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\api\\khaltiinitiateresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\api\\paymentrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\api\\paymentrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\api\\paymentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\api\\paymentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\orders\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\orders\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\orders\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\orders\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\checkout\\confirmation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\checkout\\confirmation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\checkout\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\api\\cartdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\api\\cartdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\products\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\products\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\services\\orderapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\services\\orderapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\services\\iorderapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\services\\iorderapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\api\\orderitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\api\\orderitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\api\\orderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\api\\orderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\cart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\cart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\services\\cartapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\services\\cartapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\handlers\\jwtauthorizationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\handlers\\jwtauthorizationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\checkout\\success.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\checkout\\success.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\api\\cartitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\api\\cartitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\services\\icartapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\services\\icartapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\productviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\api\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\api\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\account\\accessdenied.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\account\\accessdenied.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\api\\updatecartitemrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\api\\updatecartitemrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\api\\addcartitemrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\api\\addcartitemrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\services\\authapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\services\\authapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\services\\productapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\services\\productapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\home\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\home\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\services\\iauthapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\services\\iauthapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\api\\authresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\api\\authresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\api\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\api\\loginrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\api\\registerrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\api\\registerrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\services\\icategoryapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\services\\icategoryapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\services\\categoryapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\services\\categoryapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\categories\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\categories\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\categories\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\categories\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\categoryviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\categoryviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\api\\categorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\api\\categorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\products\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\products\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\services\\iproductapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\services\\iproductapiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\models\\api\\productlistresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\models\\api\\productlistresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|c:\\users\\lenovo\\source\\repos\\ecommercemvc\\ecommercemvc\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9FC760F5-3546-E258-0666-6DC5CDE2A534}|ECommerceMVC\\ECommerceMVC.csproj|solutionrelative:ecommercemvc\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EsewaRedirect.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Payment\\EsewaRedirect.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Payment\\EsewaRedirect.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Payment\\EsewaRedirect.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Payment\\EsewaRedirect.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-31T06:01:08.539Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EsewaInitiateResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\EsewaInitiateResponseDto.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\Api\\EsewaInitiateResponseDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\EsewaInitiateResponseDto.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\Api\\EsewaInitiateResponseDto.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAA9wAgAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-31T05:58:29.998Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Select.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Payment\\Select.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Payment\\Select.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Payment\\Select.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Payment\\Select.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOcAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-30T07:43:53.653Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PaymentController.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Controllers\\PaymentController.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Controllers\\PaymentController.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Controllers\\PaymentController.cs",
+              "RelativeToolTip": "ECommerceMVC\\Controllers\\PaymentController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-30T07:42:22.651Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PaymentApiService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\PaymentApiService.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Services\\PaymentApiService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\PaymentApiService.cs",
+              "RelativeToolTip": "ECommerceMVC\\Services\\PaymentApiService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-30T07:40:48.086Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IPaymentApiService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\IPaymentApiService.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Services\\IPaymentApiService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\IPaymentApiService.cs",
+              "RelativeToolTip": "ECommerceMVC\\Services\\IPaymentApiService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-30T07:40:19.926Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "KhaltiInitiateResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\KhaltiInitiateResponseDto.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\Api\\KhaltiInitiateResponseDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\KhaltiInitiateResponseDto.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\Api\\KhaltiInitiateResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-30T07:39:53.145Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PaymentRequestDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\PaymentRequestDto.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\Api\\PaymentRequestDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\PaymentRequestDto.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\Api\\PaymentRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-30T07:39:27.295Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PaymentDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\PaymentDto.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\Api\\PaymentDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\PaymentDto.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\Api\\PaymentDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-30T07:38:56.757Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CheckoutController.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Controllers\\CheckoutController.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Controllers\\CheckoutController.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Controllers\\CheckoutController.cs",
+              "RelativeToolTip": "ECommerceMVC\\Controllers\\CheckoutController.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAA5wFEAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-30T06:20:32.021Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Orders\\Details.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Orders\\Details.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Orders\\Details.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Orders\\Details.cshtml",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAmwDkAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-30T07:18:56.206Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Orders\\Index.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Orders\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Orders\\Index.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Orders\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-30T07:18:19.23Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "OrdersController.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Controllers\\OrdersController.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Controllers\\OrdersController.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Controllers\\OrdersController.cs",
+              "RelativeToolTip": "ECommerceMVC\\Controllers\\OrdersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-30T07:17:03.286Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Program.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Program.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Program.cs",
+              "RelativeToolTip": "ECommerceMVC\\Program.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAmwJAAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T07:50:29.199Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Confirmation.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Checkout\\Confirmation.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Checkout\\Confirmation.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Checkout\\Confirmation.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Checkout\\Confirmation.cshtml",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAADIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-30T06:59:31.123Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "OrderDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\OrderDto.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\Api\\OrderDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\OrderDto.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\Api\\OrderDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-30T06:21:53.579Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "OrderItemDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\OrderItemDto.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\Api\\OrderItemDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\OrderItemDto.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\Api\\OrderItemDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-30T06:22:43.295Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "IOrderApiService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\IOrderApiService.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Services\\IOrderApiService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\IOrderApiService.cs",
+              "RelativeToolTip": "ECommerceMVC\\Services\\IOrderApiService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-30T06:23:32.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "OrderApiService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\OrderApiService.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Services\\OrderApiService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\OrderApiService.cs",
+              "RelativeToolTip": "ECommerceMVC\\Services\\OrderApiService.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAmwGgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-30T06:23:57.984Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Checkout\\Index.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Checkout\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Checkout\\Index.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Checkout\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAG8AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-30T06:21:08.268Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "CartDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\CartDto.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\Api\\CartDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\CartDto.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\Api\\CartDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T08:31:06.824Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Products\\Index.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Products\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Products\\Index.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Products\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-27T06:24:54.698Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-27T06:58:04.587Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\appsettings.json",
+              "RelativeDocumentMoniker": "ECommerceMVC\\appsettings.json",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\appsettings.json",
+              "RelativeToolTip": "ECommerceMVC\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-08-27T07:51:21.949Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Cart\\Index.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Cart\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Cart\\Index.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Cart\\Index.cshtml",
+              "ViewState": "AgIAAIIBAAAAAAAAAAAmwJ0BAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-28T08:35:00.756Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "CartController.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Controllers\\CartController.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Controllers\\CartController.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Controllers\\CartController.cs",
+              "RelativeToolTip": "ECommerceMVC\\Controllers\\CartController.cs",
+              "ViewState": "AgIAAJsAAAAAAAAAAAAmwK8AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T08:34:03.06Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "CartApiService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\CartApiService.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Services\\CartApiService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\CartApiService.cs",
+              "RelativeToolTip": "ECommerceMVC\\Services\\CartApiService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKEAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T08:33:16.26Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "ECommerceMVC\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAOIAAAAAAAAAAAAmwPcAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T06:01:49.67Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "JwtAuthorizationHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Handlers\\JwtAuthorizationHandler.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Handlers\\JwtAuthorizationHandler.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Handlers\\JwtAuthorizationHandler.cs",
+              "RelativeToolTip": "ECommerceMVC\\Handlers\\JwtAuthorizationHandler.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAmwCYAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T09:46:14.709Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Success.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Checkout\\Success.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Checkout\\Success.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Checkout\\Success.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Checkout\\Success.cshtml",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAmwHwAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-30T06:21:25.501Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "ProductDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\ProductDto.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\Api\\ProductDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\ProductDto.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\Api\\ProductDto.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAiwBAAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T07:47:14.184Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "ProductViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\ProductViewModel.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\ProductViewModel.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\ProductViewModel.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\ProductViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T06:43:26.942Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "CartItemDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\CartItemDto.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\Api\\CartItemDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\CartItemDto.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\Api\\CartItemDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T08:30:24.478Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ICartApiService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\ICartApiService.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Services\\ICartApiService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\ICartApiService.cs",
+              "RelativeToolTip": "ECommerceMVC\\Services\\ICartApiService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T08:32:44.375Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "ECommerceMVC\\Controllers\\ProductsController.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAkwDMAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T06:07:58.236Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "AccessDenied.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Account\\AccessDenied.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Account\\AccessDenied.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Account\\AccessDenied.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Account\\AccessDenied.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-28T06:29:22.669Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Account\\Register.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Account\\Register.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Account\\Register.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Account\\Register.cshtml",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-28T06:05:23.095Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAAFQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-28T06:04:53.276Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "UpdateCartItemRequestDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\UpdateCartItemRequestDto.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\Api\\UpdateCartItemRequestDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\UpdateCartItemRequestDto.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\Api\\UpdateCartItemRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T08:32:11.938Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "AddCartItemRequestDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\AddCartItemRequestDto.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\Api\\AddCartItemRequestDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\AddCartItemRequestDto.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\Api\\AddCartItemRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T08:31:41.339Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "ProductApiService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\ProductApiService.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Services\\ProductApiService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\ProductApiService.cs",
+              "RelativeToolTip": "ECommerceMVC\\Services\\ProductApiService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T07:49:32.916Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "AuthApiService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\AuthApiService.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Services\\AuthApiService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\AuthApiService.cs",
+              "RelativeToolTip": "ECommerceMVC\\Services\\AuthApiService.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAkwDoAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T05:59:43.609Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Profile.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Home\\Profile.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Home\\Profile.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Home\\Profile.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Home\\Profile.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-28T06:30:35.677Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "ECommerceMVC\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T06:29:56.867Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "IAuthApiService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\IAuthApiService.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Services\\IAuthApiService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\IAuthApiService.cs",
+              "RelativeToolTip": "ECommerceMVC\\Services\\IAuthApiService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T05:59:23.942Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "RegisterViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\RegisterViewModel.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\RegisterViewModel.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\RegisterViewModel.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\RegisterViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T05:57:21.576Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\LoginViewModel.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\LoginViewModel.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\LoginViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T05:56:41.636Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "AuthResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\AuthResponseDto.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\Api\\AuthResponseDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\AuthResponseDto.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\Api\\AuthResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T05:55:46.173Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "LoginRequestDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\LoginRequestDto.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\Api\\LoginRequestDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\LoginRequestDto.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\Api\\LoginRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T05:55:18.927Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "RegisterRequestDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\RegisterRequestDto.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\Api\\RegisterRequestDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\RegisterRequestDto.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\Api\\RegisterRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T05:54:34.398Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "CategoriesController.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Controllers\\CategoriesController.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Controllers\\CategoriesController.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Controllers\\CategoriesController.cs",
+              "RelativeToolTip": "ECommerceMVC\\Controllers\\CategoriesController.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAuwDEAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T08:29:21.926Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "CategoryApiService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\CategoryApiService.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Services\\CategoryApiService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\CategoryApiService.cs",
+              "RelativeToolTip": "ECommerceMVC\\Services\\CategoryApiService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T08:28:04.492Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "ICategoryApiService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\ICategoryApiService.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Services\\ICategoryApiService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\ICategoryApiService.cs",
+              "RelativeToolTip": "ECommerceMVC\\Services\\ICategoryApiService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T08:27:39.15Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Categories\\Index.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Categories\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Categories\\Index.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Categories\\Index.cshtml",
+              "ViewState": "AgIAACEAAAAAAAAAAAAqwDYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-27T08:30:03.538Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Categories\\Details.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Categories\\Details.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Categories\\Details.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Categories\\Details.cshtml",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAqwCQAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-27T08:30:31.171Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "CategoryViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\CategoryViewModel.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\CategoryViewModel.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\CategoryViewModel.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\CategoryViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T08:26:50.659Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "CategoryDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\CategoryDto.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\Api\\CategoryDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\CategoryDto.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\Api\\CategoryDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T08:26:17.061Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "IProductApiService.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\IProductApiService.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Services\\IProductApiService.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Services\\IProductApiService.cs",
+              "RelativeToolTip": "ECommerceMVC\\Services\\IProductApiService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T07:49:00.547Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "ProductListResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\ProductListResponseDto.cs",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Models\\Api\\ProductListResponseDto.cs",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Models\\Api\\ProductListResponseDto.cs",
+              "RelativeToolTip": "ECommerceMVC\\Models\\Api\\ProductListResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T07:56:41.288Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Products\\Details.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Products\\Details.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Products\\Details.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Products\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-27T06:51:49.487Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "ECommerceMVC\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Lenovo\\source\\repos\\ECommerceMVC\\ECommerceMVC\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "ECommerceMVC\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-08-27T07:26:54.565Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

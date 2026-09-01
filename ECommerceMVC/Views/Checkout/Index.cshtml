@@ -1,0 +1,181 @@
+﻿@model ECommerceMVC.Models.Api.CartDto
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<div class="container py-5">
+
+    <div class="row g-4">
+
+        <!-- ========================================== -->
+        <!-- ORDER ITEMS -->
+        <!-- ========================================== -->
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header bg-dark text-white">
+
+                    <h4 class="mb-0">
+                        Checkout
+                    </h4>
+
+                </div>
+
+                <div class="card-body">
+
+                    <h5 class="mb-4">
+                        Review Your Order
+                    </h5>
+
+                    @foreach (var item in Model.Items)
+                    {
+                        <div class="d-flex
+                            justify-content-between
+                            align-items-center
+                            border-bottom
+                            py-3">
+
+                            <div>
+
+                                <h6 class="mb-1">
+                                    @item.ProductName
+                                </h6>
+
+                                <small class="text-muted">
+
+                                    Quantity:
+                                    @item.Quantity
+
+                                    ×
+
+                                    Rs.
+                                    @item.UnitPrice.ToString("N2")
+
+                                </small>
+
+                            </div>
+
+                            <strong>
+
+                                Rs.
+                                @item.SubTotal.ToString("N2")
+
+                            </strong>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- ORDER SUMMARY -->
+        <!-- ========================================== -->
+
+        <div class="col-lg-4">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header">
+
+                    <h5 class="mb-0">
+                        Order Summary
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="d-flex
+                        justify-content-between
+                        mb-3">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <span>
+                            Rs.
+                            @Model.TotalAmount.ToString("N2")
+                        </span>
+
+                    </div>
+
+                    <div class="d-flex
+                        justify-content-between
+                        mb-3">
+
+                        <span>
+                            Shipping
+                        </span>
+
+                        <span>
+                            Free
+                        </span>
+
+                    </div>
+
+                    <hr />
+
+                    <div class="d-flex
+                        justify-content-between
+                        mb-4">
+
+                        <strong>
+                            Total
+                        </strong>
+
+                        <strong class="text-success fs-5">
+
+                            Rs.
+                            @Model.TotalAmount.ToString("N2")
+
+                        </strong>
+
+                    </div>
+
+
+                    <!-- PLACE ORDER -->
+
+                    <form asp-controller="Checkout"
+                          asp-action="PlaceOrder"
+                          method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <button type="submit"
+                                class="btn btn-success
+                            btn-lg w-100">
+
+                            Place Order
+
+                        </button>
+
+                    </form>
+
+
+                    <a asp-controller="Cart"
+                       asp-action="Index"
+                       class="btn btn-outline-secondary
+                        w-100 mt-2">
+
+                        Back to Cart
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
