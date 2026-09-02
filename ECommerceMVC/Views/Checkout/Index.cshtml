@@ -1,180 +1,611 @@
 ﻿@model ECommerceMVC.Models.Api.CartDto
 
 @{
-    ViewData["Title"] = "Checkout";
+    ViewData["Title"] = "Secure Checkout";
 }
 
-<div class="container py-5">
+<div class="checkout-page">
 
-    <div class="row g-4">
+    <div class="container py-5">
 
-        <!-- ========================================== -->
-        <!-- ORDER ITEMS -->
-        <!-- ========================================== -->
+        <!-- ===================================================== -->
+        <!-- CHECKOUT HEADER -->
+        <!-- ===================================================== -->
 
-        <div class="col-lg-8">
+        <div class="checkout-header mb-5">
 
-            <div class="card shadow-sm">
+            <div>
 
-                <div class="card-header bg-dark text-white">
+                <div class="checkout-eyebrow">
+                    🔒 SECURE CHECKOUT
+                </div>
 
-                    <h4 class="mb-0">
-                        Checkout
-                    </h4>
+                <h1>
+                    Complete Your <span>Order</span>
+                </h1>
+
+                <p>
+                    Review your items and securely place your order.
+                </p>
+
+            </div>
+
+
+            <!-- CHECKOUT STEPS -->
+
+            <div class="checkout-steps d-none d-lg-flex">
+
+                <div class="checkout-step active">
+
+                    <span>1</span>
+
+                    <small>
+                        Cart
+                    </small>
 
                 </div>
 
-                <div class="card-body">
 
-                    <h5 class="mb-4">
-                        Review Your Order
-                    </h5>
+                <div class="checkout-step-line active"></div>
 
-                    @foreach (var item in Model.Items)
-                    {
-                        <div class="d-flex
-                            justify-content-between
-                            align-items-center
-                            border-bottom
-                            py-3">
+
+                <div class="checkout-step active">
+
+                    <span>2</span>
+
+                    <small>
+                        Checkout
+                    </small>
+
+                </div>
+
+
+                <div class="checkout-step-line"></div>
+
+
+                <div class="checkout-step">
+
+                    <span>3</span>
+
+                    <small>
+                        Payment
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ===================================================== -->
+        <!-- ALERTS -->
+        <!-- ===================================================== -->
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert modern-alert modern-alert-success alert-dismissible fade show mb-4"
+                 role="alert">
+
+                <div class="alert-icon">
+                    ✓
+                </div>
+
+                <div>
+                    @TempData["Success"]
+                </div>
+
+                <button type="button"
+                        class="btn-close ms-auto"
+                        data-bs-dismiss="alert">
+                </button>
+
+            </div>
+        }
+
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert modern-alert modern-alert-danger alert-dismissible fade show mb-4"
+                 role="alert">
+
+                <div class="alert-icon">
+                    !
+                </div>
+
+                <div>
+                    @TempData["Error"]
+                </div>
+
+                <button type="button"
+                        class="btn-close ms-auto"
+                        data-bs-dismiss="alert">
+                </button>
+
+            </div>
+        }
+
+
+
+        <!-- ===================================================== -->
+        <!-- EMPTY CART -->
+        <!-- ===================================================== -->
+        @if (Model == null ||
+                     Model.Items == null ||
+                     !Model.Items.Any())
+        {
+            <div class="checkout-empty text-center">
+
+                <div class="checkout-empty-icon">
+                    🛒
+                </div>
+
+                <h2>
+                    Your cart is empty
+                </h2>
+
+                <p>
+                    Add some amazing products before proceeding to checkout.
+                </p>
+
+                <a asp-controller="Products"
+                   asp-action="Index"
+                   class="btn btn-primary-custom">
+
+                    <span>🛍️</span>
+
+                    Continue Shopping
+
+                </a>
+
+            </div>
+        }
+        else
+        {
+
+            <div class="row g-4 g-xl-5">
+
+
+                <!-- ================================================= -->
+                <!-- ORDER REVIEW -->
+                <!-- ================================================= -->
+
+                <div class="col-lg-7">
+
+                    <div class="checkout-card">
+
+                        <!-- CARD HEADER -->
+
+                        <div class="checkout-card-header">
 
                             <div>
 
-                                <h6 class="mb-1">
-                                    @item.ProductName
-                                </h6>
-
-                                <small class="text-muted">
-
-                                    Quantity:
-                                    @item.Quantity
-
-                                    ×
-
-                                    Rs.
-                                    @item.UnitPrice.ToString("N2")
-
-                                </small>
+                                <div class="checkout-section-icon">
+                                    📦
+                                </div>
 
                             </div>
 
-                            <strong>
 
-                                Rs.
-                                @item.SubTotal.ToString("N2")
+                            <div>
 
-                            </strong>
+                                <h4>
+                                    Review Your Order
+                                </h4>
+
+                                <p>
+                                    @Model.Items.Count item@(Model.Items.Count > 1 ? "s" : "")
+                                    in your order
+                                </p>
+
+                            </div>
 
                         </div>
-                    }
+
+
+
+                        <!-- ORDER ITEMS -->
+
+                        <div class="checkout-items">
+
+                            @foreach (var item in Model.Items)
+                            {
+
+                                <div class="checkout-item">
+
+
+                                    <!-- PRODUCT IMAGE -->
+
+                                    <div class="checkout-product-image">
+
+                                        @if (!string.IsNullOrWhiteSpace(item.ImageUrl))
+                                        {
+                                            <img src="@item.ImageUrl"
+                                                 alt="@item.ProductName" />
+                                        }
+                                        else
+                                        {
+                                            <div class="checkout-product-placeholder">
+                                                📦
+                                            </div>
+                                        }
+
+                                    </div>
+
+
+
+                                    <!-- PRODUCT DETAILS -->
+
+                                    <div class="checkout-product-details">
+
+                                        <h6>
+                                            @item.ProductName
+                                        </h6>
+
+
+                                        <p>
+
+                                            <span class="quantity-badge">
+
+                                                Qty @item.Quantity
+
+                                            </span>
+
+
+                                            <span>
+
+                                                Rs.
+                                                @item.UnitPrice.ToString("N2")
+                                                each
+
+                                            </span>
+
+                                        </p>
+
+                                    </div>
+
+
+
+                                    <!-- PRODUCT TOTAL -->
+
+                                    <div class="checkout-product-total">
+
+                                        Rs.
+                                        @item.SubTotal.ToString("N2")
+
+                                    </div>
+
+
+                                </div>
+
+                            }
+
+                        </div>
+
+
+
+                        <!-- CONTINUE SHOPPING -->
+
+                        <div class="checkout-card-footer">
+
+                            <a asp-controller="Cart"
+                               asp-action="Index"
+                               class="checkout-back-link">
+
+                                ← Back to Cart
+
+                            </a>
+
+
+                            <a asp-controller="Products"
+                               asp-action="Index"
+                               class="checkout-shopping-link">
+
+                                Continue Shopping →
+
+                            </a>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- ================================================= -->
+                    <!-- PAYMENT INFORMATION -->
+                    <!-- ================================================= -->
+
+                    <div class="payment-info-card mt-4">
+
+                        <div class="payment-info-icon">
+
+                            💳
+
+                        </div>
+
+
+                        <div>
+
+                            <h5>
+                                Secure Payment
+                            </h5>
+
+                            <p>
+
+                                After placing your order, you'll be able to
+                                securely complete payment using the available
+                                payment method.
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="secure-badge">
+
+                            🔒 Secure
+
+                        </div>
+
+                    </div>
+
 
                 </div>
+
+
+
+                <!-- ================================================= -->
+                <!-- ORDER SUMMARY -->
+                <!-- ================================================= -->
+
+                <div class="col-lg-5">
+
+
+                    <div class="checkout-summary-card">
+
+
+                        <!-- SUMMARY HEADER -->
+
+                        <div class="checkout-summary-header">
+
+                            <div>
+
+                                <span class="summary-icon">
+
+                                    🧾
+
+                                </span>
+
+                            </div>
+
+
+                            <div>
+
+                                <h4>
+                                    Order Summary
+                                </h4>
+
+                                <p>
+                                    Review your payment details
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- SUMMARY DETAILS -->
+
+                        <div class="checkout-summary-body">
+
+
+                            <!-- ITEMS -->
+
+                            <div class="summary-row">
+
+                                <span>
+
+                                    Items
+                                    <small>
+                                        (@Model.Items.Sum(x => x.Quantity))
+                                    </small>
+
+                                </span>
+
+
+                                <strong>
+
+                                    Rs.
+                                    @Model.TotalAmount.ToString("N2")
+
+                                </strong>
+
+                            </div>
+
+
+
+                            <!-- SHIPPING -->
+
+                            <div class="summary-row">
+
+                                <span>
+
+                                    Shipping
+
+                                </span>
+
+
+                                <span class="free-shipping">
+
+                                    FREE
+
+                                </span>
+
+                            </div>
+
+
+
+                            <!-- DIVIDER -->
+
+                            <div class="summary-divider"></div>
+
+
+
+                            <!-- TOTAL -->
+
+                            <div class="summary-total">
+
+                                <div>
+
+                                    <span>
+                                        Total Amount
+                                    </span>
+
+                                    <small>
+                                        Including all charges
+                                    </small>
+
+                                </div>
+
+
+                                <div class="summary-total-price">
+
+                                    Rs.
+                                    @Model.TotalAmount.ToString("N2")
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- ========================================= -->
+                            <!-- PLACE ORDER -->
+                            <!-- ========================================= -->
+
+                            <form asp-controller="Checkout"
+                                  asp-action="PlaceOrder"
+                                  method="post"
+                                  class="checkout-place-order-form">
+
+                                @Html.AntiForgeryToken()
+
+
+                                <button type="submit"
+                                        class="btn-place-order">
+
+                                    <span>
+
+                                        🔒
+
+                                    </span>
+
+                                    Place Secure Order
+
+                                    <span class="place-order-arrow">
+
+                                        →
+
+                                    </span>
+
+                                </button>
+
+                            </form>
+
+
+
+                            <!-- BACK TO CART -->
+
+                            <a asp-controller="Cart"
+                               asp-action="Index"
+                               class="btn-back-cart">
+
+                                ← Return to Cart
+
+                            </a>
+
+
+                        </div>
+
+
+
+                        <!-- SECURITY -->
+
+                        <div class="checkout-security">
+
+                            <div>
+
+                                🔒
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    Secure Checkout
+                                </strong>
+
+                                <span>
+                                    Your transaction is processed securely.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- TRUST INDICATORS -->
+
+                    <div class="checkout-trust">
+
+                        <div>
+
+                            <span>
+                                🛡️
+                            </span>
+
+                            Secure
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                ✓
+                            </span>
+
+                            Trusted
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                🔐
+                            </span>
+
+                            Protected
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
 
             </div>
 
-        </div>
-
-
-        <!-- ========================================== -->
-        <!-- ORDER SUMMARY -->
-        <!-- ========================================== -->
-
-        <div class="col-lg-4">
-
-            <div class="card shadow-sm">
-
-                <div class="card-header">
-
-                    <h5 class="mb-0">
-                        Order Summary
-                    </h5>
-
-                </div>
-
-                <div class="card-body">
-
-                    <div class="d-flex
-                        justify-content-between
-                        mb-3">
-
-                        <span>
-                            Subtotal
-                        </span>
-
-                        <span>
-                            Rs.
-                            @Model.TotalAmount.ToString("N2")
-                        </span>
-
-                    </div>
-
-                    <div class="d-flex
-                        justify-content-between
-                        mb-3">
-
-                        <span>
-                            Shipping
-                        </span>
-
-                        <span>
-                            Free
-                        </span>
-
-                    </div>
-
-                    <hr />
-
-                    <div class="d-flex
-                        justify-content-between
-                        mb-4">
-
-                        <strong>
-                            Total
-                        </strong>
-
-                        <strong class="text-success fs-5">
-
-                            Rs.
-                            @Model.TotalAmount.ToString("N2")
-
-                        </strong>
-
-                    </div>
-
-
-                    <!-- PLACE ORDER -->
-
-                    <form asp-controller="Checkout"
-                          asp-action="PlaceOrder"
-                          method="post">
-
-                        @Html.AntiForgeryToken()
-
-                        <button type="submit"
-                                class="btn btn-success
-                            btn-lg w-100">
-
-                            Place Order
-
-                        </button>
-
-                    </form>
-
-
-                    <a asp-controller="Cart"
-                       asp-action="Index"
-                       class="btn btn-outline-secondary
-                        w-100 mt-2">
-
-                        Back to Cart
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
+        }
 
     </div>
 

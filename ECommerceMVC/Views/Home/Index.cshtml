@@ -1,60 +1,509 @@
 ﻿@{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Authentic Nepali Flavors";
 }
 
-<div class="text-center py-5">
 
-    <h1 class="display-4">
-        Welcome to Gaun Ko Achar
-    </h1>
+<!-- ================================================= -->
+<!-- HERO -->
+<!-- ================================================= -->
 
-    <p class="lead">
-        Authentic homemade Nepali achar delivered to your door.
-    </p>
+<section class="hero-section">
 
-    <a asp-controller="Products"
-       asp-action="Index"
-       class="btn btn-primary btn-lg">
+    <div class="container">
 
-        Shop Now
+        <div class="row align-items-center g-5">
 
-    </a>
+            <!-- HERO CONTENT -->
 
-</div>
+            <div class="col-lg-7">
+
+                <div class="hero-content">
+
+                    <div class="hero-badge">
+
+                        <span>🌶️</span>
+
+                        Authentic Nepali Homemade Taste
+
+                    </div>
 
 
-<div class="row text-center mt-5">
+                    <h1 class="hero-title">
 
-    <div class="col-md-4">
+                        Taste the tradition
+                        <span>of home.</span>
 
-        <h3>Authentic</h3>
+                    </h1>
 
-        <p>
-            Traditional Nepali flavors made with care.
-        </p>
+
+                    <p class="hero-description">
+
+                        Discover authentic homemade Nepali achar,
+                        prepared with traditional recipes, quality
+                        ingredients, and the unforgettable flavors
+                        of the village.
+
+                    </p>
+
+
+                    <div class="hero-actions">
+
+                        <a asp-controller="Products"
+                           asp-action="Index"
+                           class="btn-primary-custom">
+
+                            Shop Our Products
+
+                            <span>→</span>
+
+                        </a>
+
+
+                        <a href="#why-us"
+                           class="btn-secondary-custom">
+
+                            Discover Our Story
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- TRUST -->
+
+                    <div class="hero-trust">
+
+                        <div>
+
+                            <strong>
+
+                                🌿
+
+                            </strong>
+
+                            <span>
+
+                                Homemade
+
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+
+                                ⭐
+
+                            </strong>
+
+                            <span>
+
+                                Quality Ingredients
+
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+
+                                ❤️
+
+                            </strong>
+
+                            <span>
+
+                                Made with Care
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- HERO VISUAL -->
+
+            <div class="col-lg-5">
+
+                <div class="hero-visual">
+
+                    <div class="hero-glow"></div>
+
+
+                    <div class="achar-card">
+
+                        <div class="achar-lid"></div>
+
+                        <div class="achar-jar">
+
+                            <div class="achar-label">
+
+                                <span class="label-small">
+
+                                    AUTHENTIC
+
+                                </span>
+
+                                <strong>
+
+                                    Gaun Ko
+
+                                </strong>
+
+                                <span>
+
+                                    Achar 🌶️
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="floating-badge badge-top">
+
+                            🌶️
+                            <span>Bold Flavor</span>
+
+                        </div>
+
+
+                        <div class="floating-badge badge-bottom">
+
+                            🌿
+                            <span>Homemade</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
+</section>
 
-    <div class="col-md-4">
 
-        <h3>Fresh</h3>
+<!-- ================================================= -->
+<!-- VALUE STRIP -->
+<!-- ================================================= -->
 
-        <p>
-            Quality ingredients and homemade preparation.
-        </p>
+<section class="value-strip">
+
+    <div class="container">
+
+        <div class="row text-center g-4">
+
+            <div class="col-md-4">
+
+                <div class="value-item">
+
+                    <div class="value-icon">
+
+                        🌶️
+
+                    </div>
+
+                    <div>
+
+                        <h5>
+
+                            Authentic Taste
+
+                        </h5>
+
+                        <p>
+
+                            Traditional Nepali recipes.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="value-item">
+
+                    <div class="value-icon">
+
+                        🌿
+
+                    </div>
+
+                    <div>
+
+                        <h5>
+
+                            Fresh Ingredients
+
+                        </h5>
+
+                        <p>
+
+                            Quality ingredients in every jar.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="value-item">
+
+                    <div class="value-icon">
+
+                        🚚
+
+                    </div>
+
+                    <div>
+
+                        <h5>
+
+                            Easy Delivery
+
+                        </h5>
+
+                        <p>
+
+                            Convenient delivery to your door.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
+</section>
 
-    <div class="col-md-4">
 
-        <h3>Delivered</h3>
+<!-- ================================================= -->
+<!-- WHY US -->
+<!-- ================================================= -->
 
-        <p>
-            Convenient delivery directly to your home.
-        </p>
+<section id="why-us"
+         class="why-section">
+
+    <div class="container">
+
+        <div class="section-heading text-center">
+
+            <span class="section-eyebrow">
+
+                WHY GAUN KO ACHAR
+
+            </span>
+
+            <h2>
+
+                More than achar.
+                <span>It's a memory.</span>
+
+            </h2>
+
+            <p>
+
+                Every jar is inspired by the authentic flavors
+                found in Nepali homes and villages.
+
+            </p>
+
+        </div>
+
+
+        <div class="row g-4 mt-3">
+
+            <!-- CARD 1 -->
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-number">
+
+                        01
+
+                    </div>
+
+                    <div class="feature-icon">
+
+                        🏡
+
+                    </div>
+
+                    <h4>
+
+                        Homemade Tradition
+
+                    </h4>
+
+                    <p>
+
+                        Inspired by recipes and flavors passed
+                        through generations.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CARD 2 -->
+
+            <div class="col-md-4">
+
+                <div class="feature-card feature-card-highlight">
+
+                    <div class="feature-number">
+
+                        02
+
+                    </div>
+
+                    <div class="feature-icon">
+
+                        🌶️
+
+                    </div>
+
+                    <h4>
+
+                        Bold Nepali Flavor
+
+                    </h4>
+
+                    <p>
+
+                        Rich spices and authentic ingredients
+                        create a taste you remember.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CARD 3 -->
+
+            <div class="col-md-4">
+
+                <div class="feature-card">
+
+                    <div class="feature-number">
+
+                        03
+
+                    </div>
+
+                    <div class="feature-icon">
+
+                        ❤️
+
+                    </div>
+
+                    <h4>
+
+                        Made with Care
+
+                    </h4>
+
+                    <p>
+
+                        Carefully prepared with quality and
+                        consistency in mind.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
-</div>
+</section>
+
+
+<!-- ================================================= -->
+<!-- SHOP CTA -->
+<!-- ================================================= -->
+
+<section class="shop-cta">
+
+    <div class="container">
+
+        <div class="shop-cta-content">
+
+            <div>
+
+                <span class="section-eyebrow light">
+
+                    READY TO TASTE NEPAL?
+
+                </span>
+
+                <h2>
+
+                    Bring authentic flavors
+                    to your table.
+
+                </h2>
+
+                <p>
+
+                    Explore our collection of traditional
+                    homemade Nepali products.
+
+                </p>
+
+            </div>
+
+
+            <a asp-controller="Products"
+               asp-action="Index"
+               class="btn-light-custom">
+
+                Explore Products
+
+                <span>→</span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>

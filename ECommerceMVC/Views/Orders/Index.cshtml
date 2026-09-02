@@ -1,178 +1,217 @@
-﻿@model List<ECommerceMVC.Models.Api.OrderDto>
+﻿@model IEnumerable<ECommerceMVC.Models.Api.OrderDto>
 
 @{
     ViewData["Title"] = "My Orders";
+
+    var orders = Model?
+        .OrderByDescending(x => x.OrderDate)
+        .ToList()
+        ?? new List<ECommerceMVC.Models.Api.OrderDto>();
 }
 
-<div class="container py-5">
+<div class="orders-page">
 
-    <!-- ============================================== -->
-    <!-- PAGE HEADER -->
-    <!-- ============================================== -->
+    <!-- ===================================================== -->
+    <!-- PAGE HERO -->
+    <!-- ===================================================== -->
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <section class="orders-hero">
 
-        <div>
-            <h1 class="mb-1">
-                My Orders
-            </h1>
+        <div class="container">
 
-            <p class="text-muted mb-0">
-                View and manage your orders.
-            </p>
-        </div>
+            <div class="orders-hero-content">
 
-        <a asp-controller="Products"
-           asp-action="Index"
-           class="btn btn-outline-primary">
+                <div class="orders-hero-text">
 
-            Continue Shopping
+                    <span class="page-eyebrow">
+                        <span class="eyebrow-icon">📦</span>
+                        ORDER MANAGEMENT
+                    </span>
 
-        </a>
+                    <h1>
+                        My <span>Orders</span>
+                    </h1>
 
-    </div>
+                    <p>
+                        Track your purchases, review your order details,
+                        and stay updated on every stage of delivery.
+                    </p>
 
-
-    <!-- ============================================== -->
-    <!-- ORDERS -->
-    <!-- ============================================== -->
-    @if (Model == null || !Model.Any())
-    {
-        <div class="card shadow-sm">
-
-            <div class="card-body text-center py-5">
-
-                <div class="display-4 mb-3">
-                    📦
                 </div>
 
-                <h4>
-                    No Orders Yet
-                </h4>
 
-                <p class="text-muted">
-                    You haven't placed any orders yet.
-                </p>
+                <div class="orders-hero-action">
 
-                <a asp-controller="Products"
-                   asp-action="Index"
-                   class="btn btn-primary">
+                    <a asp-controller="Products"
+                       asp-action="Index"
+                       class="btn-primary-custom">
 
-                    Start Shopping
+                        <span class="btn-icon">
+                            🛍️
+                        </span>
 
-                </a>
+                        <span>
+                            Continue Shopping
+                        </span>
+
+                    </a>
+
+                </div>
 
             </div>
 
         </div>
-    }
-    else
-    {
-        <div class="row g-4">
 
-            @foreach (var order in Model)
+    </section>
+
+
+    <!-- ===================================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ===================================================== -->
+
+    <section class="orders-content">
+
+        <div class="container">
+
+
+            <!-- ================================================= -->
+            <!-- SUCCESS MESSAGE -->
+            <!-- ================================================= -->
+            @if (TempData["SuccessMessage"] != null)
             {
-                <div class="col-12">
+                <div class="alert modern-alert modern-alert-success
+                    alert-dismissible fade show"
+                     role="alert">
 
-                    <div class="card shadow-sm">
+                    <div class="alert-message-content">
 
-                        <!-- ====================================== -->
-                        <!-- ORDER HEADER -->
-                        <!-- ====================================== -->
+                        <div class="alert-icon">
+                            ✓
+                        </div>
 
-                        <div class="card-header">
+                        <div class="alert-text">
 
-                            <div class="row align-items-center">
-
-                                <div class="col-md-6">
-
-                                    <strong>
-                                        Order #@order.Id
-                                    </strong>
-
-                                </div>
-
-                                <div class="col-md-6 text-md-end">
-
-                                    <span class="text-muted">
-                                        @order.OrderDate.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")
-                                    </span>
-
-                                </div>
-
-                            </div>
+                            @TempData["SuccessMessage"]
 
                         </div>
 
+                    </div>
 
-                        <!-- ====================================== -->
-                        <!-- ORDER BODY -->
-                        <!-- ====================================== -->
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close">
+                    </button>
 
-                        <div class="card-body">
-
-                            <div class="row align-items-center">
-
-                                <!-- STATUS -->
-
-                                <div class="col-md-4 mb-3 mb-md-0">
-
-                                    <small class="text-muted d-block">
-                                        Status
-                                    </small>
-
-                                    @if (order.Status == 1)
-                                    {
-                                        <span class="badge bg-warning text-dark">
-                                            Pending
-                                        </span>
-                                    }
-                                    else if (order.Status == 6)
-                                    {
-                                        <span class="badge bg-danger">
-                                            Cancelled
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge bg-secondary">
-                                            @order.Status
-                                        </span>
-                                    }
-
-                                </div>
+                </div>
+            }
 
 
-                                <!-- TOTAL -->
+            <!-- ================================================= -->
+            <!-- ERROR MESSAGE -->
+            <!-- ================================================= -->
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert modern-alert modern-alert-danger
+                    alert-dismissible fade show"
+                     role="alert">
 
-                                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="alert-message-content">
 
-                                    <small class="text-muted d-block">
-                                        Total
-                                    </small>
+                        <div class="alert-icon">
+                            !
+                        </div>
 
-                                    <strong class="text-success">
-                                        Rs.
-                                        @order.TotalAmount.ToString("N2")
-                                    </strong>
+                        <div class="alert-text">
 
-                                </div>
+                            @TempData["ErrorMessage"]
+
+                        </div>
+
+                    </div>
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close">
+                    </button>
+
+                </div>
+            }
 
 
-                                <!-- ACTIONS -->
+            <!-- ================================================= -->
+            <!-- EMPTY STATE -->
+            <!-- ================================================= -->
+            @if (!orders.Any())
+            {
+                <div class="empty-orders">
 
-                                <div class="col-md-4 text-md-end">
+                    <div class="empty-orders-icon">
+                        📦
+                    </div>
 
-                                    <a asp-controller="Orders"
-                                       asp-action="Details"
-                                       asp-route-id="@order.Id"
-                                       class="btn btn-primary">
+                    <span class="empty-orders-eyebrow">
+                        NO PURCHASES YET
+                    </span>
 
-                                        View Details
+                    <h2>
+                        No orders yet
+                    </h2>
 
-                                    </a>
+                    <p>
+                        You haven't placed any orders yet.
+                        Explore our collection and find something you love.
+                    </p>
 
-                                </div>
+                    <a asp-controller="Products"
+                       asp-action="Index"
+                       class="btn-primary-custom">
+
+                        <span class="btn-icon">
+                            🛍️
+                        </span>
+
+                        <span>
+                            Start Shopping
+                        </span>
+
+                    </a>
+
+                </div>
+            }
+            else
+            {
+
+                <!-- ================================================= -->
+                <!-- ORDERS SUMMARY -->
+                <!-- ================================================= -->
+
+                <div class="orders-summary-row">
+
+                    <div class="orders-summary-info">
+
+                        <div class="orders-summary-count">
+
+                            <span class="orders-count">
+
+                                @orders.Count
+
+                            </span>
+
+                            <div class="orders-count-content">
+
+                                <strong>
+
+                                    @(orders.Count == 1
+                                        ? "Total Order"
+                                        : "Total Orders")
+
+                                </strong>
+
+                                <span>
+                                    Your purchase history
+                                </span>
 
                             </div>
 
@@ -180,10 +219,277 @@
 
                     </div>
 
+
+                    <p class="orders-summary-description">
+
+                        Review your recent purchases and track
+                        the progress of your orders.
+
+                    </p>
+
                 </div>
+
+
+                <!-- ================================================= -->
+                <!-- ORDERS LIST -->
+                <!-- ================================================= -->
+
+                <div class="orders-list">
+
+                    @foreach (var order in orders)
+                    {
+                        /*
+                         * IMPORTANT:
+                         *
+                         * Store values in variables before displaying them.
+                         *
+                         * This avoids Razor parsing problems such as:
+                         *
+                         * 02/09/2026 08:06:05.ToLocalTime()
+                         * .ToString("dd MMM yyyy")
+                         *
+                         * appearing literally in the browser.
+                         */
+
+                        var itemCount = order.Items?.Count ?? 0;
+
+                        var orderDate = order.OrderDate.ToLocalTime();
+
+                        var formattedDate =
+                            orderDate.ToString("dd MMM yyyy");
+
+                        var formattedTime =
+                            orderDate.ToString("hh:mm tt");
+
+                        var formattedAmount =
+                            order.TotalAmount.ToString("N2");
+
+                        string statusText;
+                        string statusClass;
+
+                        switch (order.Status)
+                        {
+                            case 1:
+                                statusText = "Pending";
+                                statusClass = "status-pending";
+                                break;
+
+                            case 2:
+                                statusText = "Confirmed";
+                                statusClass = "status-confirmed";
+                                break;
+
+                            case 3:
+                                statusText = "Processing";
+                                statusClass = "status-processing";
+                                break;
+
+                            case 4:
+                                statusText = "Shipped";
+                                statusClass = "status-shipped";
+                                break;
+
+                            case 5:
+                                statusText = "Delivered";
+                                statusClass = "status-delivered";
+                                break;
+
+                            case 6:
+                                statusText = "Cancelled";
+                                statusClass = "status-cancelled";
+                                break;
+
+                            default:
+                                statusText = "Unknown";
+                                statusClass = "status-default";
+                                break;
+                        }
+
+
+                        <!-- ========================================= -->
+                        <!-- ORDER CARD -->
+                        <!-- ========================================= -->
+
+                        <article class="modern-order-card">
+
+
+                            <!-- ===================================== -->
+                            <!-- CARD HEADER -->
+                            <!-- ===================================== -->
+
+                            <div class="modern-order-header">
+
+
+                                <!-- ORDER ID -->
+
+                                <div class="order-header-left">
+
+                                    <div class="order-icon">
+
+                                        📦
+
+                                    </div>
+
+
+                                    <div class="order-header-information">
+
+                                        <span class="order-label">
+
+                                            ORDER
+
+                                        </span>
+
+                                        <h4>
+
+                                            #@order.Id
+
+                                        </h4>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- STATUS -->
+
+                                <div class="order-status-wrapper">
+
+                                    <span class="order-status @statusClass">
+
+                                        <span class="status-dot"></span>
+
+                                        @statusText
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- ===================================== -->
+                            <!-- CARD BODY -->
+                            <!-- ===================================== -->
+
+                            <div class="modern-order-body">
+
+
+                                <!-- ================================= -->
+                                <!-- ORDER DATE -->
+                                <!-- ================================= -->
+
+                                <div class="order-info">
+
+                                    <span class="order-info-label">
+
+                                        ORDER DATE
+
+                                    </span>
+
+                                    <strong>
+
+                                        @formattedDate
+
+                                    </strong>
+
+                                    <small>
+
+                                        @formattedTime
+
+                                    </small>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- ITEMS -->
+                                <!-- ================================= -->
+
+                                <div class="order-info">
+
+                                    <span class="order-info-label">
+
+                                        ITEMS
+
+                                    </span>
+
+                                    <strong>
+
+                                        @itemCount
+                                        @(itemCount == 1 ? " item" : " items")
+
+                                    </strong>
+
+                                    <small>
+
+                                        Products in this order
+
+                                    </small>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- TOTAL -->
+                                <!-- ================================= -->
+
+                                <div class="order-info order-total-info">
+
+                                    <span class="order-info-label">
+
+                                        TOTAL AMOUNT
+
+                                    </span>
+
+                                    <strong class="order-total">
+
+                                        Rs. @formattedAmount
+
+                                    </strong>
+
+                                    <small>
+
+                                        Total payable amount
+
+                                    </small>
+
+                                </div>
+
+
+                                <!-- ================================= -->
+                                <!-- ACTION -->
+                                <!-- ================================= -->
+
+                                <div class="order-action">
+
+                                    <a asp-controller="Orders"
+                                       asp-action="Details"
+                                       asp-route-id="@order.Id"
+                                       class="btn-order-details">
+
+                                        <span>
+                                            View Details
+                                        </span>
+
+                                        <span class="button-arrow">
+                                            →
+                                        </span>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+                    }
+
+                </div>
+
             }
 
         </div>
-    }
+
+    </section>
 
 </div>

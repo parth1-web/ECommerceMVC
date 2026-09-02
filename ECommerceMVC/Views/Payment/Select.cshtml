@@ -1,235 +1,92 @@
 ﻿@model ECommerceMVC.Models.Api.OrderDto
 
 @{
-    ViewData["Title"] = "Select Payment";
+    ViewData["Title"] = "Secure Payment";
+
+    var orderItems =
+        Model.Items ?? new List<ECommerceMVC.Models.Api.OrderItemDto>();
+
+    var orderDate =
+        Model.OrderDate.Kind == DateTimeKind.Utc
+            ? Model.OrderDate.ToLocalTime()
+            : Model.OrderDate;
+
+    var itemCount = orderItems.Count;
 }
 
-<div class="container py-5">
+<div class="payment-page">
 
-    <!-- ============================================== -->
-    <!-- HEADER -->
-    <!-- ============================================== -->
+    <!-- ===================================================== -->
+    <!-- PAGE HEADER -->
+    <!-- ===================================================== -->
 
-    <div class="text-center mb-5">
+    <section class="payment-hero">
 
-        <h1>
-            Select Payment Method
-        </h1>
+        <div class="container">
 
-        <p class="text-muted">
-            Choose how you want to pay for your order.
-        </p>
+            <div class="payment-header">
 
-    </div>
+                <!-- LEFT -->
 
+                <div class="payment-heading">
 
-    <!-- ============================================== -->
-    <!-- ORDER SUMMARY -->
-    <!-- ============================================== -->
+                    <a asp-controller="Orders"
+                       asp-action="Details"
+                       asp-route-id="@Model.Id"
+                       class="back-link">
 
-    <div class="row justify-content-center">
-
-        <div class="col-lg-8">
-
-            <div class="card shadow-sm mb-4">
-
-                <div class="card-header">
-
-                    <h5 class="mb-0">
-                        Order Summary
-                    </h5>
-
-                </div>
-
-                <div class="card-body">
-
-                    <div class="d-flex
-                        justify-content-between
-                        mb-2">
-
-                        <span>
-                            Order
-                        </span>
-
-                        <strong>
-                            #@Model.Id
-                        </strong>
-
-                    </div>
-
-                    <div class="d-flex
-                        justify-content-between
-                        mb-2">
-
-                        <span>
-                            Items
+                        <span class="back-arrow">
+                            ←
                         </span>
 
                         <span>
-                            @Model.Items.Count
-                        </span>
-
-                    </div>
-
-                    <hr />
-
-                    <div class="d-flex
-                        justify-content-between">
-
-                        <strong>
-                            Total
-                        </strong>
-
-                        <strong class="text-success fs-5">
-
-                            Rs.
-                            @Model.TotalAmount.ToString("N2")
-
-                        </strong>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- ============================================== -->
-            <!-- PAYMENT METHODS -->
-            <!-- ============================================== -->
-
-            <div class="card shadow-sm">
-
-                <div class="card-header">
-
-                    <h5 class="mb-0">
-                        Payment Method
-                    </h5>
-
-                </div>
-
-                <div class="card-body">
-
-                    <form asp-controller="Payment"
-                          asp-action="Process"
-                          method="post">
-
-                        @Html.AntiForgeryToken()
-
-                        <input type="hidden"
-                               name="orderId"
-                               value="@Model.Id" />
-
-
-                        <!-- ====================================== -->
-                        <!-- COD -->
-                        <!-- ====================================== -->
-
-                        <div class="form-check border rounded p-3 mb-3">
-
-                            <input class="form-check-input"
-                                   type="radio"
-                                   name="method"
-                                   id="cod"
-                                   value="1"
-                                   checked />
-
-                            <label class="form-check-label w-100"
-                                   for="cod">
-
-                                <strong>
-                                    Cash on Delivery
-                                </strong>
-
-                                <span class="d-block text-muted mt-1">
-                                    Pay when your order is delivered.
-                                </span>
-
-                            </label>
-
-                        </div>
-
-
-                        <!-- ====================================== -->
-                        <!-- KHALTI -->
-                        <!-- ====================================== -->
-
-                        <div class="form-check border rounded p-3 mb-3">
-
-                            <input class="form-check-input"
-                                   type="radio"
-                                   name="method"
-                                   id="khalti"
-                                   value="2" />
-
-                            <label class="form-check-label w-100"
-                                   for="khalti">
-
-                                <strong>
-                                    Khalti
-                                </strong>
-
-                                <span class="d-block text-muted mt-1">
-                                    Pay securely through Khalti.
-                                </span>
-
-                            </label>
-
-                        </div>
-
-
-                        <!-- ====================================== -->
-                        <!-- ESEWA -->
-                        <!-- ====================================== -->
-
-                        <div class="form-check border rounded p-3 mb-4">
-
-                            <input class="form-check-input"
-                                   type="radio"
-                                   name="method"
-                                   id="esewa"
-                                   value="3" />
-
-                            <label class="form-check-label w-100"
-                                   for="esewa">
-
-                                <strong>
-                                    eSewa
-                                </strong>
-
-                                <span class="d-block text-muted mt-1">
-                                    Pay securely through eSewa.
-                                </span>
-
-                            </label>
-
-                        </div>
-
-
-                        <!-- ====================================== -->
-                        <!-- BUTTON -->
-                        <!-- ====================================== -->
-
-                        <button type="submit"
-                                class="btn btn-success
-                            btn-lg w-100">
-
-                            Continue to Payment
-
-                        </button>
-
-
-                        <a asp-controller="Orders"
-                           asp-action="Details"
-                           asp-route-id="@Model.Id"
-                           class="btn btn-outline-secondary
-                            w-100 mt-2">
-
                             Back to Order
+                        </span>
 
-                        </a>
+                    </a>
 
-                    </form>
+
+                    <div class="payment-heading-content">
+
+                        <span class="section-eyebrow">
+                            SECURE CHECKOUT
+                        </span>
+
+                        <h1 class="payment-title">
+                            Choose your <span>payment method</span>
+                        </h1>
+
+                        <p class="payment-subtitle">
+
+                            Select your preferred payment option
+                            to complete your order securely.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SECURITY BADGE -->
+
+                <div class="secure-payment-badge">
+
+                    <span class="secure-badge-icon">
+                        🔒
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Secure Payment
+                        </strong>
+
+                        <small>
+                            Protected checkout
+                        </small>
+
+                    </div>
 
                 </div>
 
@@ -237,6 +94,645 @@
 
         </div>
 
-    </div>
+    </section>
+
+
+    <!-- ===================================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ===================================================== -->
+
+    <section class="payment-content">
+
+        <div class="container">
+
+
+            <!-- ============================================= -->
+            <!-- ALERTS -->
+            <!-- ============================================= -->
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert modern-alert modern-alert-success alert-dismissible fade show"
+                     role="alert">
+
+                    <div class="alert-message-content">
+
+                        <div class="alert-icon">
+                            ✓
+                        </div>
+
+                        <div>
+                            @TempData["SuccessMessage"]
+                        </div>
+
+                    </div>
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close">
+                    </button>
+
+                </div>
+            }
+
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert modern-alert modern-alert-danger alert-dismissible fade show"
+                     role="alert">
+
+                    <div class="alert-message-content">
+
+                        <div class="alert-icon">
+                            !
+                        </div>
+
+                        <div>
+                            @TempData["ErrorMessage"]
+                        </div>
+
+                    </div>
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close">
+                    </button>
+
+                </div>
+            }
+
+
+            <div class="row g-4 align-items-start">
+
+
+                <!-- ================================================= -->
+                <!-- PAYMENT METHODS -->
+                <!-- ================================================= -->
+
+                <div class="col-lg-8">
+
+                    <form asp-controller="Payment"
+                          asp-action="Process"
+                          method="post"
+                          id="paymentForm">
+
+                        @Html.AntiForgeryToken()
+
+
+                        <!-- ORDER ID -->
+
+                        <input type="hidden"
+                               name="orderId"
+                               value="@Model.Id" />
+
+
+                        <div class="payment-methods-card">
+
+
+                            <!-- ===================================== -->
+                            <!-- CARD HEADER -->
+                            <!-- ===================================== -->
+
+                            <div class="payment-card-header">
+
+                                <div>
+
+                                    <span class="section-eyebrow">
+                                        PAYMENT METHOD
+                                    </span>
+
+                                    <h4>
+                                        How would you like to pay?
+                                    </h4>
+
+                                    <p>
+                                        Choose one secure payment option
+                                        below to continue.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- ===================================== -->
+                            <!-- PAYMENT OPTIONS -->
+                            <!-- ===================================== -->
+
+                            <div class="payment-options-list">
+
+
+                                <!-- ================================= -->
+                                <!-- CASH ON DELIVERY -->
+                                <!-- ================================= -->
+
+                                <label class="payment-option payment-option-cod">
+
+                                    <input type="radio"
+                                           name="method"
+                                           value="1"
+                                           checked />
+
+                                    <span class="payment-option-content">
+
+
+                                        <!-- ICON -->
+
+                                        <span class="payment-option-icon">
+
+                                            💵
+
+                                        </span>
+
+
+                                        <!-- INFORMATION -->
+
+                                        <span class="payment-option-info">
+
+                                            <span class="payment-option-title">
+
+                                                Cash on Delivery
+
+                                                <span class="recommended-badge">
+
+                                                    Flexible
+
+                                                </span>
+
+                                            </span>
+
+
+                                            <span class="payment-option-description">
+
+                                                Pay for your order when it is
+                                                delivered to your doorstep.
+
+                                            </span>
+
+                                        </span>
+
+
+                                        <!-- RADIO -->
+
+                                        <span class="payment-radio">
+
+                                            <span class="payment-radio-check">
+
+                                                ✓
+
+                                            </span>
+
+                                        </span>
+
+                                    </span>
+
+                                </label>
+
+
+                                <!-- ================================= -->
+                                <!-- KHALTI -->
+                                <!-- ================================= -->
+
+                                <label class="payment-option payment-option-khalti">
+
+                                    <input type="radio"
+                                           name="method"
+                                           value="2" />
+
+                                    <span class="payment-option-content">
+
+
+                                        <!-- ICON -->
+
+                                        <span class="payment-option-icon khalti-icon">
+
+                                            K
+
+                                        </span>
+
+
+                                        <!-- INFORMATION -->
+
+                                        <span class="payment-option-info">
+
+                                            <span class="payment-option-title">
+
+                                                Khalti
+
+                                                <span class="payment-provider-badge">
+
+                                                    Digital Wallet
+
+                                                </span>
+
+                                            </span>
+
+
+                                            <span class="payment-option-description">
+
+                                                Pay securely using your
+                                                Khalti digital wallet.
+
+                                            </span>
+
+                                        </span>
+
+
+                                        <!-- RADIO -->
+
+                                        <span class="payment-radio">
+
+                                            <span class="payment-radio-check">
+
+                                                ✓
+
+                                            </span>
+
+                                        </span>
+
+                                    </span>
+
+                                </label>
+
+
+                                <!-- ================================= -->
+                                <!-- ESEWA -->
+                                <!-- ================================= -->
+
+                                <label class="payment-option payment-option-esewa">
+
+                                    <input type="radio"
+                                           name="method"
+                                           value="3" />
+
+                                    <span class="payment-option-content">
+
+
+                                        <!-- ICON -->
+
+                                        <span class="payment-option-icon esewa-icon">
+
+                                            eS
+
+                                        </span>
+
+
+                                        <!-- INFORMATION -->
+
+                                        <span class="payment-option-info">
+
+                                            <span class="payment-option-title">
+
+                                                eSewa
+
+                                                <span class="secure-badge">
+
+                                                    🔒 Secure
+
+                                                </span>
+
+                                            </span>
+
+
+                                            <span class="payment-option-description">
+
+                                                Complete your payment securely
+                                                through the eSewa gateway.
+
+                                            </span>
+
+                                        </span>
+
+
+                                        <!-- RADIO -->
+
+                                        <span class="payment-radio">
+
+                                            <span class="payment-radio-check">
+
+                                                ✓
+
+                                            </span>
+
+                                        </span>
+
+                                    </span>
+
+                                </label>
+
+                            </div>
+
+
+                            <!-- ===================================== -->
+                            <!-- SUBMIT -->
+                            <!-- ===================================== -->
+
+                            <div class="payment-submit-area">
+
+                                <button type="submit"
+                                        class="payment-submit-button"
+                                        id="paymentSubmitButton">
+
+                                    <span class="payment-button-text">
+
+                                        Continue Securely
+
+                                    </span>
+
+
+                                    <span class="payment-button-arrow">
+
+                                        →
+
+                                    </span>
+
+
+                                    <span class="payment-button-loading d-none">
+
+                                        Processing...
+
+                                    </span>
+
+                                </button>
+
+
+                                <p class="payment-submit-note">
+
+                                    🔒 Your payment information is handled
+                                    securely by trusted payment providers.
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+
+                    <!-- ================================================= -->
+                    <!-- SECURITY INFORMATION -->
+                    <!-- ================================================= -->
+
+                    <div class="payment-security-info">
+
+                        <div class="security-info-icon">
+
+                            🛡️
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Your payment information is secure
+                            </strong>
+
+                            <p>
+
+                                We use secure payment providers and
+                                protected checkout processes to help
+                                keep your transaction safe.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- ORDER SUMMARY -->
+                <!-- ================================================= -->
+
+                <div class="col-lg-4">
+
+                    <aside class="payment-summary-card">
+
+
+                        <!-- HEADER -->
+
+                        <div class="payment-summary-header">
+
+                            <span class="section-eyebrow">
+                                ORDER SUMMARY
+                            </span>
+
+                            <h5>
+                                Order #@Model.Id
+                            </h5>
+
+
+                            <p>
+
+                                @itemCount
+                                @(itemCount == 1 ? " item" : " items")
+
+                            </p>
+
+                        </div>
+
+
+                        <!-- BODY -->
+
+                        <div class="payment-summary-body">
+
+
+                            <!-- ORDER DATE -->
+
+                            <div class="summary-item-row">
+
+                                <span>
+                                    Order Date
+                                </span>
+
+                                <strong>
+                                    @orderDate.ToString("dd MMM yyyy")
+                                </strong>
+
+                            </div>
+
+
+                            <!-- ITEMS -->
+
+                            <div class="summary-item-row">
+
+                                <span>
+                                    Items
+                                </span>
+
+                                <strong>
+                                    @itemCount
+                                </strong>
+
+                            </div>
+
+
+                            <!-- SUBTOTAL -->
+
+                            <div class="summary-item-row">
+
+                                <span>
+                                    Subtotal
+                                </span>
+
+                                <strong>
+                                    Rs. @Model.TotalAmount.ToString("N2")
+                                </strong>
+
+                            </div>
+
+
+                            <!-- SHIPPING -->
+
+                            <div class="summary-item-row">
+
+                                <span>
+                                    Shipping
+                                </span>
+
+                                <strong class="free-shipping">
+                                    Free
+                                </strong>
+
+                            </div>
+
+
+                            <div class="payment-summary-divider"></div>
+
+
+                            <!-- TOTAL -->
+
+                            <div class="payment-total">
+
+                                <span>
+                                    Total Amount
+                                </span>
+
+                                <h2>
+                                    Rs. @Model.TotalAmount.ToString("N2")
+                                </h2>
+
+                            </div>
+
+
+                            <!-- TRUST -->
+
+                            <div class="payment-trust-list">
+
+                                <div>
+
+                                    <span>
+                                        ✓
+                                    </span>
+
+                                    Secure checkout
+
+                                </div>
+
+
+                                <div>
+
+                                    <span>
+                                        ✓
+                                    </span>
+
+                                    Protected transaction
+
+                                </div>
+
+
+                                <div>
+
+                                    <span>
+                                        ✓
+                                    </span>
+
+                                    Trusted payment providers
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </aside>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 
 </div>
+
+
+@section Scripts
+{
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                const form =
+                    document.getElementById("paymentForm");
+
+                const submitButton =
+                    document.getElementById(
+                        "paymentSubmitButton");
+
+                if (!form || !submitButton) {
+                    return;
+                }
+
+
+                form.addEventListener(
+                    "submit",
+                    function() {
+
+                        if (submitButton.dataset.submitting === "true") {
+                            return;
+                        }
+
+                        submitButton.dataset.submitting = "true";
+
+                        submitButton.disabled = true;
+
+                        const text =
+                            submitButton.querySelector(
+                                ".payment-button-text");
+
+                        const arrow =
+                            submitButton.querySelector(
+                                ".payment-button-arrow");
+
+                        const loading =
+                            submitButton.querySelector(
+                                ".payment-button-loading");
+
+
+                        if (text) {
+                            text.classList.add("d-none");
+                        }
+
+                        if (arrow) {
+                            arrow.classList.add("d-none");
+                        }
+
+                        if (loading) {
+                            loading.classList.remove("d-none");
+                        }
+
+                    });
+
+            });
+
+    </script>
+}

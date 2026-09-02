@@ -1,0 +1,188 @@
+﻿@{
+    ViewData["Title"] = "Payment";
+
+    var orderId = ViewBag.OrderId;
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-7">
+
+            <!-- ============================================= -->
+            <!-- PAYMENT HEADER -->
+            <!-- ============================================= -->
+
+            <div class="text-center mb-5">
+
+                <span class="section-eyebrow">
+                    SECURE CHECKOUT
+                </span>
+
+                <h1 class="mt-2">
+                    Choose Payment Method
+                </h1>
+
+                <p class="text-muted">
+
+                    Complete payment securely for your order.
+
+                </p>
+
+            </div>
+
+
+            <!-- ============================================= -->
+            <!-- ERROR MESSAGE -->
+            <!-- ============================================= -->
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show"
+                     role="alert">
+
+                    @TempData["Error"]
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert">
+                    </button>
+
+                </div>
+            }
+
+
+            <!-- ============================================= -->
+            <!-- ORDER INFO -->
+            <!-- ============================================= -->
+
+            <div class="card shadow-sm mb-4">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+
+                            <span class="text-muted">
+                                Order Number
+                            </span>
+
+                            <h5 class="mb-0">
+
+                                #@orderId
+
+                            </h5>
+
+                        </div>
+
+
+                        <a asp-controller="Orders"
+                           asp-action="Details"
+                           asp-route-id="@orderId"
+                           class="btn btn-outline-secondary btn-sm">
+
+                            View Order
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ============================================= -->
+            <!-- ESEWA PAYMENT -->
+            <!-- ============================================= -->
+
+            <div class="card shadow-sm">
+
+                <div class="card-body p-4">
+
+                    <div class="d-flex align-items-center">
+
+                        <div class="payment-method-icon me-3">
+
+                            💳
+
+                        </div>
+
+
+                        <div>
+
+                            <h5 class="mb-1">
+
+                                Pay with eSewa
+
+                            </h5>
+
+                            <p class="text-muted mb-0">
+
+                                Secure online payment using eSewa.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <hr class="my-4" />
+
+
+                    <form asp-controller="Payment"
+                          asp-action="InitiateEsewa"
+                          method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden"
+                               name="orderId"
+                               value="@orderId" />
+
+
+                        <button type="submit"
+                                class="btn btn-success btn-lg w-100">
+
+                            Pay with eSewa
+
+                        </button>
+
+                    </form>
+
+
+                    <p class="text-center text-muted small mt-3 mb-0">
+
+                        You will be redirected to the secure eSewa payment page.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ============================================= -->
+            <!-- BACK -->
+            <!-- ============================================= -->
+
+            <div class="text-center mt-4">
+
+                <a asp-controller="Orders"
+                   asp-action="Details"
+                   asp-route-id="@orderId"
+                   class="text-decoration-none">
+
+                    ← Back to Order
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,78 +1,146 @@
-﻿@model int?
+﻿@model ECommerceMVC.Models.Api.PaymentDto?
 
 @{
-ViewData["Title"] = "Payment Successful";
+    ViewData["Title"] = "Payment Successful";
+
+    var orderId = ViewBag.OrderId;
+    var transactionUuid = ViewBag.TransactionUuid;
 }
 
 <div class="container py-5">
 
+    <div class="row justify-content-center">
 
-<div class="row justify-content-center">
+        <div class="col-lg-8">
 
-    <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm border-0">
 
-        <div class="card shadow-sm text-center">
+                <div class="card-body text-center p-5">
 
-            <div class="card-body p-5">
+                    <!-- SUCCESS ICON -->
 
-                <div style="font-size: 70px;">
-                    ✅
-                </div>
+                    <div style="font-size: 80px;">
 
-                <h1 class="mt-3">
-                    Payment Successful!
-                </h1>
-
-                <p class="text-muted">
-                    Your payment has been successfully verified.
-                </p>
-
-                @if (Model.HasValue && Model.Value > 0)
-                {
-                    <div class="alert alert-success mt-4">
-
-                        <strong>
-                            Order #@Model.Value
-                        </strong>
-
-                        has been successfully paid.
+                        ✅
 
                     </div>
-                }
 
-                <p class="text-muted mt-3">
-                    Your order is now being processed.
-                </p>
 
-                <div class="d-grid gap-2 mt-4">
+                    <h1 class="mt-3 text-success">
 
-                    @if (Model.HasValue && Model.Value > 0)
+                        Payment Successful!
+
+                    </h1>
+
+
+                    <p class="text-muted fs-5">
+
+                        Your payment has been verified successfully.
+
+                    </p>
+
+
+                    <hr class="my-4" />
+
+
+                    <!-- ORDER INFORMATION -->
+
+                    <div class="row text-start">
+
+                        <div class="col-md-6 mb-3">
+
+                            <span class="text-muted">
+
+                                Order Number
+
+                            </span>
+
+                            <h5>
+
+                                #@orderId
+
+                            </h5>
+
+                        </div>
+
+
+                        @if (!string.IsNullOrWhiteSpace(transactionUuid))
+                        {
+                            <div class="col-md-6 mb-3">
+
+                                <span class="text-muted">
+
+                                    Transaction UUID
+
+                                </span>
+
+                                <h6 class="text-break">
+
+                                    @transactionUuid
+
+                                </h6>
+
+                            </div>
+                        }
+
+                    </div>
+
+
+                    <!-- PAYMENT INFORMATION -->
+                    @if (Model != null)
                     {
+                        <hr />
+
+                        <div class="row text-start">
+
+                            <div class="col-md-6 mb-3">
+
+                                <span class="text-muted">
+
+                                    Payment Status
+
+                                </span>
+
+                                <h5 class="text-success">
+
+                                    @Model.Status
+
+                                </h5>
+
+                            </div>
+
+                        </div>
+                    }
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="d-flex
+                        flex-column
+                        flex-md-row
+                        justify-content-center
+                        gap-2
+                        mt-4">
+
                         <a asp-controller="Orders"
                            asp-action="Details"
-                           asp-route-id="@Model.Value"
+                           asp-route-id="@orderId"
                            class="btn btn-primary">
 
                             View Order
 
                         </a>
-                    }
 
-                    <a asp-controller="Orders"
-                       asp-action="Index"
-                       class="btn btn-outline-primary">
 
-                        My Orders
+                        <a asp-controller="Products"
+                           asp-action="Index"
+                           class="btn btn-outline-secondary">
 
-                    </a>
+                            Continue Shopping
 
-                    <a asp-controller="Products"
-                       asp-action="Index"
-                       class="btn btn-outline-secondary">
+                        </a>
 
-                        Continue Shopping
-
-                    </a>
+                    </div>
 
                 </div>
 
@@ -81,8 +149,5 @@ ViewData["Title"] = "Payment Successful";
         </div>
 
     </div>
-
-</div>
-
 
 </div>

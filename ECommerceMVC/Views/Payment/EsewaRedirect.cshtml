@@ -1,5 +1,4 @@
-﻿
-@model ECommerceMVC.Models.Api.EsewaInitiateResponseDto
+﻿@model ECommerceMVC.Models.Api.EsewaInitiateResponseDto
 
 @{
     ViewData["Title"] = "Redirecting to eSewa";
@@ -11,94 +10,175 @@
 
         <div class="col-md-7">
 
-            <div class="card shadow-sm">
+            <div class="card shadow-sm border-0">
 
                 <div class="card-body text-center p-5">
 
-                    <h2 class="mb-3">
-                        Redirecting to eSewa
-                    </h2>
+                    <!-- ===================================== -->
+                    <!-- LOADING ICON -->
+                    <!-- ===================================== -->
 
-                    <p class="text-muted mb-4">
-                        Please wait while we redirect you
-                        to the eSewa payment page.
-                    </p>
+                    <div class="mb-4"
+                         style="font-size: 60px;">
 
-                    <div class="spinner-border mb-4"
-                         role="status">
-
-                        <span class="visually-hidden">
-                            Loading...
-                        </span>
+                        ⏳
 
                     </div>
 
-                    <p class="small text-muted">
-                        Order #@Model.OrderId
+
+                    <!-- ===================================== -->
+                    <!-- TITLE -->
+                    <!-- ===================================== -->
+
+                    <h2 class="mb-3">
+
+                        Redirecting to eSewa
+
+                    </h2>
+
+
+                    <!-- ===================================== -->
+                    <!-- DESCRIPTION -->
+                    <!-- ===================================== -->
+
+                    <p class="text-muted mb-4">
+
+                        Please wait while we redirect you to the
+                        secure eSewa payment gateway.
+
                     </p>
 
-                    <p class="fw-bold">
-                        Amount:
-                        Rs. @Model.Amount.ToString("N2")
-                    </p>
+
+                    <!-- ===================================== -->
+                    <!-- ESEWA PAYMENT FORM -->
+                    <!-- ===================================== -->
+
+                    <form id="esewaPaymentForm"
+                          action="@Model.PaymentUrl"
+                          method="post">
 
 
-                    <form id="esewaForm"
-                          method="POST"
-                          action="@Model.PaymentUrl">
+                        <!-- AMOUNT -->
 
                         <input type="hidden"
                                name="amount"
                                value="@Model.FormData.Amount" />
 
+
+                        <!-- TAX AMOUNT -->
+
                         <input type="hidden"
                                name="tax_amount"
                                value="@Model.FormData.TaxAmount" />
+
+
+                        <!-- TOTAL AMOUNT -->
 
                         <input type="hidden"
                                name="total_amount"
                                value="@Model.FormData.TotalAmount" />
 
+
+                        <!-- TRANSACTION UUID -->
+
                         <input type="hidden"
                                name="transaction_uuid"
                                value="@Model.FormData.TransactionUuid" />
+
+
+                        <!-- PRODUCT CODE -->
 
                         <input type="hidden"
                                name="product_code"
                                value="@Model.FormData.ProductCode" />
 
+
+                        <!-- SERVICE CHARGE -->
+
                         <input type="hidden"
                                name="product_service_charge"
                                value="@Model.FormData.ProductServiceCharge" />
+
+
+                        <!-- DELIVERY CHARGE -->
 
                         <input type="hidden"
                                name="product_delivery_charge"
                                value="@Model.FormData.ProductDeliveryCharge" />
 
+
+                        <!-- SUCCESS URL -->
+
                         <input type="hidden"
                                name="success_url"
                                value="@Model.FormData.SuccessUrl" />
+
+
+                        <!-- FAILURE URL -->
 
                         <input type="hidden"
                                name="failure_url"
                                value="@Model.FormData.FailureUrl" />
 
+
+                        <!-- SIGNED FIELD NAMES -->
+
                         <input type="hidden"
                                name="signed_field_names"
                                value="@Model.FormData.SignedFieldNames" />
+
+
+                        <!-- SIGNATURE -->
 
                         <input type="hidden"
                                name="signature"
                                value="@Model.FormData.Signature" />
 
-                        <noscript>
-                            <button type="submit"
-                                    class="btn btn-primary">
-                                Continue to eSewa
-                            </button>
-                        </noscript>
+
+                        <!-- ================================= -->
+                        <!-- FALLBACK BUTTON -->
+                        <!-- ================================= -->
+
+                        <button type="submit"
+                                class="btn btn-success btn-lg">
+
+                            Continue to eSewa
+
+                        </button>
 
                     </form>
+
+
+                    <!-- ===================================== -->
+                    <!-- LOADING SPINNER -->
+                    <!-- ===================================== -->
+
+                    <div class="mt-4">
+
+                        <div class="spinner-border text-success"
+                             role="status">
+
+                            <span class="visually-hidden">
+
+                                Redirecting to eSewa...
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ===================================== -->
+                    <!-- SECURITY MESSAGE -->
+                    <!-- ===================================== -->
+
+                    <p class="small text-muted mt-4 mb-0">
+
+                        🔒 You are being redirected to a secure
+                        payment gateway.
+
+                    </p>
 
                 </div>
 
@@ -111,11 +191,25 @@
 </div>
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
+@section Scripts
+{
+    <script>
 
-        document.getElementById("esewaForm").submit();
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
 
-    });
-</script>
+                const form =
+                    document.getElementById(
+                        "esewaPaymentForm");
 
+                if (form) {
+
+                    form.submit();
+
+                }
+
+            });
+
+    </script>
+}

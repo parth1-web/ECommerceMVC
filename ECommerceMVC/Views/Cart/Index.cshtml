@@ -2,300 +2,253 @@
 
 @{
     ViewData["Title"] = "Shopping Cart";
+
+    var itemCount = Model?.Items?.Count ?? 0;
+    var totalQuantity = Model?.Items?.Sum(x => x.Quantity) ?? 0;
 }
 
-<div class="container mt-4 mb-5">
+<div class="cart-page">
 
-    <!-- ===================================================== -->
-    <!-- HEADER -->
-    <!-- ===================================================== -->
+    <div class="container py-5">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+        <!-- ===================================================== -->
+        <!-- CART HEADER -->
+        <!-- ===================================================== -->
 
-        <div>
-            <h1 class="mb-1">
-                Shopping Cart
-            </h1>
+        <div class="cart-page-header">
 
-            <p class="text-muted mb-0">
-                Review the products in your cart.
-            </p>
-        </div>
+            <div>
 
-        <a asp-controller="Products"
-           asp-action="Index"
-           class="btn btn-outline-primary">
+                <div class="section-eyebrow">
+                    YOUR SHOPPING BAG
+                </div>
 
-            ← Continue Shopping
+                <h1>
+                    Your <span>Cart</span>
+                </h1>
 
-        </a>
+                <p>
+                    Review your selected homemade products before checkout.
+                </p>
 
-    </div>
-
-
-    <!-- ===================================================== -->
-    <!-- SUCCESS MESSAGE -->
-    <!-- ===================================================== -->
-    @if (TempData["Success"] != null)
-    {
-        <div class="alert alert-success alert-dismissible fade show"
-             role="alert">
-
-            @TempData["Success"]
-
-            <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert">
-            </button>
-
-        </div>
-    }
-
-
-    <!-- ===================================================== -->
-    <!-- ERROR MESSAGE -->
-    <!-- ===================================================== -->
-    @if (TempData["Error"] != null)
-    {
-        <div class="alert alert-danger alert-dismissible fade show"
-             role="alert">
-
-            @TempData["Error"]
-
-            <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert">
-            </button>
-
-        </div>
-    }
-
-
-    <!-- ===================================================== -->
-    <!-- EMPTY CART -->
-    <!-- ===================================================== -->
-    @if (Model == null ||
-             Model.Items == null ||
-             !Model.Items.Any())
-    {
-        <div class="text-center py-5">
-
-            <div style="font-size: 60px;">
-                🛒
             </div>
-
-            <h3 class="mt-3">
-                Your cart is empty
-            </h3>
-
-            <p class="text-muted">
-                Add some products to your cart to continue.
-            </p>
 
             <a asp-controller="Products"
                asp-action="Index"
-               class="btn btn-primary">
+               class="cart-continue-shopping">
 
-                Start Shopping
+                <span>←</span>
+
+                Continue Shopping
 
             </a>
 
         </div>
-    }
-    else
-    {
-        <!-- ================================================= -->
-        <!-- CART CONTENT -->
-        <!-- ================================================= -->
 
-        <div class="row g-4">
 
-            <!-- ============================================= -->
-            <!-- CART ITEMS -->
-            <!-- ============================================= -->
+        <!-- ===================================================== -->
+        <!-- SUCCESS MESSAGE -->
+        <!-- ===================================================== -->
+        @if (TempData["Success"] != null)
+        {
+            <div class="modern-alert modern-alert-success alert alert-dismissible fade show"
+                 role="alert">
 
-            <div class="col-lg-8">
+                <div class="alert-icon">
+                    ✓
+                </div>
 
-                <div class="card shadow-sm">
+                <div>
+                    @TempData["Success"]
+                </div>
 
-                    <div class="card-header">
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert">
+                </button>
 
-                        <h5 class="mb-0">
-                            Cart Items
-                        </h5>
+            </div>
+        }
+
+
+        <!-- ===================================================== -->
+        <!-- ERROR MESSAGE -->
+        <!-- ===================================================== -->
+        @if (TempData["Error"] != null)
+        {
+            <div class="modern-alert modern-alert-danger alert alert-dismissible fade show"
+                 role="alert">
+
+                <div class="alert-icon">
+                    !
+                </div>
+
+                <div>
+                    @TempData["Error"]
+                </div>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert">
+                </button>
+
+            </div>
+        }
+
+
+        <!-- ===================================================== -->
+        <!-- EMPTY CART -->
+        <!-- ===================================================== -->
+        @if (Model == null ||
+                     Model.Items == null ||
+                     !Model.Items.Any())
+        {
+            <div class="empty-cart-card">
+
+                <div class="empty-cart-icon">
+                    🛒
+                </div>
+
+                <div class="section-eyebrow">
+                    YOUR CART IS WAITING
+                </div>
+
+                <h2>
+                    Your cart is <span>empty</span>
+                </h2>
+
+                <p>
+                    Discover delicious traditional homemade products
+                    and add your favorites to your cart.
+                </p>
+
+                <a asp-controller="Products"
+                   asp-action="Index"
+                   class="btn-primary-custom">
+
+                    Explore Products
+
+                    <span>→</span>
+
+                </a>
+
+            </div>
+        }
+        else
+        {
+            <!-- ================================================= -->
+            <!-- CART PROGRESS -->
+            <!-- ================================================= -->
+
+            <div class="cart-progress">
+
+                <div class="cart-progress-step active">
+
+                    <div class="cart-progress-number">
+                        1
+                    </div>
+
+                    <div>
+                        <strong>Shopping Cart</strong>
+                        <span>Review your items</span>
+                    </div>
+
+                </div>
+
+
+                <div class="cart-progress-line active"></div>
+
+
+                <div class="cart-progress-step">
+
+                    <div class="cart-progress-number">
+                        2
+                    </div>
+
+                    <div>
+                        <strong>Checkout</strong>
+                        <span>Delivery details</span>
+                    </div>
+
+                </div>
+
+
+                <div class="cart-progress-line"></div>
+
+
+                <div class="cart-progress-step">
+
+                    <div class="cart-progress-number">
+                        3
+                    </div>
+
+                    <div>
+                        <strong>Payment</strong>
+                        <span>Secure payment</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- CART STATS -->
+            <!-- ================================================= -->
+
+            <div class="cart-summary-strip">
+
+                <div class="cart-summary-stat">
+
+                    <span class="cart-summary-icon">
+                        🛍️
+                    </span>
+
+                    <div>
+
+                        <small>PRODUCTS</small>
+
+                        <strong>
+                            @itemCount Items
+                        </strong>
 
                     </div>
 
+                </div>
 
-                    <div class="card-body p-0">
 
-                        <div class="table-responsive">
+                <div class="cart-summary-stat">
 
-                            <table class="table table-hover mb-0 align-middle">
+                    <span class="cart-summary-icon">
+                        📦
+                    </span>
 
-                                <thead>
+                    <div>
 
-                                    <tr>
+                        <small>TOTAL QUANTITY</small>
 
-                                        <th>
-                                            Product
-                                        </th>
+                        <strong>
+                            @totalQuantity Units
+                        </strong>
 
-                                        <th>
-                                            Price
-                                        </th>
+                    </div>
 
-                                        <th>
-                                            Quantity
-                                        </th>
+                </div>
 
-                                        <th>
-                                            Subtotal
-                                        </th>
 
-                                        <th>
-                                            Action
-                                        </th>
+                <div class="cart-summary-stat">
 
-                                    </tr>
+                    <span class="cart-summary-icon">
+                        💳
+                    </span>
 
-                                </thead>
+                    <div>
 
+                        <small>PAYMENT</small>
 
-                                <tbody>
-
-                                    @foreach (var item in Model.Items)
-                                    {
-                                        <tr>
-
-                                            <!-- Product -->
-
-                                            <td>
-
-                                                <div class="d-flex align-items-center">
-
-                                                    @if (!string.IsNullOrWhiteSpace(item.ImageUrl))
-                                                    {
-                                                        <img src="@item.ImageUrl"
-                                                             alt="@item.ProductName"
-                                                             style="width:70px;
-                                                        height:70px;
-                                                        object-fit:cover;"
-                                                             class="rounded me-3" />
-                                                    }
-                                                    else
-                                                    {
-                                                        <div class="bg-light rounded me-3 d-flex
-                                                            align-items-center
-                                                            justify-content-center"
-                                                             style="width:70px;
-                                                            height:70px;">
-
-                                                            📦
-
-                                                        </div>
-                                                    }
-
-                                                    <strong>
-                                                        @item.ProductName
-                                                    </strong>
-
-                                                </div>
-
-                                            </td>
-
-
-                                            <!-- Price -->
-
-                                            <td>
-
-                                                Rs. @item.UnitPrice.ToString("N2")
-
-                                            </td>
-
-
-                                            <!-- Quantity -->
-
-                                            <td>
-
-                                                <form asp-controller="Cart"
-                                                      asp-action="Update"
-                                                      method="post">
-
-                                                    @Html.AntiForgeryToken()
-
-                                                    <input type="hidden"
-                                                           name="productId"
-                                                           value="@item.ProductId" />
-
-
-                                                    <div class="input-group"
-                                                         style="width:150px;">
-
-                                                        <input type="number"
-                                                               name="quantity"
-                                                               value="@item.Quantity"
-                                                               min="1"
-                                                               class="form-control" />
-
-                                                        <button type="submit"
-                                                                class="btn btn-outline-primary">
-
-                                                            Update
-
-                                                        </button>
-
-                                                    </div>
-
-                                                </form>
-
-                                            </td>
-
-
-                                            <!-- Subtotal -->
-
-                                            <td>
-
-                                                <strong>
-                                                    Rs. @item.SubTotal.ToString("N2")
-                                                </strong>
-
-                                            </td>
-
-
-                                            <!-- Remove -->
-
-                                            <td>
-
-                                                <form asp-controller="Cart"
-                                                      asp-action="Remove"
-                                                      method="post">
-
-                                                    @Html.AntiForgeryToken()
-
-                                                    <input type="hidden"
-                                                           name="productId"
-                                                           value="@item.ProductId" />
-
-                                                    <button type="submit"
-                                                            class="btn btn-outline-danger">
-
-                                                        Remove
-
-                                                    </button>
-
-                                                </form>
-
-                                            </td>
-
-                                        </tr>
-                                    }
-
-                                </tbody>
-
-                            </table>
-
-                        </div>
+                        <strong>
+                            Secure Checkout
+                        </strong>
 
                     </div>
 
@@ -304,121 +257,451 @@
             </div>
 
 
-            <!-- ============================================= -->
-            <!-- CART SUMMARY -->
-            <!-- ============================================= -->
+            <!-- ================================================= -->
+            <!-- MAIN CART CONTENT -->
+            <!-- ================================================= -->
 
-            <div class="col-lg-4">
+            <div class="row g-4 align-items-start">
 
-                <div class="card shadow-sm">
+                <!-- ============================================= -->
+                <!-- CART ITEMS -->
+                <!-- ============================================= -->
 
-                    <div class="card-header">
+                <div class="col-lg-8">
 
-                        <h5 class="mb-0">
-                            Order Summary
-                        </h5>
+                    <div class="premium-cart-card">
+
+                        <!-- CARD HEADER -->
+
+                        <div class="premium-cart-header">
+
+                            <div>
+
+                                <h4>
+                                    Your Selected Products
+                                </h4>
+
+                                <p>
+                                    @itemCount product@(itemCount != 1 ? "s" : "")
+                                    ready for checkout
+                                </p>
+
+                            </div>
+
+                            <span class="cart-item-count-badge">
+
+                                @itemCount Item@(itemCount != 1 ? "s" : "")
+
+                            </span>
+
+                        </div>
+
+
+                        <!-- CART ITEMS -->
+
+                        <div class="cart-items-list">
+
+                            @foreach (var item in Model.Items)
+                            {
+                                <div class="premium-cart-item">
+
+                                    <!-- PRODUCT IMAGE -->
+
+                                    <div class="cart-product-image">
+
+                                        @if (!string.IsNullOrWhiteSpace(item.ImageUrl))
+                                        {
+                                            <img src="@item.ImageUrl"
+                                                 alt="@item.ProductName" />
+                                        }
+                                        else
+                                        {
+                                            <div class="cart-image-placeholder">
+                                                📦
+                                            </div>
+                                        }
+
+                                    </div>
+
+
+                                    <!-- PRODUCT DETAILS -->
+
+                                    <div class="cart-product-details">
+
+                                        <div class="cart-product-main">
+
+                                            <h5>
+                                                @item.ProductName
+                                            </h5>
+
+                                            <span class="cart-product-price">
+
+                                                Rs. @item.UnitPrice.ToString("N2")
+
+                                                <small>
+                                                    / each
+                                                </small>
+
+                                            </span>
+
+                                        </div>
+
+
+                                        <!-- QUANTITY -->
+
+                                        <div class="cart-quantity-section">
+
+                                            <span class="cart-label">
+                                                QUANTITY
+                                            </span>
+
+
+                                            <form asp-controller="Cart"
+                                                  asp-action="Update"
+                                                  method="post"
+                                                  class="cart-update-form">
+
+                                                @Html.AntiForgeryToken()
+
+                                                <input type="hidden"
+                                                       name="productId"
+                                                       value="@item.ProductId" />
+
+
+                                                <div class="cart-quantity-control">
+
+                                                    <input type="number"
+                                                           name="quantity"
+                                                           value="@item.Quantity"
+                                                           min="1"
+                                                           class="form-control cart-quantity-input" />
+
+                                                    <button type="submit"
+                                                            class="cart-update-button"
+                                                            title="Update quantity">
+
+                                                        Update
+
+                                                    </button>
+
+                                                </div>
+
+                                            </form>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- SUBTOTAL -->
+
+                                    <div class="cart-item-subtotal">
+
+                                        <span>
+                                            ITEM TOTAL
+                                        </span>
+
+                                        <strong>
+
+                                            Rs. @item.SubTotal.ToString("N2")
+
+                                        </strong>
+
+                                    </div>
+
+
+                                    <!-- REMOVE -->
+
+                                    <div class="cart-remove-section">
+
+                                        <form asp-controller="Cart"
+                                              asp-action="Remove"
+                                              method="post">
+
+                                            @Html.AntiForgeryToken()
+
+                                            <input type="hidden"
+                                                   name="productId"
+                                                   value="@item.ProductId" />
+
+                                            <button type="submit"
+                                                    class="cart-remove-button"
+                                                    title="Remove product">
+
+                                                ✕
+                                                <span>Remove</span>
+
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                </div>
+                            }
+
+                        </div>
+
+
+                        <!-- CART FOOTER -->
+
+                        <div class="premium-cart-footer">
+
+                            <a asp-controller="Products"
+                               asp-action="Index"
+                               class="cart-footer-link">
+
+                                ← Continue Shopping
+
+                            </a>
+
+
+                            <form asp-controller="Cart"
+                                  asp-action="Clear"
+                                  method="post">
+
+                                @Html.AntiForgeryToken()
+
+                                <button type="submit"
+                                        class="cart-clear-button">
+
+                                    🗑 Clear Cart
+
+                                </button>
+
+                            </form>
+
+                        </div>
 
                     </div>
 
+                </div>
 
-                    <div class="card-body">
 
-                        <div class="d-flex justify-content-between mb-3">
+                <!-- ============================================= -->
+                <!-- ORDER SUMMARY -->
+                <!-- ============================================= -->
+
+                <div class="col-lg-4">
+
+                    <div class="order-summary-card">
+
+                        <div class="order-summary-top">
+
+                            <div class="summary-icon">
+                                🧾
+                            </div>
+
+                            <div>
+
+                                <span class="section-eyebrow">
+                                    ORDER SUMMARY
+                                </span>
+
+                                <h4>
+                                    Ready to checkout?
+                                </h4>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="summary-divider"></div>
+
+
+                        <!-- ITEMS -->
+
+                        <div class="summary-row">
 
                             <span>
-                                Items
+
+                                Products
+                                <small>@itemCount item@(itemCount != 1 ? "s" : "")</small>
+
                             </span>
 
                             <strong>
-                                @Model.Items.Count
+
+                                @totalQuantity
+
                             </strong>
 
                         </div>
 
 
-                        <div class="d-flex justify-content-between mb-3">
+                        <!-- SUBTOTAL -->
+
+                        <div class="summary-row">
 
                             <span>
                                 Subtotal
                             </span>
 
                             <strong>
+
                                 Rs. @Model.TotalAmount.ToString("N2")
+
                             </strong>
 
                         </div>
 
 
-                        <hr />
+                        <!-- DELIVERY -->
 
+                        <div class="summary-row">
 
-                        <div class="d-flex justify-content-between mb-4">
+                            <span>
+                                Delivery
+                            </span>
 
-                            <h5>
-                                Total
-                            </h5>
+                            <strong class="summary-free">
 
-                            <h5 class="text-primary">
+                                Calculated at checkout
 
-                                Rs. @Model.TotalAmount.ToString("N2")
-
-                            </h5>
+                            </strong>
 
                         </div>
 
 
-                        <!-- Checkout will be connected on Day 13 -->
+                        <div class="summary-divider"></div>
+
+
+                        <!-- TOTAL -->
+
+                        <div class="summary-total">
+
+                            <div>
+
+                                <span>
+                                    TOTAL
+                                </span>
+
+                                <small>
+                                    Including applicable charges
+                                </small>
+
+                            </div>
+
+                            <strong>
+
+                                Rs. @Model.TotalAmount.ToString("N2")
+
+                            </strong>
+
+                        </div>
+
+
+                        <!-- CHECKOUT BUTTON -->
 
                         <a asp-controller="Checkout"
                            asp-action="Index"
-                           class="btn btn-primary w-100 mb-2">
+                           class="checkout-button">
 
-                            Proceed to Checkout
+                            <span>
+                                Proceed to Checkout
+                            </span>
+
+                            <span class="checkout-arrow">
+                                →
+                            </span>
 
                         </a>
 
 
-                        <!-- Clear Cart -->
+                        <!-- SECURITY -->
 
-                        <form asp-controller="Cart"
-                              asp-action="Clear"
-                              method="post">
+                        <div class="secure-checkout-note">
 
-                            @Html.AntiForgeryToken()
+                            <span>
+                                🔒
+                            </span>
 
-                            <button type="submit"
-                                    class="btn btn-outline-danger w-100">
+                            <p>
 
-                                Clear Cart
+                                Secure checkout.
+                                Your payment information is protected.
 
-                            </button>
+                            </p>
 
-                        </form>
+                        </div>
+
+                    </div>
+
+
+                    <!-- TRUST CARD -->
+
+                    <div class="cart-trust-card">
+
+                        <div class="cart-trust-item">
+
+                            <span>
+                                ✓
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Quality Products
+                                </strong>
+
+                                <small>
+                                    Carefully selected products
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="cart-trust-item">
+
+                            <span>
+                                🔒
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Secure Payment
+                                </strong>
+
+                                <small>
+                                    Safe and protected checkout
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="cart-trust-item">
+
+                            <span>
+                                🚚
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Easy Ordering
+                                </strong>
+
+                                <small>
+                                    Simple and convenient process
+                                </small>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
                 </div>
-                @if (Model.Items != null &&
-                     Model.Items.Any())
-                {
-                    <div class="mt-4">
-
-                        <a asp-controller="Checkout"
-                           asp-action="Index"
-                           class="btn btn-success btn-lg w-100">
-
-                            Proceed to Checkout
-
-                        </a>
-
-                    </div>
-                }
-
 
             </div>
+        }
 
-        </div>
-    }
-    
+    </div>
 
 </div>

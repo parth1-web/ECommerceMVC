@@ -2,129 +2,322 @@
 
 @{
     ViewData["Title"] = "Order Confirmed";
+
+    var statusText = Model.Status switch
+    {
+        1 => "Pending",
+        2 => "Confirmed",
+        3 => "Processing",
+        4 => "Shipped",
+        5 => "Delivered",
+        6 => "Cancelled",
+        _ => Model.Status.ToString()
+    };
+
+    var statusClass = Model.Status switch
+    {
+        1 => "status-pending",
+        2 => "status-confirmed",
+        3 => "status-processing",
+        4 => "status-shipped",
+        5 => "status-delivered",
+        6 => "status-cancelled",
+        _ => "status-default"
+    };
 }
 
-<div class="container mt-5 mb-5">
+<div class="confirmation-page">
 
-    <div class="row justify-content-center">
+    <div class="container py-5">
 
-        <div class="col-md-8">
+        <!-- ================================================= -->
+        <!-- SUCCESS HERO -->
+        <!-- ================================================= -->
 
-            <div class="card shadow-sm text-center">
+        <div class="confirmation-hero text-center">
 
-                <div class="card-body p-5">
+            <div class="confirmation-icon">
+                <span>✓</span>
+            </div>
 
-                    <div style="font-size: 70px;">
-                        ✅
-                    </div>
+            <div class="confirmation-eyebrow">
+                ORDER SUCCESSFULLY CREATED
+            </div>
+
+            <h1>
+                Thank you for your
+                <span>order!</span>
+            </h1>
+
+            <p>
+                Your order has been received successfully.
+                We'll keep you updated as your order progresses.
+            </p>
+
+        </div>
 
 
-                    <h1 class="mt-3">
-                        Order Confirmed!
-                    </h1>
+        <!-- ================================================= -->
+        <!-- ORDER SUCCESS CARD -->
+        <!-- ================================================= -->
+
+        <div class="confirmation-card">
+
+            <!-- ============================================= -->
+            <!-- ORDER HEADER -->
+            <!-- ============================================= -->
+
+            <div class="confirmation-card-header">
+
+                <div>
+
+                    <span class="order-label">
+                        ORDER NUMBER
+                    </span>
+
+                    <h3>
+                        #@Model.Id
+                    </h3>
+
+                </div>
 
 
-                    <p class="text-muted">
+                <div class="text-md-end mt-3 mt-md-0">
 
-                        Thank you for your purchase.
+                    <span class="order-label">
+                        ORDER DATE
+                    </span>
+
+                    <p class="order-date">
+
+                        @Model.OrderDate
+                        .ToLocalTime()
+                        .ToString("dd MMM yyyy, hh:mm tt")
 
                     </p>
 
+                </div>
 
-                    <hr />
-
-
-                    <div class="row text-start mt-4">
-
-                        <div class="col-md-6">
-
-                            <p class="mb-1 text-muted">
-                                Order ID
-                            </p>
-
-                            <h5>
-                                #@Model.Id
-                            </h5>
-
-                        </div>
+            </div>
 
 
-                        <div class="col-md-6">
+            <!-- ============================================= -->
+            <!-- ORDER STATUS -->
+            <!-- ============================================= -->
 
-                            <p class="mb-1 text-muted">
-                                Order Date
-                            </p>
+            <div class="order-status-section">
 
-                            <h5>
-                                @Model.OrderDate.ToLocalTime()
-                            </h5>
+                <div class="status-info">
 
-                        </div>
-
+                    <div class="status-icon">
+                        📦
                     </div>
 
+                    <div>
 
-                    <div class="row text-start mt-3">
+                        <span>
+                            ORDER STATUS
+                        </span>
 
-                        <div class="col-md-6">
-
-                            <p class="mb-1 text-muted">
-                                Status
-                            </p>
-
-                            <h5>
-                                @Model.Status
-                            </h5>
-
-                        </div>
-
-
-                        <div class="col-md-6">
-
-                            <p class="mb-1 text-muted">
-                                Total
-                            </p>
-
-                            <h5 class="text-primary">
-
-                                Rs.
-                                @Model.TotalAmount.ToString("N2")
-
-                            </h5>
-
-                        </div>
-
-                    </div>
-
-
-                    <hr class="my-4" />
-
-
-                    <div class="d-flex
-                        justify-content-center
-                        gap-2">
-
-                        <a asp-controller="Products"
-                           asp-action="Index"
-                           class="btn btn-primary">
-
-                            Continue Shopping
-
-                        </a>
-
-                        <a asp-controller="Orders"
-                           asp-action="Index"
-                           class="btn btn-outline-primary">
-
-                            My Orders
-
-                        </a>
+                        <h5>
+                            @statusText
+                        </h5>
 
                     </div>
 
                 </div>
 
+
+                <span class="order-status-badge @statusClass">
+
+                    @statusText
+
+                </span>
+
             </div>
+
+
+            <!-- ============================================= -->
+            <!-- ORDER ITEMS -->
+            <!-- ============================================= -->
+
+            <div class="confirmation-items">
+
+                <div class="confirmation-section-title">
+
+                    <div>
+
+                        <span class="section-mini-label">
+                            PURCHASE SUMMARY
+                        </span>
+
+                        <h4>
+                            Order Items
+                        </h4>
+
+                    </div>
+
+                    <span class="item-count">
+
+                        @(Model.Items?.Count ?? 0)
+                        item@(Model.Items?.Count == 1 ? "" : "s")
+
+                    </span>
+
+                </div>
+
+
+                @if (Model.Items != null && Model.Items.Any())
+                {
+                    @foreach (var item in Model.Items)
+                    {
+                        <div class="confirmation-item">
+
+                            <!-- Product Icon -->
+
+                            <div class="confirmation-product-icon">
+                                📦
+                            </div>
+
+
+                            <!-- Product Information -->
+
+                            <div class="confirmation-product-info">
+
+                                <h6>
+                                    @item.ProductName
+                                </h6>
+
+                                <p>
+
+                                    @item.Quantity
+                                    ×
+                                    Rs. @item.UnitPrice.ToString("N2")
+
+                                </p>
+
+                            </div>
+
+
+                            <!-- Subtotal -->
+
+                            <div class="confirmation-item-price">
+
+                                Rs. @item.Subtotal.ToString("N2")
+
+                            </div>
+
+                        </div>
+                    }
+                }
+
+            </div>
+
+
+            <!-- ============================================= -->
+            <!-- ORDER TOTAL -->
+            <!-- ============================================= -->
+
+            <div class="confirmation-total">
+
+                <div class="total-label">
+
+                    <span>
+                        TOTAL AMOUNT
+                    </span>
+
+                    <small>
+                        Including all applicable charges
+                    </small>
+
+                </div>
+
+
+                <div class="total-amount">
+
+                    Rs. @Model.TotalAmount.ToString("N2")
+
+                </div>
+
+            </div>
+
+
+            <!-- ============================================= -->
+            <!-- PAYMENT INFORMATION -->
+            <!-- ============================================= -->
+
+            <div class="payment-note">
+
+                <div class="payment-note-icon">
+                    🔒
+                </div>
+
+                <div>
+
+                    <strong>
+                        Secure Order Processing
+                    </strong>
+
+                    <p>
+                        Your order is securely recorded in our system.
+                        You can track its progress from your orders page.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- ACTION BUTTONS -->
+        <!-- ================================================= -->
+
+        <div class="confirmation-actions">
+
+            <a asp-controller="Orders"
+               asp-action="Index"
+               class="btn-confirmation-primary">
+
+                <span>
+                    View My Orders
+                </span>
+
+                <span>
+                    →
+                </span>
+
+            </a>
+
+
+            <a asp-controller="Products"
+               asp-action="Index"
+               class="btn-confirmation-secondary">
+
+                ← Continue Shopping
+
+            </a>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- HELP -->
+        <!-- ================================================= -->
+
+        <div class="confirmation-help text-center">
+
+            <span>
+                Need help with your order?
+            </span>
+
+            <a asp-controller="Home"
+               asp-action="Privacy">
+
+                Contact Support
+
+            </a>
 
         </div>
 

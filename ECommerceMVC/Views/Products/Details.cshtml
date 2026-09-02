@@ -4,66 +4,502 @@
     ViewData["Title"] = Model.Name;
 }
 
-<div class="container mt-5">
+<div class="product-details-page">
 
-    <div class="row">
+    <!-- ===================================================== -->
+    <!-- BREADCRUMB -->
+    <!-- ===================================================== -->
 
-        <div class="col-md-6">
+    <div class="container">
 
-            @if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
-            {
-                <img src="@Model.ImageUrl"
-                     alt="@Model.Name"
-                     class="img-fluid rounded shadow"
-                     style="width: 100%; max-height: 500px; object-fit: cover;" />
-            }
+        <nav class="product-breadcrumb" aria-label="breadcrumb">
+
+            <a asp-controller="Home"
+               asp-action="Index">
+                Home
+            </a>
+
+            <span>/</span>
+
+            <a asp-controller="Products"
+               asp-action="Index">
+                Products
+            </a>
+
+            <span>/</span>
+
+            <span class="current-product">
+                @Model.Name
+            </span>
+
+        </nav>
+
+    </div>
+
+
+    <!-- ===================================================== -->
+    <!-- PRODUCT DETAILS -->
+    <!-- ===================================================== -->
+
+    <section class="product-details-section">
+
+        <div class="container">
+
+            <div class="row g-5 align-items-start">
+
+
+                <!-- ================================================= -->
+                <!-- PRODUCT IMAGE -->
+                <!-- ================================================= -->
+
+                <div class="col-lg-6">
+
+                    <div class="product-image-card">
+
+                        @if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
+                        {
+                            <img src="@Model.ImageUrl"
+                                 alt="@Model.Name"
+                                 class="product-main-image" />
+                        }
+                        else
+                        {
+                            <div class="product-image-placeholder">
+
+                                <div class="placeholder-icon">
+                                    🥫
+                                </div>
+
+                                <h5>No Product Image</h5>
+
+                                <p>
+                                    Product image will be available soon.
+                                </p>
+
+                            </div>
+                        }
+
+
+                        <!-- Decorative Badge -->
+                        @if (Model.IsAvailable)
+                        {
+                            <div class="product-image-badge">
+
+                                <span class="badge-dot"></span>
+
+                                Fresh & Available
+
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- PRODUCT INFORMATION -->
+                <!-- ================================================= -->
+
+                <div class="col-lg-6">
+
+                    <div class="product-information">
+
+
+                        <!-- CATEGORY / LABEL -->
+
+                        <div class="product-category-label">
+
+                            <span>AUTHENTIC NEPALI PRODUCT</span>
+
+                        </div>
+
+
+                        <!-- PRODUCT NAME -->
+
+                        <h1 class="product-details-title">
+
+                            @Model.Name
+
+                        </h1>
+
+
+                        <!-- DESCRIPTION -->
+
+                        <p class="product-details-description">
+
+                            @Model.Description
+
+                        </p>
+
+
+                        <!-- ================================================= -->
+                        <!-- PRICE -->
+                        <!-- ================================================= -->
+
+                        <div class="product-price-section">
+
+                            <span class="price-label">
+                                Price
+                            </span>
+
+                            <div class="product-details-price">
+
+                                Rs. @Model.Price.ToString("N2")
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================================================= -->
+                        <!-- DIVIDER -->
+                        <!-- ================================================= -->
+
+                        <div class="product-divider"></div>
+
+
+                        <!-- ================================================= -->
+                        <!-- STOCK STATUS -->
+                        <!-- ================================================= -->
+                        @if (Model.IsAvailable && Model.Stock > 0)
+                        {
+                            <div class="product-stock-card product-stock-available">
+
+                                <div class="stock-icon">
+
+                                    ✓
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        In Stock
+                                    </strong>
+
+                                    <span>
+                                        @Model.Stock item@(Model.Stock == 1 ? "" : "s") currently available
+                                    </span>
+
+                                </div>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="product-stock-card product-stock-unavailable">
+
+                                <div class="stock-icon">
+
+                                    !
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Currently Out of Stock
+                                    </strong>
+
+                                    <span>
+                                        This product is temporarily unavailable.
+                                    </span>
+
+                                </div>
+
+                            </div>
+                        }
+
+
+                        <!-- ================================================= -->
+                        <!-- ADD TO CART -->
+                        <!-- ================================================= -->
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+
+                            @if (Model.IsAvailable && Model.Stock > 0)
+                            {
+                                <form asp-controller="Cart"
+                                      asp-action="Add"
+                                      method="post"
+                                      class="add-to-cart-form">
+
+                                    @Html.AntiForgeryToken()
+
+
+                                    <!-- Product ID -->
+
+                                    <input type="hidden"
+                                           name="productId"
+                                           value="@Model.Id" />
+
+
+                                    <!-- Quantity -->
+
+                                    <div class="quantity-section">
+
+                                        <label for="quantity">
+
+                                            Quantity
+
+                                        </label>
+
+
+                                        <div class="quantity-and-action">
+
+
+                                            <div class="quantity-control">
+
+                                                <button type="button"
+                                                        class="quantity-button quantity-minus"
+                                                        aria-label="Decrease quantity">
+
+                                                    −
+
+                                                </button>
+
+
+                                                <input id="quantity"
+                                                       type="number"
+                                                       name="quantity"
+                                                       value="1"
+                                                       min="1"
+                                                       max="@Model.Stock"
+                                                       class="quantity-input" />
+
+
+                                                <button type="button"
+                                                        class="quantity-button quantity-plus"
+                                                        aria-label="Increase quantity">
+
+                                                    +
+
+                                                </button>
+
+                                            </div>
+
+
+                                            <!-- Add To Cart -->
+
+                                            <button type="submit"
+                                                    class="btn-add-to-cart">
+
+                                                <span class="cart-icon">
+                                                    🛒
+                                                </span>
+
+                                                Add to Cart
+
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+
+                                </form>
+                            }
+                            else
+                            {
+                                <button type="button"
+                                        class="btn-out-of-stock"
+                                        disabled>
+
+                                    Currently Out of Stock
+
+                                </button>
+                            }
+
+                        }
+                        else
+                        {
+
+                            <!-- NOT LOGGED IN -->
+
+                            <div class="login-to-purchase">
+
+                                <div class="login-purchase-content">
+
+                                    <div class="login-purchase-icon">
+
+                                        🔐
+
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Ready to order?
+                                        </strong>
+
+                                        <span>
+                                            Login to add this product to your cart.
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <a asp-controller="Account"
+                                   asp-action="Login"
+                                   class="btn-login-to-buy">
+
+                                    Login to Purchase
+
+                                </a>
+
+                            </div>
+
+                        }
+
+
+                        <!-- ================================================= -->
+                        <!-- PRODUCT TRUST INFORMATION -->
+                        <!-- ================================================= -->
+
+                        <div class="product-trust-grid">
+
+
+                            <div class="product-trust-item">
+
+                                <div class="trust-item-icon">
+
+                                    🌿
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Authentic
+                                    </strong>
+
+                                    <span>
+                                        Traditional Nepali taste
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="product-trust-item">
+
+                                <div class="trust-item-icon">
+
+                                    ✨
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Fresh
+                                    </strong>
+
+                                    <span>
+                                        Quality ingredients
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="product-trust-item">
+
+                                <div class="trust-item-icon">
+
+                                    🚚
+
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Delivery
+                                    </strong>
+
+                                    <span>
+                                        Delivered to your door
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <!-- ================================================= -->
+                        <!-- BACK TO PRODUCTS -->
+                        <!-- ================================================= -->
+
+                        <div class="back-to-products">
+
+                            <a asp-controller="Products"
+                               asp-action="Index">
+
+                                ← Continue Shopping
+
+                            </a>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
-        <div class="col-md-6">
+    </section>
 
-            <h1>@Model.Name</h1>
 
-            <p class="text-muted">
-                @Model.Description
-            </p>
+    <!-- ===================================================== -->
+    <!-- PRODUCT EXPERIENCE SECTION -->
+    <!-- ===================================================== -->
 
-            <h2 class="mt-4">
-                Rs. @Model.Price
-            </h2>
+    <section class="product-experience-section">
 
-            @if (Model.IsAvailable)
-            {
-                <div class="alert alert-success mt-3">
-                    In Stock
+        <div class="container">
+
+            <div class="product-experience-card">
+
+                <div>
+
+                    <span class="section-eyebrow">
+
+                        MADE WITH CARE
+
+                    </span>
+
+                    <h2>
+
+                        Traditional flavor,
+                        <span>modern convenience.</span>
+
+                    </h2>
+
+                    <p>
+
+                        Enjoy authentic Nepali homemade products prepared
+                        with care and delivered conveniently to your home.
+
+                    </p>
+
                 </div>
 
-                <p>
-                    Available quantity: @Model.Stock
-                </p>
-
-                <button class="btn btn-primary">
-                    Add to Cart
-                </button>
-            }
-            else
-            {
-                <div class="alert alert-danger mt-3">
-                    Out of Stock
-                </div>
-
-                <button class="btn btn-secondary" disabled>
-                    Out of Stock
-                </button>
-            }
-
-            <div class="mt-4">
 
                 <a asp-controller="Products"
                    asp-action="Index"
-                   class="btn btn-outline-secondary">
+                   class="btn-primary-custom">
 
-                    ← Back to Products
+                    Explore More Products →
 
                 </a>
 
@@ -71,6 +507,72 @@
 
         </div>
 
-    </div>
+    </section>
 
 </div>
+
+
+@section Scripts
+{
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function() {
+
+            const quantityInput =
+                document.getElementById("quantity");
+
+            const minusButton =
+                document.querySelector(".quantity-minus");
+
+            const plusButton =
+                document.querySelector(".quantity-plus");
+
+
+            if (!quantityInput ||
+                !minusButton ||
+                !plusButton) {
+                return;
+            }
+
+
+            minusButton.addEventListener("click", function() {
+
+                let currentValue =
+                    parseInt(quantityInput.value) || 1;
+
+                let minimum =
+                    parseInt(quantityInput.min) || 1;
+
+
+                if (currentValue > minimum) {
+
+                    quantityInput.value =
+                        currentValue - 1;
+
+                }
+
+            });
+
+
+            plusButton.addEventListener("click", function() {
+
+                let currentValue =
+                    parseInt(quantityInput.value) || 1;
+
+                let maximum =
+                    parseInt(quantityInput.max) || 999;
+
+
+                if (currentValue < maximum) {
+
+                    quantityInput.value =
+                        currentValue + 1;
+
+                }
+
+            });
+
+        });
+
+    </script>
+}

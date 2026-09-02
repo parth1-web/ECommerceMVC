@@ -1,113 +1,122 @@
 ﻿@model ECommerceMVC.Models.Api.OrderDto
 
 @{
-    ViewData["Title"] = "Order Details";
+    ViewData["Title"] = $"Order #{Model.Id}";
+
+    var orderItems =
+        Model.Items ?? new List<ECommerceMVC.Models.Api.OrderItemDto>();
+
+    var orderDate =
+        Model.OrderDate.Kind == DateTimeKind.Utc
+            ? Model.OrderDate.ToLocalTime()
+            : Model.OrderDate;
+
+    var canPay = Model.Status == 1;
+
+    var statusText = Model.Status switch
+    {
+        1 => "Pending",
+        2 => "Confirmed",
+        3 => "Processing",
+        4 => "Shipped",
+        5 => "Delivered",
+        6 => "Cancelled",
+        _ => $"Status {Model.Status}"
+    };
+
+    var statusClass = Model.Status switch
+    {
+        1 => "status-pending",
+        2 => "status-confirmed",
+        3 => "status-processing",
+        4 => "status-shipped",
+        5 => "status-delivered",
+        6 => "status-cancelled",
+        _ => "status-default"
+    };
 }
 
-<div class="container py-5">
+<div class="order-details-page">
 
-    <!-- ============================================== -->
-    <!-- PAGE HEADER -->
-    <!-- ============================================== -->
+    <!-- ===================================================== -->
+    <!-- PAGE HERO -->
+    <!-- ===================================================== -->
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <section class="order-details-hero">
 
-        <div>
-            <h1 class="mb-1">
-                Order #@Model.Id
-            </h1>
+        <div class="container">
 
-            <p class="text-muted mb-0">
-                Order details
-            </p>
-        </div>
+            <div class="order-details-header">
 
-        <a asp-controller="Orders"
-           asp-action="Index"
-           class="btn btn-outline-secondary">
+                <!-- LEFT -->
 
-            ← Back to My Orders
+                <div class="order-details-heading">
 
-        </a>
+                    <a asp-controller="Orders"
+                       asp-action="Index"
+                       class="back-link">
 
-    </div>
+                        <span class="back-arrow">
+                            ←
+                        </span>
+
+                        <span>
+                            Back to My Orders
+                        </span>
+
+                    </a>
 
 
-    <!-- ============================================== -->
-    <!-- ORDER INFORMATION -->
-    <!-- ============================================== -->
+                    <div class="order-heading-content">
 
-    <div class="card shadow-sm mb-4">
+                        <span class="section-eyebrow">
+                            ORDER DETAILS
+                        </span>
 
-        <div class="card-header">
 
-            <h5 class="mb-0">
-                Order Information
-            </h5>
+                        <h1 class="order-title">
 
-        </div>
+                            Order
 
-        <div class="card-body">
+                            <span>
+                                #@Model.Id
+                            </span>
 
-            <div class="row">
+                        </h1>
 
-                <!-- ORDER DATE -->
 
-                <div class="col-md-4 mb-3">
+                        <p class="order-date-text">
 
-                    <small class="text-muted d-block">
-                        Order Date
-                    </small>
+                            Placed on
 
-                    <strong>
-                        @Model.OrderDate.ToLocalTime().ToString("dd MMM yyyy, hh:mm tt")
-                    </strong>
+                            <strong>
+                                @orderDate.ToString("dd MMM yyyy")
+                            </strong>
+
+                            <span class="date-divider">
+                                •
+                            </span>
+
+                            @orderDate.ToString("hh:mm tt")
+
+                        </p>
+
+                    </div>
 
                 </div>
 
 
                 <!-- STATUS -->
 
-                <div class="col-md-4 mb-3">
+                <div class="order-status-wrapper">
 
-                    <small class="text-muted d-block">
-                        Status
-                    </small>
+                    <span class="order-status @statusClass">
 
-                    @if (Model.Status == 1)
-                    {
-                        <span class="badge bg-warning text-dark">
-                            Pending
-                        </span>
-                    }
-                    else if (Model.Status == 6)
-                    {
-                        <span class="badge bg-danger">
-                            Cancelled
-                        </span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-secondary">
-                            @Model.Status
-                        </span>
-                    }
+                        <span class="status-dot"></span>
 
-                </div>
+                        @statusText
 
-
-                <!-- TOTAL -->
-
-                <div class="col-md-4 mb-3">
-
-                    <small class="text-muted d-block">
-                        Total
-                    </small>
-
-                    <strong class="text-success">
-                        Rs.
-                        @Model.TotalAmount.ToString("N2")
-                    </strong>
+                    </span>
 
                 </div>
 
@@ -115,117 +124,595 @@
 
         </div>
 
-    </div>
+    </section>
 
 
-    <!-- ============================================== -->
-    <!-- ORDER ITEMS -->
-    <!-- ============================================== -->
+    <!-- ===================================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ===================================================== -->
 
-    <div class="card shadow-sm">
+    <section class="order-details-content">
 
-        <div class="card-header">
+        <div class="container">
 
-            <h5 class="mb-0">
-                Order Items
-            </h5>
 
-        </div>
-
-        <div class="card-body p-0">
-
-            @if (Model.Items != null && Model.Items.Any())
+            <!-- ================================================= -->
+            <!-- SUCCESS MESSAGE -->
+            <!-- ================================================= -->
+            @if (TempData["SuccessMessage"] != null)
             {
-                @foreach (var item in Model.Items)
-                {
-                    <div class="p-4 border-bottom">
+                <div class="alert modern-alert modern-alert-success alert-dismissible fade show"
+                     role="alert">
 
-                        <div class="row align-items-center">
+                    <div class="alert-message-content">
 
-                            <!-- PRODUCT -->
+                        <div class="alert-icon">
+                            ✓
+                        </div>
 
-                            <div class="col-md-4 mb-3 mb-md-0">
+                        <div>
+                            @TempData["SuccessMessage"]
+                        </div>
+
+                    </div>
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close">
+                    </button>
+
+                </div>
+            }
+
+
+            <!-- ================================================= -->
+            <!-- ERROR MESSAGE -->
+            <!-- ================================================= -->
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert modern-alert modern-alert-danger alert-dismissible fade show"
+                     role="alert">
+
+                    <div class="alert-message-content">
+
+                        <div class="alert-icon">
+                            !
+                        </div>
+
+                        <div>
+                            @TempData["ErrorMessage"]
+                        </div>
+
+                    </div>
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close">
+                    </button>
+
+                </div>
+            }
+
+
+            <div class="row g-4 align-items-start">
+
+
+                <!-- ================================================= -->
+                <!-- LEFT COLUMN -->
+                <!-- ================================================= -->
+
+                <div class="col-lg-8">
+
+
+                    <!-- ============================================= -->
+                    <!-- ORDER ITEMS -->
+                    <!-- ============================================= -->
+
+                    <section class="order-items-card">
+
+
+                        <!-- HEADER -->
+
+                        <div class="order-card-header">
+
+                            <div>
+
+                                <span class="section-eyebrow">
+                                    PURCHASE DETAILS
+                                </span>
+
+                                <h4>
+                                    Your Order Items
+                                </h4>
+
+                                <p>
+                                    @orderItems.Count
+                                    @(orderItems.Count == 1 ? "item" : "items")
+                                    included in this order
+                                </p>
+
+                            </div>
+
+
+                            <div class="items-count-badge"
+                                 aria-label="@orderItems.Count order items">
+
+                                <span>
+                                    📦
+                                </span>
 
                                 <strong>
-                                    @item.ProductName
-                                </strong>
-
-                            </div>
-
-
-                            <!-- QUANTITY -->
-
-                            <div class="col-md-2 mb-3 mb-md-0">
-
-                                <small class="text-muted d-block">
-                                    Quantity
-                                </small>
-
-                                @item.Quantity
-
-                            </div>
-
-
-                            <!-- UNIT PRICE -->
-
-                            <div class="col-md-3 mb-3 mb-md-0">
-
-                                <small class="text-muted d-block">
-                                    Unit Price
-                                </small>
-
-                                Rs.
-                                @item.UnitPrice.ToString("N2")
-
-                            </div>
-
-
-                            <!-- SUBTOTAL -->
-
-                            <div class="col-md-3 text-md-end">
-
-                                <small class="text-muted d-block">
-                                    Subtotal
-                                </small>
-
-                                <strong>
-                                    Rs.
-                                    @item.Subtotal.ToString("N2")
+                                    @orderItems.Count
                                 </strong>
 
                             </div>
 
                         </div>
 
-                    </div>
-                }
-            }
-            else
-            {
-                <div class="p-4 text-muted">
-                    No items found for this order.
+
+                        <!-- EMPTY STATE -->
+                        @if (!orderItems.Any())
+                        {
+                            <div class="empty-order-items">
+
+                                <div class="empty-order-items-icon">
+                                    📦
+                                </div>
+
+                                <h5>
+                                    No order items found
+                                </h5>
+
+                                <p>
+                                    We couldn't find any items associated
+                                    with this order.
+                                </p>
+
+                            </div>
+                        }
+                        else
+                        {
+
+                            <!-- ITEMS -->
+
+                            <div class="order-items-list">
+
+                                @foreach (var item in orderItems)
+                                {
+                                    <article class="order-item">
+
+
+                                        <!-- PRODUCT -->
+
+                                        <div class="order-item-product">
+
+                                            <div class="order-product-icon">
+
+                                                📦
+
+                                            </div>
+
+
+                                            <div class="order-product-details">
+
+                                                <h6>
+                                                    @item.ProductName
+                                                </h6>
+
+
+                                                <div class="order-item-meta">
+
+                                                    <span>
+
+                                                        Quantity:
+
+                                                        <strong>
+                                                            @item.Quantity
+                                                        </strong>
+
+                                                    </span>
+
+
+                                                    <span class="meta-divider">
+                                                        •
+                                                    </span>
+
+
+                                                    <span>
+
+                                                        Rs.
+                                                        @item.UnitPrice.ToString("N2")
+                                                        each
+
+                                                    </span>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+                                        <!-- PRICE -->
+
+                                        <div class="order-item-price">
+
+                                            <span class="item-price-label">
+                                                Subtotal
+                                            </span>
+
+                                            <strong>
+                                                Rs. @item.Subtotal.ToString("N2")
+                                            </strong>
+
+                                        </div>
+
+                                    </article>
+                                }
+
+                            </div>
+                        }
+
+                    </section>
+
+
+                    <!-- ============================================= -->
+                    <!-- ORDER INFORMATION -->
+                    <!-- ============================================= -->
+
+                    <section class="order-information-card mt-4">
+
+                        <div class="order-card-header compact-header">
+
+                            <div>
+
+                                <span class="section-eyebrow">
+                                    ORDER INFORMATION
+                                </span>
+
+                                <h5>
+                                    Purchase Details
+                                </h5>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="order-information-grid">
+
+
+                            <!-- ORDER NUMBER -->
+
+                            <div class="order-information-item">
+
+                                <span class="info-label">
+                                    ORDER NUMBER
+                                </span>
+
+                                <strong>
+                                    #@Model.Id
+                                </strong>
+
+                            </div>
+
+
+                            <!-- DATE -->
+
+                            <div class="order-information-item">
+
+                                <span class="info-label">
+                                    ORDER DATE
+                                </span>
+
+                                <strong>
+                                    @orderDate.ToString("dd MMM yyyy")
+                                </strong>
+
+                            </div>
+
+
+                            <!-- TIME -->
+
+                            <div class="order-information-item">
+
+                                <span class="info-label">
+                                    ORDER TIME
+                                </span>
+
+                                <strong>
+                                    @orderDate.ToString("hh:mm tt")
+                                </strong>
+
+                            </div>
+
+
+                            <!-- STATUS -->
+
+                            <div class="order-information-item">
+
+                                <span class="info-label">
+                                    ORDER STATUS
+                                </span>
+
+                                <strong>
+                                    @statusText
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
                 </div>
-            }
 
 
-            <!-- ====================================== -->
-            <!-- TOTAL -->
-            <!-- ====================================== -->
+                <!-- ================================================= -->
+                <!-- RIGHT COLUMN -->
+                <!-- ================================================= -->
 
-            <div class="p-4">
+                <div class="col-lg-4">
 
-                <div class="d-flex justify-content-between">
 
-                    <h5 class="mb-0">
-                        Total
-                    </h5>
+                    <!-- ============================================= -->
+                    <!-- ORDER SUMMARY -->
+                    <!-- ============================================= -->
 
-                    <h5 class="text-success mb-0">
+                    <aside class="order-summary-card">
 
-                        Rs.
-                        @Model.TotalAmount.ToString("N2")
 
-                    </h5>
+                        <!-- HEADER -->
+
+                        <div class="order-summary-header">
+
+                            <span class="section-eyebrow">
+                                ORDER SUMMARY
+                            </span>
+
+                            <h4>
+                                Payment Summary
+                            </h4>
+
+                        </div>
+
+
+                        <!-- BODY -->
+
+                        <div class="order-summary-body">
+
+
+                            <!-- ORDER NUMBER -->
+
+                            <div class="summary-row">
+
+                                <span>
+                                    Order Number
+                                </span>
+
+                                <strong>
+                                    #@Model.Id
+                                </strong>
+
+                            </div>
+
+
+                            <!-- ITEMS -->
+
+                            <div class="summary-row">
+
+                                <span>
+                                    Items
+                                </span>
+
+                                <strong>
+                                    @orderItems.Count
+                                </strong>
+
+                            </div>
+
+
+                            <!-- SHIPPING -->
+
+                            <div class="summary-row">
+
+                                <span>
+                                    Shipping
+                                </span>
+
+                                <strong class="free-shipping">
+                                    Free
+                                </strong>
+
+                            </div>
+
+
+                            <div class="summary-divider"></div>
+
+
+                            <!-- TOTAL -->
+
+                            <div class="order-total-section">
+
+                                <span>
+                                    Total Amount
+                                </span>
+
+                                <h2>
+                                    Rs. @Model.TotalAmount.ToString("N2")
+                                </h2>
+
+                            </div>
+
+
+                            <!-- ===================================== -->
+                            <!-- PAYMENT STATUS -->
+                            <!-- ===================================== -->
+                            @if (canPay)
+                            {
+                                <div class="payment-notice pending-payment-notice">
+
+                                    <div class="payment-notice-icon">
+                                        ⏳
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Payment Pending
+                                        </strong>
+
+                                        <p>
+                                            Choose your preferred payment
+                                            method to complete your order.
+                                        </p>
+
+                                    </div>
+
+                                </div>
+                            }
+                            else if (Model.Status == 2)
+                            {
+                                <div class="payment-notice confirmed-payment-notice">
+
+                                    <div class="payment-notice-icon">
+                                        ✓
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            Order Confirmed
+                                        </strong>
+
+                                        <p>
+                                            Your order has been successfully
+                                            confirmed.
+                                        </p>
+
+                                    </div>
+
+                                </div>
+                            }
+
+
+                            <!-- ===================================== -->
+                            <!-- ACTIONS -->
+                            <!-- ===================================== -->
+
+                            <div class="order-actions">
+
+
+                                <!-- PAY NOW -->
+                                @if (canPay)
+                                {
+                                    <a asp-controller="Payment"
+                                       asp-action="Select"
+                                       asp-route-id="@Model.Id"
+                                       class="btn-pay-now">
+
+                                        <span class="button-icon">
+                                            💳
+                                        </span>
+
+                                        <span>
+                                            Proceed to Payment
+                                        </span>
+
+                                        <span class="button-arrow">
+                                            →
+                                        </span>
+
+                                    </a>
+                                }
+
+
+                                <!-- CONTINUE SHOPPING -->
+
+                                <a asp-controller="Products"
+                                   asp-action="Index"
+                                   class="btn-continue-shopping">
+
+                                    <span>
+                                        🛍️
+                                    </span>
+
+                                    <span>
+                                        Continue Shopping
+                                    </span>
+
+                                </a>
+
+
+                                <!-- BACK TO ORDERS -->
+
+                                <a asp-controller="Orders"
+                                   asp-action="Index"
+                                   class="btn-view-orders">
+
+                                    <span>
+                                        ←
+                                    </span>
+
+                                    <span>
+                                        Back to My Orders
+                                    </span>
+
+                                </a>
+
+                            </div>
+
+
+                            <!-- TRUST -->
+
+                            <div class="order-trust-info">
+
+                                <div>
+                                    🔒 Secure payment
+                                </div>
+
+                                <div>
+                                    ✓ Protected checkout
+                                </div>
+
+                                <div>
+                                    🛡️ Safe transaction
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </aside>
+
+
+                    <!-- ============================================= -->
+                    <!-- HELP CARD -->
+                    <!-- ============================================= -->
+
+                    <div class="order-help-card">
+
+                        <div class="help-icon">
+                            💬
+                        </div>
+
+
+                        <div class="help-content">
+
+                            <strong>
+                                Need help with your order?
+                            </strong>
+
+                            <p>
+                                Our support team is here to help you
+                                with your purchase.
+                            </p>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -233,45 +720,6 @@
 
         </div>
 
-    </div>
-
-
-    <!-- ============================================== -->
-    <!-- ACTIONS -->
-    <!-- ============================================== -->
-
-    <div class="d-flex justify-content-between align-items-center mt-4">
-
-        <a asp-controller="Orders"
-           asp-action="Index"
-           class="btn btn-outline-secondary">
-
-            ← Back to My Orders
-
-        </a>
-
-
-        <!-- CANCEL ORDER -->
-        @if (Model.Status == 1)
-        {
-            <form asp-controller="Orders"
-                  asp-action="Cancel"
-                  asp-route-id="@Model.Id"
-                  method="post"
-                  onsubmit="return confirm('Are you sure you want to cancel this order?');">
-
-                @Html.AntiForgeryToken()
-
-                <button type="submit"
-                        class="btn btn-danger">
-
-                    Cancel Order
-
-                </button>
-
-            </form>
-        }
-
-    </div>
+    </section>
 
 </div>

@@ -1,84 +1,127 @@
-﻿
-using ECommerceMVC.Services;
+﻿using ECommerceMVC.Services;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ECommerceMVC.Controllers
+namespace ECommerceMVC.Controllers;
+
+[Authorize]
+public class OrdersController : Controller
 {
-    [Authorize]
-    public class OrdersController : Controller
+    private readonly IOrderApiService _orderApiService;
+    private readonly ILogger<OrdersController> _logger;
+
+    public OrdersController(
+        IOrderApiService orderApiService,
+        ILogger<OrdersController> logger)
     {
-        private readonly IOrderApiService _orderApiService;
+        _orderApiService = orderApiService;
+        _logger = logger;
+    }
 
-        public OrdersController(
-            IOrderApiService orderApiService)
-        {
-            _orderApiService = orderApiService;
-        }
 
-        // ==================================================
-        // MY ORDERS
-        // GET /Orders
-        // API: GET /api/Orders
-        // ==================================================
+    // =========================================================
+    // MY ORDERS
+    //
+    // GET: /Orders
+    // API: GET /api/Orders
+    // =========================================================
 
-        [HttpGet]
-        public async Task<IActionResult> Index()
+    [HttpGet]
+    public async Task<IActionResult> Index()
+    {
+        try
         {
             var orders =
                 await _orderApiService.GetOrdersAsync();
 
             return View(orders);
         }
-
-
-        // ==================================================
-        // ORDER DETAILS
-        // GET /Orders/Details/{id}
-        // API: GET /api/Orders/{id}
-        // ==================================================
-
-        [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        catch (Exception ex)
         {
-            if (id <= 0)
-            {
-                return RedirectToAction(nameof(Index));
-            }
+            _logger.LogError(
+                ex,
+                "Error occurred while loading orders.");
 
+            TempData["ErrorMessage"] =
+                "Unable to load your orders. Please try again.";
+
+            return View(
+                Enumerable.Empty<
+                    ECommerceMVC.Models.Api.OrderDto>());
+        }
+    }
+
+
+    // =========================================================
+    // ORDER DETAILS
+    //
+    // GET: /Orders/Details/{id}
+    // API: GET /api/Orders/{id}
+    // =========================================================
+
+    [HttpGet]
+    public async Task<IActionResult> Details(int id)
+    {
+        if (id <= 0)
+        {
+            TempData["ErrorMessage"] =
+                "Invalid order.";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        try
+        {
             var order =
                 await _orderApiService.GetOrderByIdAsync(id);
 
             if (order == null)
             {
                 TempData["ErrorMessage"] =
-                    "Unable to load order details.";
+                    "The requested order could not be found.";
 
                 return RedirectToAction(nameof(Index));
             }
 
             return View(order);
         }
-
-
-        // ==================================================
-        // CANCEL ORDER
-        // POST /Orders/Cancel/{id}
-        // API: POST /api/Orders/{id}/cancel
-        // ==================================================
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Cancel(int id)
+        catch (Exception ex)
         {
-            if (id <= 0)
-            {
-                TempData["ErrorMessage"] =
-                    "Invalid order.";
+            _logger.LogError(
+                ex,
+                "Error occurred while loading OrderId {OrderId}.",
+                id);
 
-                return RedirectToAction(nameof(Index));
-            }
+            TempData["ErrorMessage"] =
+                "Unable to load order details. Please try again.";
 
+            return RedirectToAction(nameof(Index));
+        }
+    }
+
+
+    // =========================================================
+    // CANCEL ORDER
+    //
+    // POST: /Orders/Cancel/{id}
+    // API: POST /api/Orders/{id}/cancel
+    // =========================================================
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Cancel(int id)
+    {
+        if (id <= 0)
+        {
+            TempData["ErrorMessage"] =
+                "Invalid order.";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        try
+        {
             var success =
                 await _orderApiService.CancelOrderAsync(id);
 
@@ -86,7 +129,7 @@ namespace ECommerceMVC.Controllers
             {
                 TempData["ErrorMessage"] =
                     "Unable to cancel the order. " +
-                    "Please try again.";
+                    "The order may already be processed or cancelled.";
 
                 return RedirectToAction(
                     nameof(Details),
@@ -94,10 +137,23 @@ namespace ECommerceMVC.Controllers
             }
 
             TempData["SuccessMessage"] =
-                "Order cancelled successfully.";
+                "Your order has been cancelled successfully.";
 
             return RedirectToAction(nameof(Index));
         }
+        catch (Exception ex)
+        {
+            _logger.LogError(
+                ex,
+                "Error occurred while cancelling OrderId {OrderId}.",
+                id);
+
+            TempData["ErrorMessage"] =
+                "An unexpected error occurred while cancelling your order.";
+
+            return RedirectToAction(
+                nameof(Details),
+                new { id });
+        }
     }
 }
-
