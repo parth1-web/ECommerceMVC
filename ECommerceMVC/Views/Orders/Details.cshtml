@@ -4,7 +4,10 @@
     ViewData["Title"] = $"Order #{Model.Id} Details";
 
     var orderItems = Model.Items ?? new List<ECommerceMVC.Models.Api.OrderItemDto>();
-    var orderDate = Model.OrderDate.Kind == DateTimeKind.Utc ? Model.OrderDate.ToLocalTime() : Model.OrderDate;
+    var orderDate = Model.OrderDate.Kind == DateTimeKind.Utc
+        ? Model.OrderDate.ToLocalTime()
+        : Model.OrderDate;
+
     var canPay = Model.Status == 1;
     var canCancel = Model.Status == 1 || Model.Status == 2;
 
@@ -29,6 +32,25 @@
         6 => "status-cancelled",
         _ => "status-default"
     };
+
+    var payment = Model.Payment;
+
+    var paymentMethodText = payment?.Method switch
+    {
+        1 => "Cash on Delivery",
+        2 => "Khalti",
+        3 => "eSewa",
+        _ => payment == null ? "Not selected" : $"Method {((int)payment.Method)}"
+    };
+
+    var paymentStatusText = payment?.Status switch
+    {
+        1 => "Pending",
+        2 => "Paid",
+        3 => "Failed",
+        4 => "Refunded",
+        _ => payment == null ? "Not available" : $"Status {((int)payment.Status)}"
+    };
 }
 
 <div class="py-5">
@@ -36,7 +58,9 @@
 
         <!-- BREADCRUMB -->
         <nav class="breadcrumb-nav mb-3" aria-label="breadcrumb">
-            <a asp-controller="Home" asp-action="Index"><i class="bi bi-house-door me-1"></i> Home</a>
+            <a asp-controller="Home" asp-action="Index">
+                <i class="bi bi-house-door me-1"></i> Home
+            </a>
             <span>/</span>
             <a asp-controller="Orders" asp-action="Index">My Orders</a>
             <span>/</span>
@@ -47,8 +71,12 @@
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
             <div>
                 <span class="section-eyebrow">ORDER TRACKING</span>
-                <h1 class="font-serif display-6 fw-bold mb-1">Order <span class="text-primary font-serif">#@Model.Id</span></h1>
-                <p class="text-muted small mb-0">Placed on @orderDate.ToString("dd MMMM yyyy, hh:mm tt")</p>
+                <h1 class="font-serif display-6 fw-bold mb-1">
+                    Order <span class="text-primary font-serif">#@Model.Id</span>
+                </h1>
+                <p class="text-muted small mb-0">
+                    Placed on @orderDate.ToString("dd MMMM yyyy, hh:mm tt")
+                </p>
             </div>
 
             <div class="d-flex align-items-center gap-2">
@@ -62,13 +90,23 @@
         {
             <!-- VISUAL TRACKING TIMELINE -->
             <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4 bg-white p-4">
-                <h6 class="fw-bold text-muted text-uppercase small mb-2">Delivery Pipeline</h6>
-                
+                <h6 class="fw-bold text-muted text-uppercase small mb-2">
+                    Delivery Pipeline
+                </h6>
+
                 <div class="order-tracking-timeline">
+
                     <!-- STEP 1: PENDING -->
                     <div class="timeline-step @(Model.Status >= 1 ? (Model.Status > 1 ? "completed" : "active") : "")">
                         <div class="timeline-circle">
-                            @if (Model.Status > 1) { <i class="bi bi-check-lg"></i> } else { <span>1</span> }
+                            @if (Model.Status > 1)
+                            {
+                                <i class="bi bi-check-lg"></i>
+                            }
+                            else
+                            {
+                                <span>1</span>
+                            }
                         </div>
                         <span class="timeline-label">Order Received</span>
                     </div>
@@ -76,7 +114,14 @@
                     <!-- STEP 2: CONFIRMED -->
                     <div class="timeline-step @(Model.Status >= 2 ? (Model.Status > 2 ? "completed" : "active") : "")">
                         <div class="timeline-circle">
-                            @if (Model.Status > 2) { <i class="bi bi-check-lg"></i> } else { <span>2</span> }
+                            @if (Model.Status > 2)
+                            {
+                                <i class="bi bi-check-lg"></i>
+                            }
+                            else
+                            {
+                                <span>2</span>
+                            }
                         </div>
                         <span class="timeline-label">Confirmed</span>
                     </div>
@@ -84,7 +129,14 @@
                     <!-- STEP 3: PROCESSING -->
                     <div class="timeline-step @(Model.Status >= 3 ? (Model.Status > 3 ? "completed" : "active") : "")">
                         <div class="timeline-circle">
-                            @if (Model.Status > 3) { <i class="bi bi-check-lg"></i> } else { <span>3</span> }
+                            @if (Model.Status > 3)
+                            {
+                                <i class="bi bi-check-lg"></i>
+                            }
+                            else
+                            {
+                                <span>3</span>
+                            }
                         </div>
                         <span class="timeline-label">Kitchen Prep</span>
                     </div>
@@ -92,7 +144,14 @@
                     <!-- STEP 4: SHIPPED -->
                     <div class="timeline-step @(Model.Status >= 4 ? (Model.Status > 4 ? "completed" : "active") : "")">
                         <div class="timeline-circle">
-                            @if (Model.Status > 4) { <i class="bi bi-check-lg"></i> } else { <span>4</span> }
+                            @if (Model.Status > 4)
+                            {
+                                <i class="bi bi-check-lg"></i>
+                            }
+                            else
+                            {
+                                <span>4</span>
+                            }
                         </div>
                         <span class="timeline-label">In Transit</span>
                     </div>
@@ -100,10 +159,18 @@
                     <!-- STEP 5: DELIVERED -->
                     <div class="timeline-step @(Model.Status == 5 ? "completed" : "")">
                         <div class="timeline-circle">
-                            @if (Model.Status == 5) { <i class="bi bi-check-lg"></i> } else { <span>5</span> }
+                            @if (Model.Status == 5)
+                            {
+                                <i class="bi bi-check-lg"></i>
+                            }
+                            else
+                            {
+                                <span>5</span>
+                            }
                         </div>
                         <span class="timeline-label">Delivered</span>
                     </div>
+
                 </div>
             </div>
         }
@@ -112,16 +179,22 @@
 
             <!-- LEFT: ITEMS TABLE -->
             <div class="col-lg-8">
+
                 <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4 bg-white">
+
                     <div class="p-3 px-4 bg-light border-bottom d-flex justify-content-between align-items-center">
                         <span class="fw-bold small text-muted text-uppercase">
                             Items in this package (@orderItems.Count)
                         </span>
-                        <span class="small text-muted">Authentic Homemade Guarantee</span>
+
+                        <span class="small text-muted">
+                            Authentic Homemade Guarantee
+                        </span>
                     </div>
 
                     <div class="table-responsive">
                         <table class="table align-middle mb-0">
+
                             <thead class="table-light small">
                                 <tr>
                                     <th class="ps-4">Product</th>
@@ -130,6 +203,7 @@
                                     <th class="text-end pe-4">Subtotal</th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 @foreach (var itm in orderItems)
                                 {
@@ -137,29 +211,53 @@
                                         <td class="ps-4 py-3">
                                             <div class="d-flex align-items-center gap-3">
                                                 <span class="fs-4">🥫</span>
+
                                                 <div>
-                                                    <h6 class="fw-bold mb-0 text-dark">@itm.ProductName</h6>
-                                                    <span class="text-muted small">Handcrafted batch</span>
+                                                    <h6 class="fw-bold mb-0 text-dark">
+                                                        @itm.ProductName
+                                                    </h6>
+
+                                                    <span class="text-muted small">
+                                                        Handcrafted batch
+                                                    </span>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="text-center fw-bold">@itm.Quantity</td>
-                                        <td class="text-end text-muted">Rs. @itm.UnitPrice.ToString("N2")</td>
-                                        <td class="text-end pe-4 fw-bold text-dark">Rs. @itm.Subtotal.ToString("N2")</td>
+
+                                        <td class="text-center fw-bold">
+                                            @itm.Quantity
+                                        </td>
+
+                                        <td class="text-end text-muted">
+                                            Rs. @itm.UnitPrice.ToString("N2")
+                                        </td>
+
+                                        <td class="text-end pe-4 fw-bold text-dark">
+                                            Rs. @itm.Subtotal.ToString("N2")
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
+
                         </table>
                     </div>
 
                     <div class="p-3 px-4 bg-light border-top d-flex justify-content-between align-items-center">
-                        <a asp-controller="Orders" asp-action="Index" class="text-muted small text-decoration-none">
-                            <i class="bi bi-arrow-left me-1"></i> Back to Orders List
+
+                        <a asp-controller="Orders"
+                           asp-action="Index"
+                           class="text-muted small text-decoration-none">
+                            <i class="bi bi-arrow-left me-1"></i>
+                            Back to Orders List
                         </a>
 
-                        <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" onclick="window.print();">
-                            <i class="bi bi-printer me-1"></i> Print Invoice
+                        <button type="button"
+                                class="btn btn-outline-secondary btn-sm rounded-pill px-3"
+                                onclick="window.print();">
+                            <i class="bi bi-printer me-1"></i>
+                            Print Invoice
                         </button>
+
                     </div>
                 </div>
 
@@ -167,31 +265,58 @@
                 {
                     <!-- CANCEL ORDER OPTION -->
                     <div class="card border border-danger-subtle rounded-4 p-4 bg-white shadow-sm mb-4">
+
                         <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3">
+
                             <div>
-                                <h6 class="text-danger fw-bold mb-1">Need to cancel this order?</h6>
-                                <p class="text-muted small mb-0">You can cancel your order while it is still pending or before it enters transit.</p>
+                                <h6 class="text-danger fw-bold mb-1">
+                                    Need to cancel this order?
+                                </h6>
+
+                                <p class="text-muted small mb-0">
+                                    You can cancel your order while it is pending or confirmed.
+                                </p>
                             </div>
-                            <form asp-controller="Orders" asp-action="Cancel" asp-route-id="@Model.Id" method="post" class="m-0" onsubmit="return confirm('Are you sure you want to cancel this order? This action cannot be undone.');">
+
+                            <form asp-controller="Orders"
+                                  asp-action="Cancel"
+                                  asp-route-id="@Model.Id"
+                                  method="post"
+                                  class="m-0"
+                                  onsubmit="return confirm('Are you sure you want to cancel this order? This action cannot be undone.');">
+
                                 @Html.AntiForgeryToken()
-                                <button type="submit" class="btn btn-outline-danger btn-sm rounded-pill px-3">
-                                    <i class="bi bi-x-circle me-1"></i> Cancel Order
+
+                                <button type="submit"
+                                        class="btn btn-outline-danger btn-sm rounded-pill px-3">
+                                    <i class="bi bi-x-circle me-1"></i>
+                                    Cancel Order
                                 </button>
+
                             </form>
+
                         </div>
                     </div>
                 }
+
             </div>
 
             <!-- RIGHT: SUMMARY SIDEBAR -->
             <div class="col-lg-4">
+
                 <div class="order-summary-box mb-4">
+
                     <span class="section-eyebrow mb-2">SUMMARY</span>
-                    <h4 class="font-serif fw-bold mb-3">Order Total</h4>
+
+                    <h4 class="font-serif fw-bold mb-3">
+                        Order Total
+                    </h4>
 
                     <div class="summary-line">
                         <span>Items Subtotal</span>
-                        <strong>Rs. @Model.TotalAmount.ToString("N2")</strong>
+                        <strong>
+                            Rs. @Model.TotalAmount.ToString("N2")
+                        </strong>
                     </div>
 
                     <div class="summary-line">
@@ -201,35 +326,105 @@
 
                     <div class="summary-total-line">
                         <div>
-                            <span class="d-block fw-bold text-dark">Total Amount</span>
-                            <span class="text-muted small">Inclusive of charges</span>
+                            <span class="d-block fw-bold text-dark">
+                                Total Amount
+                            </span>
+
+                            <span class="text-muted small">
+                                Inclusive of charges
+                            </span>
                         </div>
-                        <span class="summary-total-price">Rs. @Model.TotalAmount.ToString("N2")</span>
+
+                        <span class="summary-total-price">
+                            Rs. @Model.TotalAmount.ToString("N2")
+                        </span>
                     </div>
 
                     @if (canPay)
                     {
-                        <a asp-controller="Payment" asp-action="Select" asp-route-id="@Model.Id" class="btn-primary-custom w-100 py-3 mb-3 text-center">
+                        <a asp-controller="Payment"
+                           asp-action="Select"
+                           asp-route-id="@Model.Id"
+                           class="btn-primary-custom w-100 py-3 mb-3 text-center">
+
                             <i class="bi bi-credit-card me-1"></i>
+
                             <span>Proceed to Payment</span>
+
                             <i class="bi bi-arrow-right ms-1"></i>
+
                         </a>
                     }
 
+                    <!-- PAYMENT INFORMATION -->
+                    <div class="card border-0 bg-light rounded-3 p-3 mb-3">
+
+                        <h6 class="fw-bold text-dark mb-3">
+                            <i class="bi bi-wallet2 text-primary me-1"></i>
+                            Payment Information
+                        </h6>
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted small">Payment Method</span>
+                            <span class="fw-semibold small text-dark text-end">
+                                @paymentMethodText
+                            </span>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted small">Payment Status</span>
+
+                            <span class="fw-semibold small text-end">
+                                @paymentStatusText
+                            </span>
+                        </div>
+
+                        @if (!string.IsNullOrWhiteSpace(payment?.TransactionId))
+                        {
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <span class="text-muted small">Transaction ID</span>
+                                <span class="fw-semibold small text-dark text-end text-break ms-3">
+                                    @payment.TransactionId
+                                </span>
+                            </div>
+                        }
+
+                        @if (payment?.PaymentDate != null)
+                        {
+                            var paymentDate = payment.PaymentDate.Value.Kind == DateTimeKind.Utc
+                                ? payment.PaymentDate.Value.ToLocalTime()
+                                : payment.PaymentDate.Value;
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-muted small">Payment Date</span>
+                                <span class="fw-semibold small text-dark text-end">
+                                    @paymentDate.ToString("dd MMM yyyy, hh:mm tt")
+                                </span>
+                            </div>
+                        }
+
+                    </div>
+
+                    <!-- SUPPORT -->
                     <div class="p-3 bg-light rounded-3 border text-start">
+
                         <div class="d-flex align-items-center gap-2 mb-1 text-dark fw-bold small">
                             <i class="bi bi-patch-question text-primary"></i>
                             <span>Need assistance?</span>
                         </div>
+
                         <p class="text-muted small mb-0" style="font-size: 0.78rem;">
-                            For order modifications or dispatch inquiries, reach out via our support lines.
+                            For order modifications or dispatch inquiries,
+                            reach out via our support lines.
                         </p>
+
                     </div>
+
                 </div>
+
             </div>
 
         </div>
 
     </div>
-</div>
 </div>

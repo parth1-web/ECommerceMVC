@@ -42,25 +42,25 @@ namespace ECommerceMVC.Services
 
 
         // ==================================================
-        // GET ALL ORDERS
+        // GET USER ORDER HISTORY
         // GET /api/Orders
         // ==================================================
 
-        public async Task<List<OrderDto>> GetOrdersAsync()
+        public async Task<List<OrderSummaryDto>> GetOrdersAsync()
         {
             var response = await _httpClient.GetAsync(
                 "api/Orders");
 
             if (!response.IsSuccessStatusCode)
             {
-                return new List<OrderDto>();
+                return new List<OrderSummaryDto>();
             }
 
             var orders =
                 await response.Content
-                    .ReadFromJsonAsync<List<OrderDto>>();
+                    .ReadFromJsonAsync<List<OrderSummaryDto>>();
 
-            return orders ?? new List<OrderDto>();
+            return orders ?? new List<OrderSummaryDto>();
         }
 
 

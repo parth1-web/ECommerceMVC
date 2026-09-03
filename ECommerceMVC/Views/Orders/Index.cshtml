@@ -1,4 +1,4 @@
-@model IEnumerable<ECommerceMVC.Models.Api.OrderDto>
+@model IEnumerable<ECommerceMVC.Models.Api.OrderSummaryDto>
 
 @{
     ViewData["Title"] = "My Orders";
@@ -6,7 +6,7 @@
     var orders = Model?
         .OrderByDescending(x => x.OrderDate)
         .ToList()
-        ?? new List<ECommerceMVC.Models.Api.OrderDto>();
+        ?? new List<ECommerceMVC.Models.Api.OrderSummaryDto>();
 }
 
 <div class="py-5">
@@ -18,26 +18,45 @@
                 <span class="section-eyebrow">
                     <i class="bi bi-box-seam-fill"></i> CUSTOMER DASHBOARD
                 </span>
-                <h1 class="font-serif display-6 fw-bold mb-1">My <span class="text-primary font-serif">Orders</span></h1>
-                <p class="text-muted mb-0">Track your deliveries and review your previous purchases.</p>
+
+                <h1 class="font-serif display-6 fw-bold mb-1">
+                    My <span class="text-primary font-serif">Orders</span>
+                </h1>
+
+                <p class="text-muted mb-0">
+                    Track your deliveries and review your previous purchases.
+                </p>
             </div>
 
-            <a asp-controller="Products" asp-action="Index" class="btn-primary-custom">
+            <a asp-controller="Products"
+               asp-action="Index"
+               class="btn-primary-custom">
                 <i class="bi bi-shop"></i>
                 <span>Shop More Pickles</span>
             </a>
         </div>
 
+
         @if (!orders.Any())
         {
             <!-- EMPTY STATE -->
             <div class="text-center py-5 my-4 bg-white rounded-4 border p-5 max-w-600 mx-auto shadow-sm">
-                <div class="display-2 text-muted mb-3"><i class="bi bi-bag-x"></i></div>
-                <h3 class="font-serif fw-bold mb-2">No Orders Placed Yet</h3>
+                <div class="display-2 text-muted mb-3">
+                    <i class="bi bi-bag-x"></i>
+                </div>
+
+                <h3 class="font-serif fw-bold mb-2">
+                    No Orders Placed Yet
+                </h3>
+
                 <p class="text-muted mb-4">
-                    You haven't ordered any delicious homemade pickles yet. Explore our handcrafted collection today!
+                    You haven't ordered any delicious homemade pickles yet.
+                    Explore our handcrafted collection today!
                 </p>
-                <a asp-controller="Products" asp-action="Index" class="btn-primary-custom">
+
+                <a asp-controller="Products"
+                   asp-action="Index"
+                   class="btn-primary-custom">
                     <span>Explore Products</span>
                     <i class="bi bi-arrow-right"></i>
                 </a>
@@ -47,10 +66,13 @@
         {
             <!-- ORDERS LIST -->
             <div class="d-flex flex-column gap-3">
+
                 @foreach (var order in orders)
                 {
-                    var itemCount = order.Items?.Count ?? 0;
+                    var itemCount = order.ItemCount;
                     var orderDate = order.OrderDate.ToLocalTime();
+
+                    // OrderStatus.Pending = 1
                     var canPay = order.Status == 1;
 
                     string statusText;
@@ -62,26 +84,32 @@
                             statusText = "Pending Payment";
                             statusClass = "status-pending";
                             break;
+
                         case 2:
                             statusText = "Confirmed";
                             statusClass = "status-confirmed";
                             break;
+
                         case 3:
                             statusText = "Processing";
                             statusClass = "status-processing";
                             break;
+
                         case 4:
                             statusText = "Shipped";
                             statusClass = "status-shipped";
                             break;
+
                         case 5:
                             statusText = "Delivered";
                             statusClass = "status-delivered";
                             break;
+
                         case 6:
                             statusText = "Cancelled";
                             statusClass = "status-cancelled";
                             break;
+
                         default:
                             statusText = $"Status {order.Status}";
                             statusClass = "status-default";
@@ -89,72 +117,119 @@
                     }
 
                     <div class="card shadow-sm border-0 rounded-4 overflow-hidden bg-white">
+
+                        <!-- ORDER HEADER -->
                         <div class="p-3 px-4 bg-light border-bottom d-flex flex-wrap justify-content-between align-items-center gap-2">
+
                             <div class="d-flex align-items-center gap-3">
-                                <div class="brand-icon-box bg-white" style="width: 38px; height: 38px; font-size: 1.2rem;">
+
+                                <div class="brand-icon-box bg-white"
+                                     style="width: 38px; height: 38px; font-size: 1.2rem;">
                                     📦
                                 </div>
+
                                 <div>
-                                    <span class="text-muted small text-uppercase fw-bold d-block" style="font-size: 0.72rem;">Order Reference</span>
-                                    <span class="fw-bold font-serif text-dark fs-5">#@order.Id</span>
+                                    <span class="text-muted small text-uppercase fw-bold d-block"
+                                          style="font-size: 0.72rem;">
+                                        Order Reference
+                                    </span>
+
+                                    <span class="fw-bold font-serif text-dark fs-5">
+                                        #@order.Id
+                                    </span>
                                 </div>
+
                             </div>
+
 
                             <div class="d-flex align-items-center gap-3">
+
                                 <div class="text-end d-none d-sm-block">
-                                    <span class="text-muted small d-block" style="font-size: 0.72rem;">Order Date</span>
-                                    <span class="small fw-bold text-dark">@orderDate.ToString("dd MMM yyyy, hh:mm tt")</span>
+                                    <span class="text-muted small d-block"
+                                          style="font-size: 0.72rem;">
+                                        Order Date
+                                    </span>
+
+                                    <span class="small fw-bold text-dark">
+                                        @orderDate.ToString("dd MMM yyyy, hh:mm tt")
+                                    </span>
                                 </div>
+
                                 <span class="status-badge @statusClass">
-                                    <span class="status-dot"></span> @statusText
+                                    <span class="status-dot"></span>
+                                    @statusText
                                 </span>
+
                             </div>
+
                         </div>
 
+
+                        <!-- ORDER SUMMARY -->
                         <div class="p-4 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+
                             <div>
+
                                 <div class="fw-bold text-dark mb-1">
                                     @itemCount product@(itemCount == 1 ? "" : "s") in this shipment
                                 </div>
-                                @if (order.Items != null && order.Items.Any())
-                                {
-                                    <div class="text-muted small d-flex flex-wrap gap-2">
-                                        @foreach (var itm in order.Items.Take(3))
-                                        {
-                                            <span class="badge bg-light text-dark border">@itm.ProductName (x@itm.Quantity)</span>
-                                        }
-                                        @if (order.Items.Count > 3)
-                                        {
-                                            <span class="badge bg-light text-muted border">+@(order.Items.Count - 3) more</span>
-                                        }
-                                    </div>
-                                }
+
+                                <div class="text-muted small">
+                                    View order details to see the products and quantities.
+                                </div>
+
                             </div>
 
+
+                            <!-- TOTAL + ACTIONS -->
                             <div class="d-flex align-items-center justify-content-between justify-content-md-end gap-3 pt-3 pt-md-0 border-top border-md-0">
+
                                 <div class="text-md-end me-md-2">
-                                    <span class="text-muted small d-block" style="font-size: 0.75rem;">Total Amount</span>
-                                    <span class="fs-5 fw-bold text-primary">Rs. @order.TotalAmount.ToString("N2")</span>
+
+                                    <span class="text-muted small d-block"
+                                          style="font-size: 0.75rem;">
+                                        Total Amount
+                                    </span>
+
+                                    <span class="fs-5 fw-bold text-primary">
+                                        Rs. @order.TotalAmount.ToString("N2")
+                                    </span>
+
                                 </div>
+
 
                                 <div class="d-flex align-items-center gap-2">
+
                                     @if (canPay)
                                     {
-                                        <a asp-controller="Payment" asp-action="Select" asp-route-id="@order.Id" class="btn btn-danger btn-sm rounded-pill px-3 fw-bold">
-                                            <i class="bi bi-credit-card me-1"></i> Pay Now
+                                        <a asp-controller="Payment"
+                                           asp-action="Select"
+                                           asp-route-id="@order.Id"
+                                           class="btn btn-danger btn-sm rounded-pill px-3 fw-bold">
+                                            <i class="bi bi-credit-card me-1"></i>
+                                            Pay Now
                                         </a>
                                     }
-                                    <a asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
-                                        <span>Details</span> <i class="bi bi-chevron-right small"></i>
+
+                                    <a asp-controller="Orders"
+                                       asp-action="Details"
+                                       asp-route-id="@order.Id"
+                                       class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                                        <span>Details</span>
+                                        <i class="bi bi-chevron-right small"></i>
                                     </a>
+
                                 </div>
+
                             </div>
+
                         </div>
+
                     </div>
                 }
+
             </div>
         }
 
     </div>
-</div>
 </div>

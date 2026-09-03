@@ -6,7 +6,7 @@ namespace ECommerceMVC.Services
     {
         Task<OrderDto?> CreateOrderAsync();
 
-        Task<List<OrderDto>> GetOrdersAsync();
+        Task<List<OrderSummaryDto>> GetOrdersAsync();
 
         Task<OrderDto?> GetOrderByIdAsync(int id);
 

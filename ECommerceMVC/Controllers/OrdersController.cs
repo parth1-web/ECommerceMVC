@@ -1,4 +1,5 @@
-﻿using ECommerceMVC.Services;
+﻿using ECommerceMVC.Models.Api;
+using ECommerceMVC.Services;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -47,8 +48,7 @@ public class OrdersController : Controller
                 "Unable to load your orders. Please try again.";
 
             return View(
-                Enumerable.Empty<
-                    ECommerceMVC.Models.Api.OrderDto>());
+                Enumerable.Empty<OrderSummaryDto>());
         }
     }
 
