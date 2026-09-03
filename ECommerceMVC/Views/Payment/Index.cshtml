@@ -133,7 +133,7 @@
 
 
                     <form asp-controller="Payment"
-                          asp-action="InitiateEsewa"
+                          asp-action="Process"
                           method="post">
 
                         @Html.AntiForgeryToken()
@@ -142,6 +142,9 @@
                                name="orderId"
                                value="@orderId" />
 
+                        <input type="hidden"
+                               name="method"
+                               value="3" />
 
                         <button type="submit"
                                 class="btn btn-success btn-lg w-100">

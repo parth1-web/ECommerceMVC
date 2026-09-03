@@ -1,96 +1,106 @@
-﻿@model ECommerceMVC.Models.LoginViewModel
+@model ECommerceMVC.Models.LoginViewModel
 
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Sign In";
 }
 
-<div class="container mt-5">
+<div class="auth-wrapper">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-9 col-lg-10">
 
-    <div class="row justify-content-center">
+                <div class="auth-card">
+                    <div class="row g-0">
 
-        <div class="col-md-6">
+                        <!-- LEFT: ARTISANAL BRAND SHOWCASE -->
+                        <div class="col-lg-5 d-none d-lg-block">
+                            <div class="auth-sidebar-art">
+                                <div>
+                                    <a asp-controller="Home" asp-action="Index" class="d-flex align-items-center gap-2 text-white text-decoration-none mb-4">
+                                        <span class="fs-2">🌶️</span>
+                                        <span class="fs-4 font-serif fw-bold">Gaun Ko Achar</span>
+                                    </a>
 
-            <div class="card shadow-sm">
+                                    <h3>Taste the warmth of traditional home.</h3>
+                                    <p class="text-white-50 small mb-4">
+                                        Sign in to order your favorite homemade pickles, track your parcel in real-time, and manage your account.
+                                    </p>
 
-                <div class="card-body p-4">
+                                    <div class="auth-perk-item">
+                                        <i class="bi bi-shield-check"></i>
+                                        <span>Safe &amp; Encrypted Account</span>
+                                    </div>
+                                    <div class="auth-perk-item">
+                                        <i class="bi bi-truck"></i>
+                                        <span>Live Tracking on Shipments</span>
+                                    </div>
+                                    <div class="auth-perk-item">
+                                        <i class="bi bi-heart"></i>
+                                        <span>Fresh Batch Alerts &amp; Re-orders</span>
+                                    </div>
+                                </div>
 
-                    <h2 class="text-center mb-4">
-                        Login
-                    </h2>
-
-                    <form asp-action="Login"
-                          method="post">
-
-                        <div asp-validation-summary="ModelOnly"
-                             class="text-danger mb-3">
+                                <div class="pt-4 border-top border-white-50 text-white-50 small">
+                                    &copy; @DateTime.Now.Year Gaun Ko Achar • Nepal
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
+                        <!-- RIGHT: LOGIN FORM -->
+                        <div class="col-lg-7">
+                            <div class="auth-form-container">
 
-                            <label asp-for="Email"
-                                   class="form-label">
-                            </label>
+                                <span class="section-eyebrow mb-2">WELCOME BACK</span>
+                                <h2 class="font-serif fw-bold mb-2">Sign In to Your Account</h2>
+                                <p class="text-muted small mb-4">Enter your registered email address and password.</p>
 
-                            <input asp-for="Email"
-                                   class="form-control"
-                                   placeholder="Enter your email" />
+                                <form asp-action="Login" method="post" id="loginForm">
+                                    @Html.AntiForgeryToken()
 
-                            <span asp-validation-for="Email"
-                                  class="text-danger">
-                            </span>
+                                    <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2 small mb-3"></div>
 
+                                    <!-- EMAIL -->
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Email" type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" autocomplete="email" required />
+                                        <label for="floatingEmail"><i class="bi bi-envelope me-1"></i> Email Address</label>
+                                        <span asp-validation-for="Email" class="text-danger small"></span>
+                                    </div>
+
+                                    <!-- PASSWORD -->
+                                    <div class="form-floating mb-4 password-toggle-wrapper">
+                                        <input asp-for="Password" type="password" class="form-control" id="floatingPassword" placeholder="Password" autocomplete="current-password" required />
+                                        <label for="floatingPassword"><i class="bi bi-key me-1"></i> Password</label>
+                                        <button type="button" class="btn-password-toggle" data-target="floatingPassword" aria-label="Toggle password visibility">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                        <span asp-validation-for="Password" class="text-danger small"></span>
+                                    </div>
+
+                                    <button type="submit" class="btn-primary-custom w-100 py-3 fs-6 mb-3">
+                                        <i class="bi bi-box-arrow-in-right me-1"></i>
+                                        <span>Sign In</span>
+                                    </button>
+                                </form>
+
+                                <div class="text-center pt-3 border-top">
+                                    <span class="text-muted small">Don't have an account yet?</span>
+                                    <a asp-controller="Account" asp-action="Register" class="fw-bold text-primary small ms-1">
+                                        Create New Account →
+                                    </a>
+                                </div>
+
+                            </div>
                         </div>
-
-                        <div class="mb-3">
-
-                            <label asp-for="Password"
-                                   class="form-label">
-                            </label>
-
-                            <input asp-for="Password"
-                                   class="form-control"
-                                   placeholder="Enter your password" />
-
-                            <span asp-validation-for="Password"
-                                  class="text-danger">
-                            </span>
-
-                        </div>
-
-                        <button type="submit"
-                                class="btn btn-primary w-100">
-
-                            Login
-
-                        </button>
-
-                    </form>
-
-                    <div class="text-center mt-3">
-
-                        <span>
-                            Don't have an account?
-                        </span>
-
-                        <a asp-controller="Account"
-                           asp-action="Register">
-
-                            Register
-
-                        </a>
 
                     </div>
-
                 </div>
 
             </div>
-
         </div>
-
     </div>
-
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+}
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ECommerceMVC.Models.Api.OrderDto>
+@model IEnumerable<ECommerceMVC.Models.Api.OrderDto>
 
 @{
     ViewData["Title"] = "My Orders";
@@ -9,487 +9,152 @@
         ?? new List<ECommerceMVC.Models.Api.OrderDto>();
 }
 
-<div class="orders-page">
+<div class="py-5">
+    <div class="container">
 
-    <!-- ===================================================== -->
-    <!-- PAGE HERO -->
-    <!-- ===================================================== -->
-
-    <section class="orders-hero">
-
-        <div class="container">
-
-            <div class="orders-hero-content">
-
-                <div class="orders-hero-text">
-
-                    <span class="page-eyebrow">
-                        <span class="eyebrow-icon">📦</span>
-                        ORDER MANAGEMENT
-                    </span>
-
-                    <h1>
-                        My <span>Orders</span>
-                    </h1>
-
-                    <p>
-                        Track your purchases, review your order details,
-                        and stay updated on every stage of delivery.
-                    </p>
-
-                </div>
-
-
-                <div class="orders-hero-action">
-
-                    <a asp-controller="Products"
-                       asp-action="Index"
-                       class="btn-primary-custom">
-
-                        <span class="btn-icon">
-                            🛍️
-                        </span>
-
-                        <span>
-                            Continue Shopping
-                        </span>
-
-                    </a>
-
-                </div>
-
+        <!-- HEADER -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+            <div>
+                <span class="section-eyebrow">
+                    <i class="bi bi-box-seam-fill"></i> CUSTOMER DASHBOARD
+                </span>
+                <h1 class="font-serif display-6 fw-bold mb-1">My <span class="text-primary font-serif">Orders</span></h1>
+                <p class="text-muted mb-0">Track your deliveries and review your previous purchases.</p>
             </div>
 
+            <a asp-controller="Products" asp-action="Index" class="btn-primary-custom">
+                <i class="bi bi-shop"></i>
+                <span>Shop More Pickles</span>
+            </a>
         </div>
 
-    </section>
-
-
-    <!-- ===================================================== -->
-    <!-- MAIN CONTENT -->
-    <!-- ===================================================== -->
-
-    <section class="orders-content">
-
-        <div class="container">
-
-
-            <!-- ================================================= -->
-            <!-- SUCCESS MESSAGE -->
-            <!-- ================================================= -->
-            @if (TempData["SuccessMessage"] != null)
-            {
-                <div class="alert modern-alert modern-alert-success
-                    alert-dismissible fade show"
-                     role="alert">
-
-                    <div class="alert-message-content">
-
-                        <div class="alert-icon">
-                            ✓
-                        </div>
-
-                        <div class="alert-text">
-
-                            @TempData["SuccessMessage"]
-
-                        </div>
-
-                    </div>
-
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="alert"
-                            aria-label="Close">
-                    </button>
-
-                </div>
-            }
-
-
-            <!-- ================================================= -->
-            <!-- ERROR MESSAGE -->
-            <!-- ================================================= -->
-            @if (TempData["ErrorMessage"] != null)
-            {
-                <div class="alert modern-alert modern-alert-danger
-                    alert-dismissible fade show"
-                     role="alert">
-
-                    <div class="alert-message-content">
-
-                        <div class="alert-icon">
-                            !
-                        </div>
-
-                        <div class="alert-text">
-
-                            @TempData["ErrorMessage"]
-
-                        </div>
-
-                    </div>
-
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="alert"
-                            aria-label="Close">
-                    </button>
-
-                </div>
-            }
-
-
-            <!-- ================================================= -->
+        @if (!orders.Any())
+        {
             <!-- EMPTY STATE -->
-            <!-- ================================================= -->
-            @if (!orders.Any())
-            {
-                <div class="empty-orders">
+            <div class="text-center py-5 my-4 bg-white rounded-4 border p-5 max-w-600 mx-auto shadow-sm">
+                <div class="display-2 text-muted mb-3"><i class="bi bi-bag-x"></i></div>
+                <h3 class="font-serif fw-bold mb-2">No Orders Placed Yet</h3>
+                <p class="text-muted mb-4">
+                    You haven't ordered any delicious homemade pickles yet. Explore our handcrafted collection today!
+                </p>
+                <a asp-controller="Products" asp-action="Index" class="btn-primary-custom">
+                    <span>Explore Products</span>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        }
+        else
+        {
+            <!-- ORDERS LIST -->
+            <div class="d-flex flex-column gap-3">
+                @foreach (var order in orders)
+                {
+                    var itemCount = order.Items?.Count ?? 0;
+                    var orderDate = order.OrderDate.ToLocalTime();
+                    var canPay = order.Status == 1;
 
-                    <div class="empty-orders-icon">
-                        📦
-                    </div>
+                    string statusText;
+                    string statusClass;
 
-                    <span class="empty-orders-eyebrow">
-                        NO PURCHASES YET
-                    </span>
-
-                    <h2>
-                        No orders yet
-                    </h2>
-
-                    <p>
-                        You haven't placed any orders yet.
-                        Explore our collection and find something you love.
-                    </p>
-
-                    <a asp-controller="Products"
-                       asp-action="Index"
-                       class="btn-primary-custom">
-
-                        <span class="btn-icon">
-                            🛍️
-                        </span>
-
-                        <span>
-                            Start Shopping
-                        </span>
-
-                    </a>
-
-                </div>
-            }
-            else
-            {
-
-                <!-- ================================================= -->
-                <!-- ORDERS SUMMARY -->
-                <!-- ================================================= -->
-
-                <div class="orders-summary-row">
-
-                    <div class="orders-summary-info">
-
-                        <div class="orders-summary-count">
-
-                            <span class="orders-count">
-
-                                @orders.Count
-
-                            </span>
-
-                            <div class="orders-count-content">
-
-                                <strong>
-
-                                    @(orders.Count == 1
-                                        ? "Total Order"
-                                        : "Total Orders")
-
-                                </strong>
-
-                                <span>
-                                    Your purchase history
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <p class="orders-summary-description">
-
-                        Review your recent purchases and track
-                        the progress of your orders.
-
-                    </p>
-
-                </div>
-
-
-                <!-- ================================================= -->
-                <!-- ORDERS LIST -->
-                <!-- ================================================= -->
-
-                <div class="orders-list">
-
-                    @foreach (var order in orders)
+                    switch (order.Status)
                     {
-                        /*
-                         * IMPORTANT:
-                         *
-                         * Store values in variables before displaying them.
-                         *
-                         * This avoids Razor parsing problems such as:
-                         *
-                         * 02/09/2026 08:06:05.ToLocalTime()
-                         * .ToString("dd MMM yyyy")
-                         *
-                         * appearing literally in the browser.
-                         */
-
-                        var itemCount = order.Items?.Count ?? 0;
-
-                        var orderDate = order.OrderDate.ToLocalTime();
-
-                        var formattedDate =
-                            orderDate.ToString("dd MMM yyyy");
-
-                        var formattedTime =
-                            orderDate.ToString("hh:mm tt");
-
-                        var formattedAmount =
-                            order.TotalAmount.ToString("N2");
-
-                        string statusText;
-                        string statusClass;
-
-                        switch (order.Status)
-                        {
-                            case 1:
-                                statusText = "Pending";
-                                statusClass = "status-pending";
-                                break;
-
-                            case 2:
-                                statusText = "Confirmed";
-                                statusClass = "status-confirmed";
-                                break;
-
-                            case 3:
-                                statusText = "Processing";
-                                statusClass = "status-processing";
-                                break;
-
-                            case 4:
-                                statusText = "Shipped";
-                                statusClass = "status-shipped";
-                                break;
-
-                            case 5:
-                                statusText = "Delivered";
-                                statusClass = "status-delivered";
-                                break;
-
-                            case 6:
-                                statusText = "Cancelled";
-                                statusClass = "status-cancelled";
-                                break;
-
-                            default:
-                                statusText = "Unknown";
-                                statusClass = "status-default";
-                                break;
-                        }
-
-
-                        <!-- ========================================= -->
-                        <!-- ORDER CARD -->
-                        <!-- ========================================= -->
-
-                        <article class="modern-order-card">
-
-
-                            <!-- ===================================== -->
-                            <!-- CARD HEADER -->
-                            <!-- ===================================== -->
-
-                            <div class="modern-order-header">
-
-
-                                <!-- ORDER ID -->
-
-                                <div class="order-header-left">
-
-                                    <div class="order-icon">
-
-                                        📦
-
-                                    </div>
-
-
-                                    <div class="order-header-information">
-
-                                        <span class="order-label">
-
-                                            ORDER
-
-                                        </span>
-
-                                        <h4>
-
-                                            #@order.Id
-
-                                        </h4>
-
-                                    </div>
-
-                                </div>
-
-
-                                <!-- STATUS -->
-
-                                <div class="order-status-wrapper">
-
-                                    <span class="order-status @statusClass">
-
-                                        <span class="status-dot"></span>
-
-                                        @statusText
-
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <!-- ===================================== -->
-                            <!-- CARD BODY -->
-                            <!-- ===================================== -->
-
-                            <div class="modern-order-body">
-
-
-                                <!-- ================================= -->
-                                <!-- ORDER DATE -->
-                                <!-- ================================= -->
-
-                                <div class="order-info">
-
-                                    <span class="order-info-label">
-
-                                        ORDER DATE
-
-                                    </span>
-
-                                    <strong>
-
-                                        @formattedDate
-
-                                    </strong>
-
-                                    <small>
-
-                                        @formattedTime
-
-                                    </small>
-
-                                </div>
-
-
-                                <!-- ================================= -->
-                                <!-- ITEMS -->
-                                <!-- ================================= -->
-
-                                <div class="order-info">
-
-                                    <span class="order-info-label">
-
-                                        ITEMS
-
-                                    </span>
-
-                                    <strong>
-
-                                        @itemCount
-                                        @(itemCount == 1 ? " item" : " items")
-
-                                    </strong>
-
-                                    <small>
-
-                                        Products in this order
-
-                                    </small>
-
-                                </div>
-
-
-                                <!-- ================================= -->
-                                <!-- TOTAL -->
-                                <!-- ================================= -->
-
-                                <div class="order-info order-total-info">
-
-                                    <span class="order-info-label">
-
-                                        TOTAL AMOUNT
-
-                                    </span>
-
-                                    <strong class="order-total">
-
-                                        Rs. @formattedAmount
-
-                                    </strong>
-
-                                    <small>
-
-                                        Total payable amount
-
-                                    </small>
-
-                                </div>
-
-
-                                <!-- ================================= -->
-                                <!-- ACTION -->
-                                <!-- ================================= -->
-
-                                <div class="order-action">
-
-                                    <a asp-controller="Orders"
-                                       asp-action="Details"
-                                       asp-route-id="@order.Id"
-                                       class="btn-order-details">
-
-                                        <span>
-                                            View Details
-                                        </span>
-
-                                        <span class="button-arrow">
-                                            →
-                                        </span>
-
-                                    </a>
-
-                                </div>
-
-                            </div>
-
-                        </article>
+                        case 1:
+                            statusText = "Pending Payment";
+                            statusClass = "status-pending";
+                            break;
+                        case 2:
+                            statusText = "Confirmed";
+                            statusClass = "status-confirmed";
+                            break;
+                        case 3:
+                            statusText = "Processing";
+                            statusClass = "status-processing";
+                            break;
+                        case 4:
+                            statusText = "Shipped";
+                            statusClass = "status-shipped";
+                            break;
+                        case 5:
+                            statusText = "Delivered";
+                            statusClass = "status-delivered";
+                            break;
+                        case 6:
+                            statusText = "Cancelled";
+                            statusClass = "status-cancelled";
+                            break;
+                        default:
+                            statusText = $"Status {order.Status}";
+                            statusClass = "status-default";
+                            break;
                     }
 
-                </div>
+                    <div class="card shadow-sm border-0 rounded-4 overflow-hidden bg-white">
+                        <div class="p-3 px-4 bg-light border-bottom d-flex flex-wrap justify-content-between align-items-center gap-2">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="brand-icon-box bg-white" style="width: 38px; height: 38px; font-size: 1.2rem;">
+                                    📦
+                                </div>
+                                <div>
+                                    <span class="text-muted small text-uppercase fw-bold d-block" style="font-size: 0.72rem;">Order Reference</span>
+                                    <span class="fw-bold font-serif text-dark fs-5">#@order.Id</span>
+                                </div>
+                            </div>
 
-            }
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="text-end d-none d-sm-block">
+                                    <span class="text-muted small d-block" style="font-size: 0.72rem;">Order Date</span>
+                                    <span class="small fw-bold text-dark">@orderDate.ToString("dd MMM yyyy, hh:mm tt")</span>
+                                </div>
+                                <span class="status-badge @statusClass">
+                                    <span class="status-dot"></span> @statusText
+                                </span>
+                            </div>
+                        </div>
 
-        </div>
+                        <div class="p-4 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+                            <div>
+                                <div class="fw-bold text-dark mb-1">
+                                    @itemCount product@(itemCount == 1 ? "" : "s") in this shipment
+                                </div>
+                                @if (order.Items != null && order.Items.Any())
+                                {
+                                    <div class="text-muted small d-flex flex-wrap gap-2">
+                                        @foreach (var itm in order.Items.Take(3))
+                                        {
+                                            <span class="badge bg-light text-dark border">@itm.ProductName (x@itm.Quantity)</span>
+                                        }
+                                        @if (order.Items.Count > 3)
+                                        {
+                                            <span class="badge bg-light text-muted border">+@(order.Items.Count - 3) more</span>
+                                        }
+                                    </div>
+                                }
+                            </div>
 
-    </section>
+                            <div class="d-flex align-items-center justify-content-between justify-content-md-end gap-3 pt-3 pt-md-0 border-top border-md-0">
+                                <div class="text-md-end me-md-2">
+                                    <span class="text-muted small d-block" style="font-size: 0.75rem;">Total Amount</span>
+                                    <span class="fs-5 fw-bold text-primary">Rs. @order.TotalAmount.ToString("N2")</span>
+                                </div>
 
+                                <div class="d-flex align-items-center gap-2">
+                                    @if (canPay)
+                                    {
+                                        <a asp-controller="Payment" asp-action="Select" asp-route-id="@order.Id" class="btn btn-danger btn-sm rounded-pill px-3 fw-bold">
+                                            <i class="bi bi-credit-card me-1"></i> Pay Now
+                                        </a>
+                                    }
+                                    <a asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id" class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                                        <span>Details</span> <i class="bi bi-chevron-right small"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+
+    </div>
+</div>
 </div>

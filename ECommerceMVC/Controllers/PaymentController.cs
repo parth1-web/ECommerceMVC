@@ -3,6 +3,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 
 using ECommerceMVC.Models.Api;
+using ECommerceMVC.Services;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,16 +14,17 @@ namespace ECommerceMVC.Controllers;
 [Route("Payment")]
 public class PaymentController : Controller
 {
-    private readonly HttpClient _httpClient;
+    private readonly IPaymentApiService _paymentApiService;
+    private readonly IOrderApiService _orderApiService;
     private readonly ILogger<PaymentController> _logger;
 
     public PaymentController(
-        IHttpClientFactory httpClientFactory,
+        IPaymentApiService paymentApiService,
+        IOrderApiService orderApiService,
         ILogger<PaymentController> logger)
     {
-        _httpClient =
-            httpClientFactory.CreateClient("ECommerceApi");
-
+        _paymentApiService = paymentApiService;
+        _orderApiService = orderApiService;
         _logger = logger;
     }
 
@@ -30,14 +32,12 @@ public class PaymentController : Controller
     // =========================================================
     // PAYMENT SELECTION
     //
-    // GET:
-    // /Payment/Select/270001
+    // GET: /Payment/Select/{id}
     // =========================================================
 
     [HttpGet("Select/{id:int}")]
     public async Task<IActionResult> Select(
-        int id,
-        CancellationToken cancellationToken)
+        int id)
     {
         if (id <= 0)
         {
@@ -49,63 +49,13 @@ public class PaymentController : Controller
                 "Orders");
         }
 
-
-        var token = GetJwtToken();
-
-        if (string.IsNullOrWhiteSpace(token))
-        {
-            TempData["ErrorMessage"] =
-                "Your session has expired. Please login again.";
-
-            return RedirectToAction(
-                "Login",
-                "Account");
-        }
-
-
         try
         {
-            using var request =
-                new HttpRequestMessage(
-                    HttpMethod.Get,
-                    $"api/Orders/{id}");
+            var order =
+                await _orderApiService
+                    .GetOrderByIdAsync(id);
 
-            request.Headers.Authorization =
-                new AuthenticationHeaderValue(
-                    "Bearer",
-                    token);
-
-
-            using var response =
-                await _httpClient.SendAsync(
-                    request,
-                    cancellationToken);
-
-
-            // =================================================
-            // UNAUTHORIZED
-            // =================================================
-
-            if (response.StatusCode ==
-                HttpStatusCode.Unauthorized)
-            {
-                ClearJwtToken();
-
-                TempData["ErrorMessage"] =
-                    "Your session has expired. Please login again.";
-
-                return RedirectToAction(
-                    "Login",
-                    "Account");
-            }
-
-
-            // =================================================
-            // NOT FOUND
-            // =================================================
-
-            if (response.StatusCode ==
-                HttpStatusCode.NotFound)
+            if (order == null)
             {
                 TempData["ErrorMessage"] =
                     "The selected order could not be found.";
@@ -115,61 +65,8 @@ public class PaymentController : Controller
                     "Orders");
             }
 
-
-            // =================================================
-            // OTHER API ERRORS
-            // =================================================
-
-            if (!response.IsSuccessStatusCode)
-            {
-                var errorContent =
-                    await response.Content
-                        .ReadAsStringAsync(
-                            cancellationToken);
-
-                _logger.LogWarning(
-                    "Unable to load payment page for OrderId {OrderId}. " +
-                    "StatusCode: {StatusCode}. Response: {Response}",
-                    id,
-                    response.StatusCode,
-                    errorContent);
-
-                TempData["ErrorMessage"] =
-                    "Unable to load the selected order.";
-
-                return RedirectToAction(
-                    "Details",
-                    "Orders",
-                    new { id });
-            }
-
-
-            // =================================================
-            // DESERIALIZE ORDER
-            // =================================================
-
-            var order =
-                await response.Content
-                    .ReadFromJsonAsync<OrderDto>(
-                        cancellationToken:
-                            cancellationToken);
-
-
-            if (order == null)
-            {
-                TempData["ErrorMessage"] =
-                    "The order could not be loaded.";
-
-                return RedirectToAction(
-                    "Index",
-                    "Orders");
-            }
-
-
             // =================================================
             // VALIDATE ORDER STATUS
-            //
-            // Only Pending orders should enter payment selection.
             // =================================================
 
             if (order.Status != 1)
@@ -186,38 +83,25 @@ public class PaymentController : Controller
                     });
             }
 
-
             return View(order);
-        }
-        catch (HttpRequestException ex)
-        {
-            _logger.LogError(
-                ex,
-                "HTTP error while loading payment page for OrderId {OrderId}.",
-                id);
-
-            TempData["ErrorMessage"] =
-                "Unable to connect to the payment service.";
-
-            return RedirectToAction(
-                "Details",
-                "Orders",
-                new { id });
         }
         catch (Exception ex)
         {
             _logger.LogError(
                 ex,
-                "Unexpected error while loading payment page for OrderId {OrderId}.",
+                "Error while loading payment page for OrderId {OrderId}.",
                 id);
 
             TempData["ErrorMessage"] =
-                "An unexpected error occurred while loading the payment page.";
+                "Unable to load the payment page.";
 
             return RedirectToAction(
                 "Details",
                 "Orders",
-                new { id });
+                new
+                {
+                    id
+                });
         }
     }
 
@@ -225,16 +109,14 @@ public class PaymentController : Controller
     // =========================================================
     // PROCESS PAYMENT
     //
-    // POST:
-    // /Payment/Process
+    // POST: /Payment/Process
     // =========================================================
 
     [HttpPost("Process")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Process(
         int orderId,
-        int method,
-        CancellationToken cancellationToken)
+        int method)
     {
         if (orderId <= 0)
         {
@@ -246,36 +128,13 @@ public class PaymentController : Controller
                 "Orders");
         }
 
-
-        var token = GetJwtToken();
-
-        if (string.IsNullOrWhiteSpace(token))
-        {
-            TempData["ErrorMessage"] =
-                "Your session has expired. Please login again.";
-
-            return RedirectToAction(
-                "Login",
-                "Account");
-        }
-
-
         return method switch
         {
-            1 => await ProcessCashOnDelivery(
-                orderId,
-                token,
-                cancellationToken),
+            1 => await ProcessCashOnDelivery(orderId),
 
-            2 => await ProcessKhalti(
-                orderId,
-                token,
-                cancellationToken),
+            2 => await ProcessKhalti(orderId),
 
-            3 => await ProcessEsewa(
-                orderId,
-                token,
-                cancellationToken),
+            3 => await ProcessEsewa(orderId),
 
             _ => InvalidPaymentMethod(orderId)
         };
@@ -306,66 +165,23 @@ public class PaymentController : Controller
     // =========================================================
 
     private async Task<IActionResult> ProcessCashOnDelivery(
-        int orderId,
-        string token,
-        CancellationToken cancellationToken)
+        int orderId)
     {
         try
         {
-            using var request =
-                new HttpRequestMessage(
-                    HttpMethod.Post,
-                    "api/Payments");
+            var request =
+                new PaymentRequestDto
+                {
+                    OrderId = orderId,
+                    Method = 1
+                };
 
-            request.Headers.Authorization =
-                new AuthenticationHeaderValue(
-                    "Bearer",
-                    token);
+            var payment =
+                await _paymentApiService
+                    .CreatePaymentAsync(request);
 
-
-            request.Content =
-                JsonContent.Create(
-                    new
-                    {
-                        OrderId = orderId,
-                        Method = 1
-                    });
-
-
-            using var response =
-                await _httpClient.SendAsync(
-                    request,
-                    cancellationToken);
-
-
-            if (response.StatusCode ==
-                HttpStatusCode.Unauthorized)
+            if (payment == null)
             {
-                ClearJwtToken();
-
-                TempData["ErrorMessage"] =
-                    "Your session has expired. Please login again.";
-
-                return RedirectToAction(
-                    "Login",
-                    "Account");
-            }
-
-
-            if (!response.IsSuccessStatusCode)
-            {
-                var errorContent =
-                    await response.Content
-                        .ReadAsStringAsync(
-                            cancellationToken);
-
-                _logger.LogWarning(
-                    "COD payment creation failed for OrderId {OrderId}. " +
-                    "StatusCode: {StatusCode}. Response: {Response}",
-                    orderId,
-                    response.StatusCode,
-                    errorContent);
-
                 TempData["ErrorMessage"] =
                     "Unable to confirm your Cash on Delivery order.";
 
@@ -377,10 +193,8 @@ public class PaymentController : Controller
                     });
             }
 
-
             TempData["SuccessMessage"] =
                 "Your Cash on Delivery order has been confirmed successfully.";
-
 
             return RedirectToAction(
                 "Details",
@@ -390,28 +204,11 @@ public class PaymentController : Controller
                     id = orderId
                 });
         }
-        catch (HttpRequestException ex)
-        {
-            _logger.LogError(
-                ex,
-                "HTTP error while creating COD payment for OrderId {OrderId}.",
-                orderId);
-
-            TempData["ErrorMessage"] =
-                "Unable to connect to the payment service.";
-
-            return RedirectToAction(
-                nameof(Select),
-                new
-                {
-                    id = orderId
-                });
-        }
         catch (Exception ex)
         {
             _logger.LogError(
                 ex,
-                "Unexpected error while processing COD payment for OrderId {OrderId}.",
+                "Error while processing COD payment for OrderId {OrderId}.",
                 orderId);
 
             TempData["ErrorMessage"] =
@@ -432,66 +229,25 @@ public class PaymentController : Controller
     // =========================================================
 
     private async Task<IActionResult> ProcessKhalti(
-        int orderId,
-        string token,
-        CancellationToken cancellationToken)
+        int orderId)
     {
         try
         {
-            using var request =
-                new HttpRequestMessage(
-                    HttpMethod.Post,
-                    "api/Payments/khalti/initiate");
+            var request =
+                new PaymentRequestDto
+                {
+                    OrderId = orderId,
+                    Method = 2
+                };
 
-            request.Headers.Authorization =
-                new AuthenticationHeaderValue(
-                    "Bearer",
-                    token);
+            var response =
+                await _paymentApiService
+                    .InitiateKhaltiAsync(request);
 
-
-            request.Content =
-                JsonContent.Create(
-                    new
-                    {
-                        OrderId = orderId,
-                        Method = 2
-                    });
-
-
-            using var response =
-                await _httpClient.SendAsync(
-                    request,
-                    cancellationToken);
-
-
-            if (response.StatusCode ==
-                HttpStatusCode.Unauthorized)
+            if (response == null ||
+                string.IsNullOrWhiteSpace(
+                    response.PaymentUrl))
             {
-                ClearJwtToken();
-
-                TempData["ErrorMessage"] =
-                    "Your session has expired. Please login again.";
-
-                return RedirectToAction(
-                    "Login",
-                    "Account");
-            }
-
-
-            if (!response.IsSuccessStatusCode)
-            {
-                var errorContent =
-                    await response.Content
-                        .ReadAsStringAsync(
-                            cancellationToken);
-
-                _logger.LogWarning(
-                    "Khalti initiation failed for OrderId {OrderId}. " +
-                    "StatusCode: {StatusCode}. Response: {Response}",
-                    orderId,
-                    response.StatusCode,
-                    errorContent);
-
                 TempData["ErrorMessage"] =
                     "Unable to initiate Khalti payment.";
 
@@ -503,60 +259,18 @@ public class PaymentController : Controller
                     });
             }
 
-
-            var khaltiResponse =
-                await response.Content
-                    .ReadFromJsonAsync<
-                        KhaltiInitiateResponseDto>(
-                        cancellationToken:
-                            cancellationToken);
-
-
-            if (khaltiResponse == null ||
-                string.IsNullOrWhiteSpace(
-                    khaltiResponse.PaymentUrl))
-            {
-                TempData["ErrorMessage"] =
-                    "Invalid Khalti payment response received.";
-
-                return RedirectToAction(
-                    nameof(Select),
-                    new
-                    {
-                        id = orderId
-                    });
-            }
-
-
             return Redirect(
-                khaltiResponse.PaymentUrl);
-        }
-        catch (HttpRequestException ex)
-        {
-            _logger.LogError(
-                ex,
-                "HTTP error while initiating Khalti payment for OrderId {OrderId}.",
-                orderId);
-
-            TempData["ErrorMessage"] =
-                "Unable to connect to Khalti.";
-
-            return RedirectToAction(
-                nameof(Select),
-                new
-                {
-                    id = orderId
-                });
+                response.PaymentUrl);
         }
         catch (Exception ex)
         {
             _logger.LogError(
                 ex,
-                "Unexpected error while initiating Khalti payment for OrderId {OrderId}.",
+                "Error while initiating Khalti payment for OrderId {OrderId}.",
                 orderId);
 
             TempData["ErrorMessage"] =
-                "An unexpected error occurred while initiating Khalti payment.";
+                "Unable to initiate Khalti payment.";
 
             return RedirectToAction(
                 nameof(Select),
@@ -573,86 +287,15 @@ public class PaymentController : Controller
     // =========================================================
 
     private async Task<IActionResult> ProcessEsewa(
-        int orderId,
-        string token,
-        CancellationToken cancellationToken)
+        int orderId)
     {
         try
         {
-            using var request =
-                new HttpRequestMessage(
-                    HttpMethod.Post,
-                    "api/Payments/esewa/initiate");
+            var response =
+                await _paymentApiService
+                    .InitiateEsewaAsync(orderId);
 
-            request.Headers.Authorization =
-                new AuthenticationHeaderValue(
-                    "Bearer",
-                    token);
-
-
-            request.Content =
-                JsonContent.Create(
-                    new
-                    {
-                        OrderId = orderId
-                    });
-
-
-            using var response =
-                await _httpClient.SendAsync(
-                    request,
-                    cancellationToken);
-
-
-            if (response.StatusCode ==
-                HttpStatusCode.Unauthorized)
-            {
-                ClearJwtToken();
-
-                TempData["ErrorMessage"] =
-                    "Your session has expired. Please login again.";
-
-                return RedirectToAction(
-                    "Login",
-                    "Account");
-            }
-
-
-            if (!response.IsSuccessStatusCode)
-            {
-                var errorContent =
-                    await response.Content
-                        .ReadAsStringAsync(
-                            cancellationToken);
-
-                _logger.LogWarning(
-                    "eSewa initiation failed for OrderId {OrderId}. " +
-                    "StatusCode: {StatusCode}. Response: {Response}",
-                    orderId,
-                    response.StatusCode,
-                    errorContent);
-
-                TempData["ErrorMessage"] =
-                    "Unable to initiate eSewa payment.";
-
-                return RedirectToAction(
-                    nameof(Select),
-                    new
-                    {
-                        id = orderId
-                    });
-            }
-
-
-            var paymentResponse =
-                await response.Content
-                    .ReadFromJsonAsync<
-                        EsewaInitiateResponseDto>(
-                        cancellationToken:
-                            cancellationToken);
-
-
-            if (paymentResponse == null)
+            if (response == null)
             {
                 TempData["ErrorMessage"] =
                     "Invalid eSewa payment response received.";
@@ -665,9 +308,8 @@ public class PaymentController : Controller
                     });
             }
 
-
             if (string.IsNullOrWhiteSpace(
-                    paymentResponse.PaymentUrl))
+                    response.PaymentUrl))
             {
                 TempData["ErrorMessage"] =
                     "eSewa payment URL is missing.";
@@ -680,9 +322,8 @@ public class PaymentController : Controller
                     });
             }
 
-
             if (string.IsNullOrWhiteSpace(
-                    paymentResponse.TransactionUuid))
+                    response.TransactionUuid))
             {
                 TempData["ErrorMessage"] =
                     "eSewa transaction information is missing.";
@@ -695,37 +336,19 @@ public class PaymentController : Controller
                     });
             }
 
-
             return View(
                 "EsewaRedirect",
-                paymentResponse);
-        }
-        catch (HttpRequestException ex)
-        {
-            _logger.LogError(
-                ex,
-                "HTTP error while initiating eSewa payment for OrderId {OrderId}.",
-                orderId);
-
-            TempData["ErrorMessage"] =
-                "Unable to connect to the eSewa payment service.";
-
-            return RedirectToAction(
-                nameof(Select),
-                new
-                {
-                    id = orderId
-                });
+                response);
         }
         catch (Exception ex)
         {
             _logger.LogError(
                 ex,
-                "Unexpected error while initiating eSewa payment for OrderId {OrderId}.",
+                "Error while initiating eSewa payment for OrderId {OrderId}.",
                 orderId);
 
             TempData["ErrorMessage"] =
-                "An unexpected error occurred while initiating eSewa payment.";
+                "Unable to initiate eSewa payment.";
 
             return RedirectToAction(
                 nameof(Select),
@@ -740,16 +363,14 @@ public class PaymentController : Controller
     // =========================================================
     // PAYMENT SUCCESS
     //
-    // GET:
-    // /Payment/Success
+    // GET: /Payment/Success
     // =========================================================
 
     [AllowAnonymous]
     [HttpGet("Success")]
     public async Task<IActionResult> Success(
         int orderId,
-        string? transactionUuid,
-        CancellationToken cancellationToken)
+        string? transactionUuid)
     {
         if (orderId <= 0)
         {
@@ -761,72 +382,27 @@ public class PaymentController : Controller
                 "Products");
         }
 
-
         PaymentDto? payment = null;
 
-        var token = GetJwtToken();
-
-
-        // =====================================================
-        // Try to load payment details when authenticated.
-        //
-        // The success page still works without the JWT because
-        // eSewa redirects through an external browser flow.
-        // =====================================================
-
-        if (!string.IsNullOrWhiteSpace(token))
+        try
         {
-            try
-            {
-                using var request =
-                    new HttpRequestMessage(
-                        HttpMethod.Get,
-                        $"api/Payments/order/{orderId}");
-
-                request.Headers.Authorization =
-                    new AuthenticationHeaderValue(
-                        "Bearer",
-                        token);
-
-
-                using var response =
-                    await _httpClient.SendAsync(
-                        request,
-                        cancellationToken);
-
-
-                if (response.IsSuccessStatusCode)
-                {
-                    payment =
-                        await response.Content
-                            .ReadFromJsonAsync<
-                                PaymentDto>(
-                                cancellationToken:
-                                    cancellationToken);
-                }
-                else
-                {
-                    _logger.LogWarning(
-                        "Unable to load payment details for OrderId {OrderId}. StatusCode: {StatusCode}",
-                        orderId,
-                        response.StatusCode);
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogWarning(
-                    ex,
-                    "Unable to load payment display information for OrderId {OrderId}.",
-                    orderId);
-            }
+            payment =
+                await _paymentApiService
+                    .GetPaymentByOrderIdAsync(
+                        orderId);
         }
-
+        catch (Exception ex)
+        {
+            _logger.LogWarning(
+                ex,
+                "Unable to load payment details for OrderId {OrderId}.",
+                orderId);
+        }
 
         ViewBag.OrderId = orderId;
 
         ViewBag.TransactionUuid =
             transactionUuid;
-
 
         return View(payment);
     }
@@ -835,8 +411,7 @@ public class PaymentController : Controller
     // =========================================================
     // PAYMENT FAILURE
     //
-    // GET:
-    // /Payment/Failure
+    // GET: /Payment/Failure
     // =========================================================
 
     [AllowAnonymous]
@@ -854,27 +429,5 @@ public class PaymentController : Controller
             transactionUuid;
 
         return View();
-    }
-
-
-    // =========================================================
-    // GET JWT TOKEN
-    // =========================================================
-
-    private string? GetJwtToken()
-    {
-        return HttpContext.Session.GetString(
-            "JWToken");
-    }
-
-
-    // =========================================================
-    // CLEAR JWT TOKEN
-    // =========================================================
-
-    private void ClearJwtToken()
-    {
-        HttpContext.Session.Remove(
-            "JWToken");
     }
 }

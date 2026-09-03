@@ -1,57 +1,52 @@
-﻿@model ECommerceMVC.Models.CategoryViewModel
+@model ECommerceMVC.Models.CategoryViewModel
 
 @{
     ViewData["Title"] = Model.Name;
 }
 
-<div class="container mt-5">
+<div class="py-5">
+    <div class="container">
 
-    <div class="row justify-content-center">
+        <!-- BREADCRUMB -->
+        <nav class="breadcrumb-nav" aria-label="breadcrumb">
+            <a asp-controller="Home" asp-action="Index"><i class="bi bi-house-door me-1"></i> Home</a>
+            <span>/</span>
+            <a asp-controller="Categories" asp-action="Index">Categories</a>
+            <span>/</span>
+            <span class="text-dark fw-bold">@Model.Name</span>
+        </nav>
 
-        <div class="col-md-8">
-
-            <div class="card shadow-sm">
-
-                <div class="card-body text-center">
-
-                    <h1 class="card-title">
-                        @Model.Name
-                    </h1>
-
-                    <p class="lead mt-3">
-                        @Model.Description
-                    </p>
-
-                    <p class="text-muted">
-                        Traditional Nepali homemade products
-                    </p>
-
-                    <div class="mt-4">
-
-                        <a asp-controller="Products"
-                           asp-action="Index"
-                           class="btn btn-primary">
-
-                            View Products
-
-                        </a>
-
-                        <a asp-controller="Categories"
-                           asp-action="Index"
-                           class="btn btn-outline-secondary">
-
-                            Back to Categories
-
-                        </a>
-
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm border-0 rounded-4 overflow-hidden text-center p-5 bg-white">
+                    <div class="mb-3">
+                        <span class="brand-icon-box mx-auto" style="width: 64px; height: 64px; font-size: 2rem;">
+                            🌶️
+                        </span>
                     </div>
 
+                    <span class="section-eyebrow mx-auto mb-2">CATEGORY DETAILS</span>
+                    <h1 class="font-serif display-5 fw-bold mb-3">@Model.Name</h1>
+
+                    <p class="lead text-muted max-w-600 mx-auto mb-4">
+                        @(string.IsNullOrWhiteSpace(Model.Description) ? "Traditional homemade Nepali achar prepared in small batches with genuine mountain spices and pure cold-pressed mustard oil." : Model.Description)
+                    </p>
+
+                    <div class="d-flex flex-wrap justify-content-center gap-3 pt-3 border-top">
+                        <a asp-controller="Products" asp-action="Index" class="btn-primary-custom">
+                            <span>Browse Pickles in this Category</span>
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+
+                        <a asp-controller="Categories" asp-action="Index" class="btn-secondary-custom">
+                            <i class="bi bi-arrow-left"></i>
+                            <span>All Categories</span>
+                        </a>
+                    </div>
                 </div>
-
             </div>
-
         </div>
 
     </div>
-
+</div>
 </div>

@@ -40,8 +40,7 @@ builder.Services.AddSession(options =>
 // ==========================================================
 
 builder.Services.AddAuthentication(
-    CookieAuthenticationDefaults
-        .AuthenticationScheme)
+    CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
         options.LoginPath =
@@ -79,6 +78,27 @@ if (string.IsNullOrWhiteSpace(apiBaseUrl))
     throw new InvalidOperationException(
         "ApiSettings:BaseUrl is not configured.");
 }
+
+// ==========================================================
+// GENERAL ECOMMERCE API CLIENT
+// Used by PaymentController
+// ==========================================================
+
+builder.Services.AddHttpClient(
+    "ECommerceApi",
+    client =>
+    {
+        client.BaseAddress =
+            new Uri(apiBaseUrl);
+
+        client.DefaultRequestHeaders.Accept
+            .Add(
+                new System.Net.Http.Headers
+                    .MediaTypeWithQualityHeaderValue(
+                        "application/json"));
+    })
+    .AddHttpMessageHandler<
+        JwtAuthorizationHandler>();
 
 // ==========================================================
 // PRODUCT API
@@ -136,13 +156,19 @@ builder.Services.AddHttpClient<
     .AddHttpMessageHandler<
         JwtAuthorizationHandler>();
 
+// ==========================================================
+// PAYMENT API
+// ==========================================================
+
 builder.Services.AddHttpClient<
     IPaymentApiService,
     PaymentApiService>(client =>
     {
-        client.BaseAddress = new Uri(apiBaseUrl);
+        client.BaseAddress =
+            new Uri(apiBaseUrl);
     })
-.AddHttpMessageHandler<JwtAuthorizationHandler>();
+    .AddHttpMessageHandler<
+        JwtAuthorizationHandler>();
 
 // ==========================================================
 // AUTH API
@@ -186,17 +212,30 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// Session must be before authentication
-// because JWT fallback reads Session.
+// ==========================================================
+// SESSION
+// Must come before Authentication because
+// JWT fallback may restore Session.
+// ==========================================================
+
 app.UseSession();
 
-// Cookie authentication
+// ==========================================================
+// AUTHENTICATION
+// ==========================================================
+
 app.UseAuthentication();
 
-// Authorization
+// ==========================================================
+// AUTHORIZATION
+// ==========================================================
+
 app.UseAuthorization();
 
-// MVC routing
+// ==========================================================
+// ROUTING
+// ==========================================================
+
 app.MapControllerRoute(
     name: "default",
     pattern:

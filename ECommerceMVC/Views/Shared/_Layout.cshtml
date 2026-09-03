@@ -1,58 +1,47 @@
-﻿@{
+@{
     var controller = ViewContext.RouteData.Values["controller"]?.ToString();
     var action = ViewContext.RouteData.Values["action"]?.ToString();
 
-    string Active(string controllerName)
+    string Active(string controllerName, string? actionName = null)
     {
-        return string.Equals(
-            controller,
-            controllerName,
-            StringComparison.OrdinalIgnoreCase)
-            ? "active"
-            : "";
+        var isControllerMatch = string.Equals(controller, controllerName, StringComparison.OrdinalIgnoreCase);
+        if (actionName != null)
+        {
+            return isControllerMatch && string.Equals(action, actionName, StringComparison.OrdinalIgnoreCase) ? "active" : "";
+        }
+        return isControllerMatch ? "active" : "";
     }
+
+    var successMessage = TempData["SuccessMessage"] ?? TempData["Success"];
+    var errorMessage = TempData["ErrorMessage"] ?? TempData["Error"];
 }
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Gaun Ko Achar - Authentic homemade Nepali achar, pickles, and chutneys handcrafted with traditional village recipes and delivered fresh to your door." />
+    <meta name="theme-color" content="#b91c1c" />
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Gaun Ko Achar | Authentic Nepali Flavors</title>
 
-    <meta name="description"
-          content="Gaun Ko Achar - Authentic homemade Nepali achar delivered to your door." />
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
-    <title>
-        @ViewData["Title"] - Gaun Ko Achar
-    </title>
-
-    <!-- Bootstrap -->
-    <link rel="stylesheet"
-          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 
     <!-- Google Fonts -->
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com" />
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin />
-
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap"
-          rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&display=swap" rel="stylesheet" />
 
     <!-- Site CSS -->
-    <link rel="stylesheet"
-          href="~/css/site.css"
-          asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
-    <link rel="icon"
-          href="~/favicon.ico" />
-
+    <link rel="icon" href="~/favicon.ico" />
 </head>
 
 <body>
@@ -60,545 +49,291 @@
     <!-- ================================================= -->
     <!-- TOP ANNOUNCEMENT BAR -->
     <!-- ================================================= -->
-
-    <div class="announcement-bar">
-
+    <aside class="announcement-bar py-2" aria-label="Store Announcement">
         <div class="container">
-
-            <div class="announcement-content">
-
-                <span>
-                    🚚 Free delivery on selected orders
-                </span>
-
-                <span class="announcement-divider">
-                    •
-                </span>
-
-                <span>
-                    🌶️ Authentic homemade Nepali flavors
-                </span>
-
+            <div class="announcement-content d-flex justify-content-between align-items-center">
+                <div class="announcement-items d-flex align-items-center gap-3">
+                    <span class="announcement-item"><i class="bi bi-truck text-warning me-1"></i> Fast Delivery across Nepal</span>
+                    <span class="announcement-dot d-none d-md-inline">•</span>
+                    <span class="announcement-item d-none d-md-inline"><i class="bi bi-patch-check-fill text-warning me-1"></i> 100% Homemade &amp; Preservative Free</span>
+                    <span class="announcement-dot d-none d-lg-inline">•</span>
+                    <span class="announcement-item d-none d-lg-inline"><i class="bi bi-shield-lock-fill text-warning me-1"></i> Cash on Delivery &amp; Digital Wallets</span>
+                </div>
+                <div class="announcement-contact d-none d-sm-flex align-items-center gap-3">
+                    <a href="tel:+9779800000000" class="announcement-link"><i class="bi bi-telephone-fill me-1"></i> Support</a>
+                    <span class="announcement-dot">•</span>
+                    <a asp-controller="Home" asp-action="Privacy" class="announcement-link"><i class="bi bi-info-circle-fill me-1"></i> Help</a>
+                </div>
             </div>
-
         </div>
-
-    </div>
-
+    </aside>
 
     <!-- ================================================= -->
-    <!-- NAVBAR -->
+    <!-- MAIN NAVBAR -->
     <!-- ================================================= -->
-
-    <header class="site-header">
-
-        <nav class="navbar navbar-expand-lg navbar-light">
-
+    <header class="site-header sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light py-3" aria-label="Main Navigation">
             <div class="container">
 
-                <!-- BRAND -->
-
-                <a class="navbar-brand brand-logo"
-                   asp-controller="Home"
-                   asp-action="Index">
-
-                    <span class="brand-icon">
-
-                        🌶️
-
-                    </span>
-
-                    <span class="brand-text">
-
-                        <strong>Gaun Ko</strong>
-
-                        <small>Achar</small>
-
-                    </span>
-
+                <!-- BRAND LOGO -->
+                <a class="navbar-brand brand-logo d-flex align-items-center gap-2" asp-controller="Home" asp-action="Index">
+                    <div class="brand-icon-box">
+                        <span class="brand-emoji">🌶️</span>
+                    </div>
+                    <div class="brand-text d-flex flex-column">
+                        <span class="brand-name">Gaun Ko <span class="brand-accent">Achar</span></span>
+                        <span class="brand-tagline">Authentic Nepali Kitchen</span>
+                    </div>
                 </a>
 
-
-                <!-- MOBILE TOGGLE -->
-
-                <button class="navbar-toggler custom-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#mainNavbar"
-                        aria-controls="mainNavbar"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-
+                <!-- MOBILE TOGGLER -->
+                <button class="navbar-toggler custom-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-
                 </button>
 
-
-                <!-- NAVIGATION -->
-
-                <div class="collapse navbar-collapse"
-                     id="mainNavbar">
-
-                    <!-- LEFT NAVIGATION -->
-
-                    <ul class="navbar-nav nav-main mx-auto">
-
+                <!-- NAVIGATION CONTENT -->
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <!-- MAIN MENU LINKS -->
+                    <ul class="navbar-nav mx-auto nav-main mb-2 mb-lg-0">
                         <li class="nav-item">
-
-                            <a class="nav-link @Active("Home")"
-                               asp-controller="Home"
-                               asp-action="Index">
-
-                                Home
-
+                            <a class="nav-link @Active("Home", "Index")" asp-controller="Home" asp-action="Index">
+                                <i class="bi bi-house-door me-1"></i> Home
                             </a>
-
                         </li>
-
-
                         <li class="nav-item">
-
-                            <a class="nav-link @Active("Products")"
-                               asp-controller="Products"
-                               asp-action="Index">
-
-                                Shop
-
+                            <a class="nav-link @Active("Products")" asp-controller="Products" asp-action="Index">
+                                <i class="bi bi-grid me-1"></i> Shop All
                             </a>
-
                         </li>
-
-
+                        <li class="nav-item">
+                            <a class="nav-link @Active("Categories")" asp-controller="Categories" asp-action="Index">
+                                <i class="bi bi-tags me-1"></i> Categories
+                            </a>
+                        </li>
                         @if (User.Identity?.IsAuthenticated == true)
                         {
                             <li class="nav-item">
-
-                                <a class="nav-link @Active("Orders")"
-                                   asp-controller="Orders"
-                                   asp-action="Index">
-
-                                    My Orders
-
+                                <a class="nav-link @Active("Orders")" asp-controller="Orders" asp-action="Index">
+                                    <i class="bi bi-box-seam me-1"></i> My Orders
                                 </a>
-
                             </li>
                         }
-
                     </ul>
 
-
-                    <!-- RIGHT NAVIGATION -->
-
-                    <div class="navbar-actions">
-
+                    <!-- ACTION BUTTONS -->
+                    <div class="navbar-actions d-flex align-items-center gap-2">
                         @if (User.Identity?.IsAuthenticated == true)
                         {
-                            <!-- CART -->
-
-                            <a class="cart-button"
-                               asp-controller="Cart"
-                               asp-action="Index">
-
-                                <span class="cart-icon">
-
-                                    🛒
-
+                            <!-- CART BUTTON -->
+                            <a class="btn-nav-cart d-flex align-items-center gap-2" asp-controller="Cart" asp-action="Index" title="View Cart">
+                                <span class="cart-icon-wrapper">
+                                    <i class="bi bi-bag-heart-fill"></i>
                                 </span>
-
-                                <span class="cart-text">
-
-                                    Cart
-
-                                </span>
-
+                                <span class="cart-btn-text d-none d-sm-inline">Cart</span>
                             </a>
 
-
-                            <!-- USER -->
-
+                            <!-- USER ACCOUNT DROPDOWN -->
                             <div class="dropdown user-dropdown">
-
-                                <button class="btn user-menu-button dropdown-toggle"
-                                        type="button"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-
-                                    <span class="user-avatar">
-
-                                        @(User.Identity?.Name?
-                                            .Substring(0, 1)
-                                            .ToUpper() ?? "U")
-
+                                <button class="btn user-menu-button d-flex align-items-center gap-2 dropdown-toggle" type="button" id="userMenuBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="user-avatar-circle">
+                                        @(User.Identity?.Name?.Length > 0 ? User.Identity.Name.Substring(0, 1).ToUpper() : "U")
                                     </span>
-
-                                    <span class="user-name">
-
-                                        @(User.Identity?.Name ?? "Account")
-
+                                    <span class="user-name-label d-none d-md-inline text-truncate" style="max-width: 140px;">
+                                        @(User.Identity?.Name ?? "My Account")
                                     </span>
-
                                 </button>
-
-
-                                <ul class="dropdown-menu dropdown-menu-end user-dropdown-menu">
-
+                                <ul class="dropdown-menu dropdown-menu-end user-dropdown-menu shadow-lg border-0" aria-labelledby="userMenuBtn">
+                                    <li class="dropdown-header">
+                                        <div class="fw-bold text-dark">Signed in as</div>
+                                        <div class="text-muted small text-truncate">@User.Identity?.Name</div>
+                                    </li>
+                                    <li><hr class="dropdown-divider" /></li>
                                     <li>
-
-                                        <a class="dropdown-item"
-                                           asp-controller="Home"
-                                           asp-action="Profile">
-
-                                            👤 My Profile
-
+                                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" asp-controller="Home" asp-action="Profile">
+                                            <i class="bi bi-person-circle text-primary"></i> My Profile
                                         </a>
-
                                     </li>
-
-
                                     <li>
-
-                                        <a class="dropdown-item"
-                                           asp-controller="Orders"
-                                           asp-action="Index">
-
-                                            📦 My Orders
-
+                                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" asp-controller="Orders" asp-action="Index">
+                                            <i class="bi bi-box-seam text-primary"></i> Order History
                                         </a>
-
                                     </li>
-
-
                                     <li>
-
-                                        <hr class="dropdown-divider" />
-
+                                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" asp-controller="Cart" asp-action="Index">
+                                            <i class="bi bi-cart3 text-primary"></i> Shopping Cart
+                                        </a>
                                     </li>
-
-
+                                    <li><hr class="dropdown-divider" /></li>
                                     <li>
-
-                                        <form asp-controller="Account"
-                                              asp-action="Logout"
-                                              method="post">
-
+                                        <form asp-controller="Account" asp-action="Logout" method="post" class="m-0 p-0">
                                             @Html.AntiForgeryToken()
-
-                                            <button type="submit"
-                                                    class="dropdown-item logout-item">
-
-                                                🚪 Logout
-
+                                            <button type="submit" class="dropdown-item logout-item d-flex align-items-center gap-2 py-2 text-danger w-100">
+                                                <i class="bi bi-box-arrow-right"></i> Sign Out
                                             </button>
-
                                         </form>
-
                                     </li>
-
                                 </ul>
-
                             </div>
                         }
                         else
                         {
-                            <a class="login-link"
-                               asp-controller="Account"
-                               asp-action="Login">
-
-                                Login
-
+                            <!-- GUEST ACTIONS -->
+                            <a class="btn-nav-login d-flex align-items-center gap-1" asp-controller="Account" asp-action="Login">
+                                <i class="bi bi-person me-1"></i> Login
                             </a>
-
-
-                            <a class="register-button"
-                               asp-controller="Account"
-                               asp-action="Register">
-
-                                Create Account
-
+                            <a class="btn-nav-register d-flex align-items-center gap-1" asp-controller="Account" asp-action="Register">
+                                <span>Create Account</span> <i class="bi bi-arrow-right-short"></i>
                             </a>
                         }
-
                     </div>
-
                 </div>
 
             </div>
-
         </nav>
-
     </header>
 
-
     <!-- ================================================= -->
-    <!-- TEMP DATA MESSAGES -->
+    <!-- GLOBAL NOTIFICATIONS -->
     <!-- ================================================= -->
-
-    @if (TempData["SuccessMessage"] != null)
+    @if (successMessage != null)
     {
-        <div class="container notification-container">
-
-            <div class="alert modern-alert modern-alert-success alert-dismissible fade show"
-                 role="alert">
-
-                <div class="alert-icon">
-
-                    ✓
-
+        <div class="container notification-container mt-3">
+            <div class="alert modern-alert modern-alert-success alert-dismissible fade show d-flex align-items-center" role="alert">
+                <div class="alert-icon-box me-3">
+                    <i class="bi bi-check-circle-fill"></i>
                 </div>
-
-                <div>
-
-                    <strong>Success!</strong>
-
-                    <span>
-                        @TempData["SuccessMessage"]
-                    </span>
-
+                <div class="alert-text-box flex-grow-1">
+                    <div class="alert-heading fw-bold">Success</div>
+                    <div>@successMessage</div>
                 </div>
-
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert"
-                        aria-label="Close">
-                </button>
-
+                <button type="button" class="btn-close ms-2" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-
         </div>
     }
 
-
-    @if (TempData["ErrorMessage"] != null)
+    @if (errorMessage != null)
     {
-        <div class="container notification-container">
-
-            <div class="alert modern-alert modern-alert-danger alert-dismissible fade show"
-                 role="alert">
-
-                <div class="alert-icon">
-
-                    !
-
+        <div class="container notification-container mt-3">
+            <div class="alert modern-alert modern-alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
+                <div class="alert-icon-box me-3">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
                 </div>
-
-                <div>
-
-                    <strong>Something went wrong</strong>
-
-                    <span>
-                        @TempData["ErrorMessage"]
-                    </span>
-
+                <div class="alert-text-box flex-grow-1">
+                    <div class="alert-heading fw-bold">Please Note</div>
+                    <div>@errorMessage</div>
                 </div>
-
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert"
-                        aria-label="Close">
-                </button>
-
+                <button type="button" class="btn-close ms-2" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-
         </div>
     }
 
-
     <!-- ================================================= -->
-    <!-- PAGE CONTENT -->
+    <!-- BODY MAIN CONTENT -->
     <!-- ================================================= -->
-
-    <main role="main"
-          class="site-main">
-
+    <main role="main" class="site-main">
         @RenderBody()
-
     </main>
-
 
     <!-- ================================================= -->
     <!-- FOOTER -->
     <!-- ================================================= -->
-
     <footer class="site-footer">
+        <div class="footer-top py-5">
+            <div class="container">
+                <div class="row g-4">
+                    <!-- BRAND COLUMN -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-brand mb-3">
+                            <a class="footer-logo d-flex align-items-center gap-2 mb-3" asp-controller="Home" asp-action="Index">
+                                <span class="brand-emoji fs-3">🌶️</span>
+                                <span class="footer-brand-name">Gaun Ko <span>Achar</span></span>
+                            </a>
+                            <p class="footer-about text-muted">
+                                Authentic homemade Nepali achar prepared with love, traditional village recipes, stone-ground Himalayan spices, and pure mustard oil. Taste the warmth of home.
+                            </p>
+                        </div>
+                        <div class="footer-trust-pills d-flex flex-wrap gap-2">
+                            <span class="trust-pill"><i class="bi bi-patch-check-fill text-warning"></i> 100% Authentic</span>
+                            <span class="trust-pill"><i class="bi bi-shield-check text-success"></i> Clean &amp; Hygienic</span>
+                            <span class="trust-pill"><i class="bi bi-box-seam text-info"></i> Safe Packaging</span>
+                        </div>
+                    </div>
 
-        <div class="container">
+                    <!-- QUICK LINKS -->
+                    <div class="col-lg-2 col-md-3 col-6">
+                        <h6 class="footer-heading">Shop</h6>
+                        <ul class="footer-nav list-unstyled">
+                            <li><a asp-controller="Products" asp-action="Index"><i class="bi bi-chevron-right me-1 small"></i> All Pickles</a></li>
+                            <li><a asp-controller="Categories" asp-action="Index"><i class="bi bi-chevron-right me-1 small"></i> Categories</a></li>
+                            <li><a asp-controller="Products" asp-action="Index"><i class="bi bi-chevron-right me-1 small"></i> Best Sellers</a></li>
+                            <li><a asp-controller="Products" asp-action="Index"><i class="bi bi-chevron-right me-1 small"></i> Fresh Batches</a></li>
+                        </ul>
+                    </div>
 
-            <div class="footer-grid">
+                    <!-- ACCOUNT LINKS -->
+                    <div class="col-lg-3 col-md-3 col-6">
+                        <h6 class="footer-heading">My Account</h6>
+                        <ul class="footer-nav list-unstyled">
+                            @if (User.Identity?.IsAuthenticated == true)
+                            {
+                                <li><a asp-controller="Home" asp-action="Profile"><i class="bi bi-chevron-right me-1 small"></i> Profile Details</a></li>
+                                <li><a asp-controller="Orders" asp-action="Index"><i class="bi bi-chevron-right me-1 small"></i> My Orders</a></li>
+                                <li><a asp-controller="Cart" asp-action="Index"><i class="bi bi-chevron-right me-1 small"></i> Shopping Cart</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-controller="Account" asp-action="Login"><i class="bi bi-chevron-right me-1 small"></i> Sign In</a></li>
+                                <li><a asp-controller="Account" asp-action="Register"><i class="bi bi-chevron-right me-1 small"></i> Create Account</a></li>
+                                <li><a asp-controller="Products" asp-action="Index"><i class="bi bi-chevron-right me-1 small"></i> Browse Products</a></li>
+                            }
+                            <li><a asp-controller="Home" asp-action="Privacy"><i class="bi bi-chevron-right me-1 small"></i> Privacy Policy</a></li>
+                        </ul>
+                    </div>
 
-                <!-- BRAND -->
-
-                <div class="footer-brand">
-
-                    <a class="footer-logo"
-                       asp-controller="Home"
-                       asp-action="Index">
-
-                        🌶️ Gaun Ko Achar
-
-                    </a>
-
-                    <p>
-
-                        Authentic homemade Nepali flavors,
-                        prepared with care and delivered
-                        with love.
-
-                    </p>
-
+                    <!-- PAYMENT & SECURITY -->
+                    <div class="col-lg-3 col-md-6">
+                        <h6 class="footer-heading">Payment Methods</h6>
+                        <p class="text-muted small mb-3">We accept all major secure payment methods for your peace of mind:</p>
+                        <div class="payment-badges-grid d-flex flex-wrap gap-2 mb-3">
+                            <span class="payment-badge cod-badge"><i class="bi bi-cash-coin me-1"></i> Cash on Delivery</span>
+                            <span class="payment-badge esewa-badge"><i class="bi bi-wallet2 me-1"></i> eSewa</span>
+                            <span class="payment-badge khalti-badge"><i class="bi bi-credit-card me-1"></i> Khalti</span>
+                        </div>
+                        <div class="footer-security d-flex align-items-center gap-2 text-muted small">
+                            <i class="bi bi-shield-lock text-success fs-5"></i>
+                            <span>All transactions are SSL 256-bit encrypted and secure.</span>
+                        </div>
+                    </div>
                 </div>
-
-
-                <!-- SHOP -->
-
-                <div class="footer-column">
-
-                    <h6>
-
-                        Shop
-
-                    </h6>
-
-                    <a asp-controller="Products"
-                       asp-action="Index">
-
-                        All Products
-
-                    </a>
-
-                    <a asp-controller="Categories"
-                       asp-action="Index">
-
-                        Categories
-
-                    </a>
-
-                </div>
-
-
-                <!-- ACCOUNT -->
-
-                <div class="footer-column">
-
-                    <h6>
-
-                        Account
-
-                    </h6>
-
-                    @if (User.Identity?.IsAuthenticated == true)
-                    {
-                        <a asp-controller="Orders"
-                           asp-action="Index">
-
-                            My Orders
-
-                        </a>
-
-                        <a asp-controller="Cart"
-                           asp-action="Index">
-
-                            Shopping Cart
-
-                        </a>
-                    }
-                    else
-                    {
-                        <a asp-controller="Account"
-                           asp-action="Login">
-
-                            Login
-
-                        </a>
-
-                        <a asp-controller="Account"
-                           asp-action="Register">
-
-                            Create Account
-
-                        </a>
-                    }
-
-                </div>
-
-
-                <!-- TRUST -->
-
-                <div class="footer-column">
-
-                    <h6>
-
-                        Why Us
-
-                    </h6>
-
-                    <span>
-
-                        🌿 Homemade
-
-                    </span>
-
-                    <span>
-
-                        ⭐ Quality Ingredients
-
-                    </span>
-
-                    <span>
-
-                        🚚 Convenient Delivery
-
-                    </span>
-
-                </div>
-
             </div>
-
-
-            <!-- FOOTER BOTTOM -->
-
-            <div class="footer-bottom">
-
-                <span>
-
-                    © @DateTime.Now.Year Gaun Ko Achar.
-                    All rights reserved.
-
-                </span>
-
-
-                <div class="footer-links">
-
-                    <a asp-controller="Home"
-                       asp-action="Privacy">
-
-                        Privacy
-
-                    </a>
-
-                </div>
-
-            </div>
-
         </div>
 
+        <div class="footer-bottom py-3">
+            <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                <div class="footer-copy text-muted small">
+                    &copy; @DateTime.Now.Year <strong>Gaun Ko Achar</strong>. Handcrafted with pride in Nepal. All rights reserved.
+                </div>
+                <div class="footer-bottom-links d-flex gap-3 small">
+                    <a asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
+                    <span class="text-muted">•</span>
+                    <a asp-controller="Home" asp-action="Index">Terms of Service</a>
+                    <span class="text-muted">•</span>
+                    <a asp-controller="Products" asp-action="Index">Shop</a>
+                </div>
+            </div>
+        </div>
     </footer>
 
-
     <!-- ================================================= -->
-    <!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT LIBRARIES -->
     <!-- ================================================= -->
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 
-    <script src="~/js/site.js"
-            asp-append-version="true"></script>
-
-    @await RenderSectionAsync(
-        "Scripts",
-        required: false)
+    @await RenderSectionAsync("Scripts", required: false)
 
 </body>
 
+</html>
 </html>

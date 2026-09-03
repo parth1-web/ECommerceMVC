@@ -1,25 +1,23 @@
-﻿
-using ECommerceMVC.Models.Api;
+﻿using ECommerceMVC.Models.Api;
 
-namespace ECommerceMVC.Services
+namespace ECommerceMVC.Services;
+
+public interface IPaymentApiService
 {
-    public interface IPaymentApiService
-    {
-        Task<PaymentDto?> CreatePaymentAsync(
+    Task<PaymentDto?> CreatePaymentAsync(
+        PaymentRequestDto request);
+
+    Task<PaymentDto?> GetPaymentByOrderIdAsync(
+        int orderId);
+
+    Task<KhaltiInitiateResponseDto?>
+        InitiateKhaltiAsync(
             PaymentRequestDto request);
 
-        Task<PaymentDto?> GetPaymentByOrderIdAsync(
+    Task<bool> KhaltiCallbackAsync(
+        string pidx);
+
+    Task<EsewaInitiateResponseDto?>
+        InitiateEsewaAsync(
             int orderId);
-
-        Task<KhaltiInitiateResponseDto?>
-            InitiateKhaltiAsync(
-                PaymentRequestDto request);
-
-        Task<bool> KhaltiCallbackAsync(
-            string pidx);
-
-        Task<EsewaInitiateResponseDto?>
-            InitiateEsewaAsync(
-                int orderId);
-    }
 }

@@ -1,509 +1,250 @@
-﻿@{
-    ViewData["Title"] = "Authentic Nepali Flavors";
+@{
+    ViewData["Title"] = "Authentic Homemade Nepali Achar & Pickles";
 }
 
-
-<!-- ================================================= -->
-<!-- HERO -->
-<!-- ================================================= -->
-
+<!-- ===================================================== -->
+<!-- HERO SECTION -->
+<!-- ===================================================== -->
 <section class="hero-section">
-
     <div class="container">
-
         <div class="row align-items-center g-5">
 
-            <!-- HERO CONTENT -->
-
+            <!-- HERO TEXT -->
             <div class="col-lg-7">
+                <div class="hero-content pe-lg-4">
 
-                <div class="hero-content">
-
-                    <div class="hero-badge">
-
-                        <span>🌶️</span>
-
-                        Authentic Nepali Homemade Taste
-
+                    <div class="section-eyebrow">
+                        <i class="bi bi-fire text-danger"></i>
+                        <span>100% Traditional Village Kitchen Recipes</span>
                     </div>
-
 
                     <h1 class="hero-title">
-
-                        Taste the tradition
-                        <span>of home.</span>
-
+                        Taste the warm tradition <br class="d-none d-md-inline" />
+                        <span class="title-accent">of Nepali home.</span>
                     </h1>
 
-
                     <p class="hero-description">
-
-                        Discover authentic homemade Nepali achar,
-                        prepared with traditional recipes, quality
-                        ingredients, and the unforgettable flavors
-                        of the village.
-
+                        Handcrafted in small batches using sun-dried Himalayan chili, cold-pressed mustard oil, and time-honored family recipes passed through generations. Preservative-free, deeply flavorful, and delivered fresh to your doorstep.
                     </p>
 
-
-                    <div class="hero-actions">
-
-                        <a asp-controller="Products"
-                           asp-action="Index"
-                           class="btn-primary-custom">
-
-                            Shop Our Products
-
-                            <span>→</span>
-
+                    <div class="d-flex flex-wrap gap-3">
+                        <a asp-controller="Products" asp-action="Index" class="btn-primary-custom">
+                            <span>Explore Our Pickles</span>
+                            <i class="bi bi-arrow-right"></i>
                         </a>
 
-
-                        <a href="#why-us"
-                           class="btn-secondary-custom">
-
-                            Discover Our Story
-
+                        <a asp-controller="Categories" asp-action="Index" class="btn-secondary-custom">
+                            <i class="bi bi-grid-3x3-gap"></i>
+                            <span>View Categories</span>
                         </a>
-
                     </div>
 
-
-                    <!-- TRUST -->
-
-                    <div class="hero-trust">
-
-                        <div>
-
-                            <strong>
-
-                                🌿
-
-                            </strong>
-
-                            <span>
-
-                                Homemade
-
-                            </span>
-
+                    <!-- HERO TRUST ICONS -->
+                    <div class="hero-trust-list">
+                        <div class="hero-trust-item">
+                            <i class="bi bi-shield-check"></i>
+                            <span>No Artificial Preservatives</span>
                         </div>
-
-
-                        <div>
-
-                            <strong>
-
-                                ⭐
-
-                            </strong>
-
-                            <span>
-
-                                Quality Ingredients
-
-                            </span>
-
+                        <div class="hero-trust-item">
+                            <i class="bi bi-sun"></i>
+                            <span>Naturally Sun-Cured</span>
                         </div>
-
-
-                        <div>
-
-                            <strong>
-
-                                ❤️
-
-                            </strong>
-
-                            <span>
-
-                                Made with Care
-
-                            </span>
-
+                        <div class="hero-trust-item">
+                            <i class="bi bi-heart-pulse"></i>
+                            <span>Pure Mustard Oil</span>
                         </div>
-
                     </div>
 
                 </div>
-
             </div>
-
 
             <!-- HERO VISUAL -->
-
             <div class="col-lg-5">
+                <div class="hero-visual-card">
+                    <div class="hero-glow-circle"></div>
 
-                <div class="hero-visual">
+                    <!-- ARTISANAL JAR SHOWCASE CARD -->
+                    <div class="achar-art-card">
+                        <span class="achar-art-badge">
+                            <i class="bi bi-award-fill me-1 text-warning"></i> Handcrafted Batch
+                        </span>
 
-                    <div class="hero-glow"></div>
-
-
-                    <div class="achar-card">
-
-                        <div class="achar-lid"></div>
-
-                        <div class="achar-jar">
-
-                            <div class="achar-label">
-
-                                <span class="label-small">
-
-                                    AUTHENTIC
-
-                                </span>
-
-                                <strong>
-
-                                    Gaun Ko
-
-                                </strong>
-
-                                <span>
-
-                                    Achar 🌶️
-
-                                </span>
-
+                        <div class="achar-jar-graphic">
+                            <div class="jar-label">
+                                <div class="jar-label-mini">AUTHENTIC</div>
+                                <div class="jar-label-title">Gaun Ko</div>
+                                <div class="jar-label-sub">ACHAR 🌶️</div>
                             </div>
-
                         </div>
 
+                        <h5 class="fw-bold mb-1">Dalle Khursani &amp; Spices</h5>
+                        <p class="text-muted small mb-0">Sun-aged in sterile glass jars</p>
+                    </div>
 
-                        <div class="floating-badge badge-top">
+                    <!-- FLOATING PILLS -->
+                    <div class="floating-pill top-right">
+                        <span>🌶️</span>
+                        <span>Bold Himalayan Zing</span>
+                    </div>
 
-                            🌶️
-                            <span>Bold Flavor</span>
-
-                        </div>
-
-
-                        <div class="floating-badge badge-bottom">
-
-                            🌿
-                            <span>Homemade</span>
-
-                        </div>
-
+                    <div class="floating-pill bottom-left">
+                        <span>🌿</span>
+                        <span>100% Homemade</span>
                     </div>
 
                 </div>
-
             </div>
 
         </div>
-
     </div>
-
 </section>
 
-
-<!-- ================================================= -->
+<!-- ===================================================== -->
 <!-- VALUE STRIP -->
-<!-- ================================================= -->
-
+<!-- ===================================================== -->
 <section class="value-strip">
-
     <div class="container">
-
-        <div class="row text-center g-4">
-
-            <div class="col-md-4">
-
-                <div class="value-item">
-
-                    <div class="value-icon">
-
-                        🌶️
-
+        <div class="row g-4">
+            <div class="col-md-3 col-sm-6">
+                <div class="value-card">
+                    <div class="value-icon-box">
+                        <i class="bi bi-mortarboard-fill"></i>
                     </div>
-
                     <div>
-
-                        <h5>
-
-                            Authentic Taste
-
-                        </h5>
-
-                        <p>
-
-                            Traditional Nepali recipes.
-
-                        </p>
-
+                        <h5>Stone-Ground Spices</h5>
+                        <p>Crushed on traditional silauto for pure aroma.</p>
                     </div>
-
                 </div>
-
             </div>
 
-
-            <div class="col-md-4">
-
-                <div class="value-item">
-
-                    <div class="value-icon">
-
-                        🌿
-
+            <div class="col-md-3 col-sm-6">
+                <div class="value-card">
+                    <div class="value-icon-box">
+                        <i class="bi bi-sun-fill text-warning"></i>
                     </div>
-
                     <div>
-
-                        <h5>
-
-                            Fresh Ingredients
-
-                        </h5>
-
-                        <p>
-
-                            Quality ingredients in every jar.
-
-                        </p>
-
+                        <h5>Sun-Aged to Perfection</h5>
+                        <p>Naturally cured in the Himalayan sun.</p>
                     </div>
-
                 </div>
-
             </div>
 
-
-            <div class="col-md-4">
-
-                <div class="value-item">
-
-                    <div class="value-icon">
-
-                        🚚
-
+            <div class="col-md-3 col-sm-6">
+                <div class="value-card">
+                    <div class="value-icon-box">
+                        <i class="bi bi-box2-heart-fill text-danger"></i>
                     </div>
-
                     <div>
-
-                        <h5>
-
-                            Easy Delivery
-
-                        </h5>
-
-                        <p>
-
-                            Convenient delivery to your door.
-
-                        </p>
-
+                        <h5>Hygienic Glass Packaging</h5>
+                        <p>Air-tight sealed for lasting freshness and flavor.</p>
                     </div>
-
                 </div>
-
             </div>
 
+            <div class="col-md-3 col-sm-6">
+                <div class="value-card">
+                    <div class="value-icon-box">
+                        <i class="bi bi-truck text-success"></i>
+                    </div>
+                    <div>
+                        <h5>Doorstep Delivery</h5>
+                        <p>Carefully dispatched across all major towns.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
-
 </section>
 
-
-<!-- ================================================= -->
-<!-- WHY US -->
-<!-- ================================================= -->
-
-<section id="why-us"
-         class="why-section">
-
+<!-- ===================================================== -->
+<!-- WHY US / STORY SECTION -->
+<!-- ===================================================== -->
+<section id="why-us" class="why-section">
     <div class="container">
 
-        <div class="section-heading text-center">
-
+        <div class="text-center max-w-700 mx-auto mb-5">
             <span class="section-eyebrow">
-
-                WHY GAUN KO ACHAR
-
+                <i class="bi bi-stars text-warning"></i> OUR COMMITMENT
             </span>
-
-            <h2>
-
-                More than achar.
-                <span>It's a memory.</span>
-
+            <h2 class="font-serif display-6 fw-bold">
+                More than just achar. <br />
+                <span class="text-primary font-serif">It's a taste of home.</span>
             </h2>
-
-            <p>
-
-                Every jar is inspired by the authentic flavors
-                found in Nepali homes and villages.
-
+            <p class="text-muted mt-3">
+                Remember the aroma of grandma's clay terrace, where jars of spicy radish and red round chilies soaked up the winter sunshine? That timeless joy is what we bring to your dining table.
             </p>
-
         </div>
 
-
-        <div class="row g-4 mt-3">
-
-            <!-- CARD 1 -->
-
+        <div class="row g-4">
             <div class="col-md-4">
-
                 <div class="feature-card">
-
-                    <div class="feature-number">
-
-                        01
-
+                    <div class="feature-card-header">
+                        <span class="feature-number">01</span>
+                        <div class="feature-icon-wrapper">
+                            <i class="bi bi-house-heart"></i>
+                        </div>
                     </div>
-
-                    <div class="feature-icon">
-
-                        🏡
-
-                    </div>
-
-                    <h4>
-
-                        Homemade Tradition
-
-                    </h4>
-
+                    <h4>Generations of Heritage</h4>
                     <p>
-
-                        Inspired by recipes and flavors passed
-                        through generations.
-
+                        Our recipes aren't industrial formulas. They are traditional village recipes refined over decades, using genuine cold-pressed mustard oil, fenugreek, and timbur.
                     </p>
-
                 </div>
-
             </div>
 
-
-            <!-- CARD 2 -->
-
             <div class="col-md-4">
-
-                <div class="feature-card feature-card-highlight">
-
-                    <div class="feature-number">
-
-                        02
-
+                <div class="feature-card highlight">
+                    <div class="feature-card-header">
+                        <span class="feature-number">02</span>
+                        <div class="feature-icon-wrapper bg-primary text-white">
+                            <i class="bi bi-fire"></i>
+                        </div>
                     </div>
-
-                    <div class="feature-icon">
-
-                        🌶️
-
-                    </div>
-
-                    <h4>
-
-                        Bold Nepali Flavor
-
-                    </h4>
-
+                    <h4>Bold, Uncompromising Flavor</h4>
                     <p>
-
-                        Rich spices and authentic ingredients
-                        create a taste you remember.
-
+                        From fiery Dalle Khursani to tangy Tama Bamboo Shoot achar, every bite packs an authentic punch that elevates every Dal Bhat, Momo, and Khaja meal.
                     </p>
-
                 </div>
-
             </div>
 
-
-            <!-- CARD 3 -->
-
             <div class="col-md-4">
-
                 <div class="feature-card">
-
-                    <div class="feature-number">
-
-                        03
-
+                    <div class="feature-card-header">
+                        <span class="feature-number">03</span>
+                        <div class="feature-icon-wrapper">
+                            <i class="bi bi-heart-pulse"></i>
+                        </div>
                     </div>
-
-                    <div class="feature-icon">
-
-                        ❤️
-
-                    </div>
-
-                    <h4>
-
-                        Made with Care
-
-                    </h4>
-
+                    <h4>Pure &amp; Chemical-Free</h4>
                     <p>
-
-                        Carefully prepared with quality and
-                        consistency in mind.
-
+                        We use zero artificial colorings, chemical souring agents, or synthetic additives. Only fresh Himalayan ingredients, natural fermentation, and mustard oil.
                     </p>
-
                 </div>
-
             </div>
-
         </div>
 
     </div>
-
 </section>
 
-
-<!-- ================================================= -->
-<!-- SHOP CTA -->
-<!-- ================================================= -->
-
-<section class="shop-cta">
-
+<!-- ===================================================== -->
+<!-- CALL TO ACTION BANNER -->
+<!-- ===================================================== -->
+<section class="shop-cta-section pt-0">
     <div class="container">
-
-        <div class="shop-cta-content">
-
+        <div class="shop-cta-banner d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-4">
             <div>
-
-                <span class="section-eyebrow light">
-
-                    READY TO TASTE NEPAL?
-
+                <span class="section-eyebrow light mb-3">
+                    <i class="bi bi-lightning-fill text-warning"></i> FRESH SEASONAL BATCHES READY
                 </span>
-
-                <h2>
-
-                    Bring authentic flavors
-                    to your table.
-
-                </h2>
-
-                <p>
-
-                    Explore our collection of traditional
-                    homemade Nepali products.
-
-                </p>
-
+                <h2>Bring the authentic taste <br class="d-none d-md-inline" />to your dinner table today.</h2>
+                <p>Browse our full collection of traditional homemade pickles, chutneys, and savory condiments.</p>
             </div>
-
-
-            <a asp-controller="Products"
-               asp-action="Index"
-               class="btn-light-custom">
-
-                Explore Products
-
-                <span>→</span>
-
-            </a>
-
+            <div class="flex-shrink-0">
+                <a asp-controller="Products" asp-action="Index" class="btn-light-custom">
+                    <span>Shop All Pickles</span>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
         </div>
-
     </div>
-
+</section>
 </section>

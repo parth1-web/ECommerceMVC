@@ -1,215 +1,71 @@
-﻿@model ECommerceMVC.Models.Api.EsewaInitiateResponseDto
+@model ECommerceMVC.Models.Api.EsewaInitiateResponseDto
 
 @{
     ViewData["Title"] = "Redirecting to eSewa";
 }
 
-<div class="container py-5">
-
-    <div class="row justify-content-center">
-
-        <div class="col-md-7">
-
-            <div class="card shadow-sm border-0">
-
-                <div class="card-body text-center p-5">
-
-                    <!-- ===================================== -->
-                    <!-- LOADING ICON -->
-                    <!-- ===================================== -->
-
-                    <div class="mb-4"
-                         style="font-size: 60px;">
-
-                        ⏳
-
-                    </div>
-
-
-                    <!-- ===================================== -->
-                    <!-- TITLE -->
-                    <!-- ===================================== -->
-
-                    <h2 class="mb-3">
-
-                        Redirecting to eSewa
-
-                    </h2>
-
-
-                    <!-- ===================================== -->
-                    <!-- DESCRIPTION -->
-                    <!-- ===================================== -->
-
-                    <p class="text-muted mb-4">
-
-                        Please wait while we redirect you to the
-                        secure eSewa payment gateway.
-
-                    </p>
-
-
-                    <!-- ===================================== -->
-                    <!-- ESEWA PAYMENT FORM -->
-                    <!-- ===================================== -->
-
-                    <form id="esewaPaymentForm"
-                          action="@Model.PaymentUrl"
-                          method="post">
-
-
-                        <!-- AMOUNT -->
-
-                        <input type="hidden"
-                               name="amount"
-                               value="@Model.FormData.Amount" />
-
-
-                        <!-- TAX AMOUNT -->
-
-                        <input type="hidden"
-                               name="tax_amount"
-                               value="@Model.FormData.TaxAmount" />
-
-
-                        <!-- TOTAL AMOUNT -->
-
-                        <input type="hidden"
-                               name="total_amount"
-                               value="@Model.FormData.TotalAmount" />
-
-
-                        <!-- TRANSACTION UUID -->
-
-                        <input type="hidden"
-                               name="transaction_uuid"
-                               value="@Model.FormData.TransactionUuid" />
-
-
-                        <!-- PRODUCT CODE -->
-
-                        <input type="hidden"
-                               name="product_code"
-                               value="@Model.FormData.ProductCode" />
-
-
-                        <!-- SERVICE CHARGE -->
-
-                        <input type="hidden"
-                               name="product_service_charge"
-                               value="@Model.FormData.ProductServiceCharge" />
-
-
-                        <!-- DELIVERY CHARGE -->
-
-                        <input type="hidden"
-                               name="product_delivery_charge"
-                               value="@Model.FormData.ProductDeliveryCharge" />
-
-
-                        <!-- SUCCESS URL -->
-
-                        <input type="hidden"
-                               name="success_url"
-                               value="@Model.FormData.SuccessUrl" />
-
-
-                        <!-- FAILURE URL -->
-
-                        <input type="hidden"
-                               name="failure_url"
-                               value="@Model.FormData.FailureUrl" />
-
-
-                        <!-- SIGNED FIELD NAMES -->
-
-                        <input type="hidden"
-                               name="signed_field_names"
-                               value="@Model.FormData.SignedFieldNames" />
-
-
-                        <!-- SIGNATURE -->
-
-                        <input type="hidden"
-                               name="signature"
-                               value="@Model.FormData.Signature" />
-
-
-                        <!-- ================================= -->
-                        <!-- FALLBACK BUTTON -->
-                        <!-- ================================= -->
-
-                        <button type="submit"
-                                class="btn btn-success btn-lg">
-
-                            Continue to eSewa
-
-                        </button>
-
-                    </form>
-
-
-                    <!-- ===================================== -->
-                    <!-- LOADING SPINNER -->
-                    <!-- ===================================== -->
-
-                    <div class="mt-4">
-
-                        <div class="spinner-border text-success"
-                             role="status">
-
-                            <span class="visually-hidden">
-
-                                Redirecting to eSewa...
-
-                            </span>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- ===================================== -->
-                    <!-- SECURITY MESSAGE -->
-                    <!-- ===================================== -->
-
-                    <p class="small text-muted mt-4 mb-0">
-
-                        🔒 You are being redirected to a secure
-                        payment gateway.
-
-                    </p>
-
+<div class="py-5">
+    <div class="container max-w-600 mx-auto">
+
+        <div class="card shadow-sm border-0 rounded-4 overflow-hidden bg-white text-center p-5">
+
+            <div class="brand-icon-box mx-auto mb-4" style="width: 76px; height: 76px; font-size: 2.2rem; background: #eaf8e6; color: #41a124;">
+                <i class="bi bi-wallet2"></i>
+            </div>
+
+            <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-1 small mb-2 mx-auto">
+                <i class="bi bi-lock-fill me-1"></i> Official eSewa Gateway
+            </span>
+
+            <h2 class="font-serif fw-bold mb-2">Connecting to eSewa...</h2>
+            <p class="text-muted small mb-4">
+                Please wait while we transfer you securely to the official eSewa checkout portal.
+            </p>
+
+            <div class="mb-4">
+                <div class="spinner-border text-success" role="status" style="width: 3rem; height: 3rem;">
+                    <span class="visually-hidden">Loading eSewa...</span>
                 </div>
+            </div>
 
+            <!-- ESEWA FORM -->
+            <form id="esewaPaymentForm" action="@Model.PaymentUrl" method="post">
+                <input type="hidden" name="amount" value="@Model.FormData.Amount" />
+                <input type="hidden" name="tax_amount" value="@Model.FormData.TaxAmount" />
+                <input type="hidden" name="total_amount" value="@Model.FormData.TotalAmount" />
+                <input type="hidden" name="transaction_uuid" value="@Model.FormData.TransactionUuid" />
+                <input type="hidden" name="product_code" value="@Model.FormData.ProductCode" />
+                <input type="hidden" name="product_service_charge" value="@Model.FormData.ProductServiceCharge" />
+                <input type="hidden" name="product_delivery_charge" value="@Model.FormData.ProductDeliveryCharge" />
+                <input type="hidden" name="success_url" value="@Model.FormData.SuccessUrl" />
+                <input type="hidden" name="failure_url" value="@Model.FormData.FailureUrl" />
+                <input type="hidden" name="signed_field_names" value="@Model.FormData.SignedFieldNames" />
+                <input type="hidden" name="signature" value="@Model.FormData.Signature" />
+
+                <button type="submit" class="btn btn-success rounded-pill px-4 py-2 fw-bold">
+                    Click here if not redirected automatically →
+                </button>
+            </form>
+
+            <div class="mt-4 pt-3 border-top text-muted small">
+                <i class="bi bi-shield-check text-success me-1"></i>
+                256-bit SSL encrypted merchant gateway.
             </div>
 
         </div>
 
     </div>
-
 </div>
-
 
 @section Scripts
 {
     <script>
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            function() {
-
-                const form =
-                    document.getElementById(
-                        "esewaPaymentForm");
-
-                if (form) {
-
-                    form.submit();
-
-                }
-
-            });
-
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("esewaPaymentForm");
+            if (form) {
+                form.submit();
+            }
+        });
     </script>
+}
 }

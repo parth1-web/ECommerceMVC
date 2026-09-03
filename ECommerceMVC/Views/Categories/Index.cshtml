@@ -1,64 +1,81 @@
-﻿@model List<ECommerceMVC.Models.CategoryViewModel>
+@model List<ECommerceMVC.Models.CategoryViewModel>
 
 @{
-    ViewData["Title"] = "Categories";
+    ViewData["Title"] = "Artisanal Achar Categories";
 }
 
-<div class="container mt-5">
-
-    <div class="text-center mb-5">
-
-        <h1>Our Categories</h1>
-
-        <p class="text-muted">
-            Explore our traditional Nepali homemade achar.
+<!-- ===================================================== -->
+<!-- CATEGORIES HERO -->
+<!-- ===================================================== -->
+<section class="products-hero-section">
+    <div class="container">
+        <span class="section-eyebrow">
+            <i class="bi bi-tag-fill"></i> FLAVOR FAMILIES
+        </span>
+        <h1 class="font-serif display-5 fw-bold mb-2">
+            Explore by <span class="text-primary font-serif">Category</span>
+        </h1>
+        <p class="text-muted mb-0 max-w-600">
+            From fiery red pepper chutneys to sun-dried vegetable blends, find your ideal Nepali condiment.
         </p>
+    </div>
+</section>
+
+<!-- ===================================================== -->
+<!-- CATEGORIES GRID -->
+<!-- ===================================================== -->
+<section class="py-5">
+    <div class="container">
+
+        @if (!Model.Any())
+        {
+            <div class="text-center py-5 my-4 bg-white rounded-4 border p-5">
+                <div class="display-3 text-muted mb-3"><i class="bi bi-tags"></i></div>
+                <h4 class="fw-bold">No Categories Found</h4>
+                <p class="text-muted mb-4">Categories are currently being curated. Please browse our full shop catalog.</p>
+                <a asp-controller="Products" asp-action="Index" class="btn-primary-custom">
+                    <span>Browse All Products</span>
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="row g-4">
+                @foreach (var category in Model)
+                {
+                    <div class="col-md-6 col-lg-4">
+                        <article class="feature-card d-flex flex-column justify-content-between p-4 h-100">
+                            <div>
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <div class="feature-icon-wrapper bg-primary-light text-primary">
+                                        <i class="bi bi-bookmark-star-fill"></i>
+                                    </div>
+                                    <span class="badge bg-light text-dark border rounded-pill px-3 py-1 small">
+                                        Authentic
+                                    </span>
+                                </div>
+
+                                <h3 class="font-serif fw-bold h4 mb-2">@category.Name</h3>
+                                <p class="text-muted small mb-4">
+                                    @(string.IsNullOrWhiteSpace(category.Description) ? "Handcrafted traditional Nepali pickles prepared with authentic spices and natural sun fermentation." : category.Description)
+                                </p>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
+                                <a asp-controller="Categories" asp-action="Details" asp-route-id="@category.Id" class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold">
+                                    <span>Explore Category</span> <i class="bi bi-arrow-right-short"></i>
+                                </a>
+                                <a asp-controller="Products" asp-action="Index" class="text-muted small text-decoration-none">
+                                    View Products →
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                }
+            </div>
+        }
 
     </div>
-
-    @if (!Model.Any())
-    {
-        <div class="alert alert-info text-center">
-            No categories are currently available.
-        </div>
-    }
-    else
-    {
-        <div class="row">
-
-            @foreach (var category in Model)
-            {
-                <div class="col-md-4 mb-4">
-
-                    <div class="card shadow-sm h-100">
-
-                        <div class="card-body">
-
-                            <h4 class="card-title">
-                                @category.Name
-                            </h4>
-
-                            <p class="card-text text-muted">
-                                @category.Description
-                            </p>
-
-                            <a asp-controller="Categories"
-                               asp-action="Details"
-                               asp-route-id="@category.Id"
-                               class="btn btn-primary">
-
-                                View Category
-
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </div>
-            }
-
-        </div>
-    }
-
+</section>
 </div>

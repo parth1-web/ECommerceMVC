@@ -1,6 +1,45 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
+@{
+    ViewData["Title"] = "Privacy & Trust Policy";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="py-5">
+    <div class="container max-w-800 mx-auto">
+        <div class="card shadow-sm border-0 rounded-4 p-5 bg-white">
+            <span class="section-eyebrow mb-2">CUSTOMER TRUST</span>
+            <h1 class="font-serif display-6 fw-bold mb-3">Privacy &amp; Data Protection Policy</h1>
+            <p class="text-muted lead fs-6 mb-4">
+                At <strong>Gaun Ko Achar</strong>, your privacy and culinary satisfaction are our highest priorities.
+            </p>
+
+            <div class="d-flex flex-column gap-4 small text-muted">
+                <div>
+                    <h5 class="text-dark fw-bold mb-2"><i class="bi bi-shield-check text-success me-1"></i> Information We Collect</h5>
+                    <p class="mb-0">
+                        We only collect the essential delivery information (such as recipient name, delivery address, phone number, and email) required to fulfill your homemade achar orders.
+                    </p>
+                </div>
+
+                <div>
+                    <h5 class="text-dark fw-bold mb-2"><i class="bi bi-credit-card text-primary me-1"></i> Payment Security</h5>
+                    <p class="mb-0">
+                        We never store your credit card, debit card, or digital wallet PINs on our servers. All transactions are securely processed directly through certified payment gateways (eSewa, Khalti, or Cash on Delivery).
+                    </p>
+                </div>
+
+                <div>
+                    <h5 class="text-dark fw-bold mb-2"><i class="bi bi-envelope-heart text-danger me-1"></i> Customer Support</h5>
+                    <p class="mb-0">
+                        Have questions regarding your order or account privacy? Reach out to our customer care team anytime at <a href="mailto:support@gaunkoachar.com" class="text-primary fw-bold">support@gaunkoachar.com</a>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-top">
+                <a asp-controller="Home" asp-action="Index" class="btn-primary-custom">
+                    <i class="bi bi-arrow-left me-1"></i> Return to Storefront
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

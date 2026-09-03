@@ -1,44 +1,69 @@
 ﻿using System.Net.Http.Headers;
-using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace ECommerceMVC.Handlers
 {
-    public class JwtAuthorizationHandler : DelegatingHandler
+    public class JwtAuthorizationHandler
+        : DelegatingHandler
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpContextAccessor
+            _httpContextAccessor;
 
         public JwtAuthorizationHandler(
             IHttpContextAccessor httpContextAccessor)
         {
-            _httpContextAccessor = httpContextAccessor;
+            _httpContextAccessor =
+                httpContextAccessor;
         }
 
-        protected override async Task<HttpResponseMessage> SendAsync(
-            HttpRequestMessage request,
-            CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage>
+            SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken)
         {
-            var httpContext = _httpContextAccessor.HttpContext;
+            var httpContext =
+                _httpContextAccessor.HttpContext;
 
             if (httpContext != null)
             {
-                // First try to get JWT from authentication claims.
-                var accessToken = httpContext.User
-                    .FindFirst("AccessToken")
-                    ?.Value;
+                // ==================================================
+                // FIRST: TRY SESSION
+                // ==================================================
 
-                // Fallback to Session if claim is unavailable.
-                if (string.IsNullOrWhiteSpace(accessToken))
+                var token =
+                    httpContext.Session.GetString(
+                        "AccessToken");
+
+                // ==================================================
+                // FALLBACK: TRY AUTHENTICATION CLAIM
+                // ==================================================
+
+                if (string.IsNullOrWhiteSpace(token))
                 {
-                    accessToken =
-                        httpContext.Session.GetString("AccessToken");
+                    token =
+                        httpContext.User
+                            .FindFirst("AccessToken")
+                            ?.Value;
+
+                    // Restore Session if token exists in cookie claim.
+                    if (!string.IsNullOrWhiteSpace(token))
+                    {
+                        httpContext.Session.SetString(
+                            "AccessToken",
+                            token);
+                    }
                 }
 
-                if (!string.IsNullOrWhiteSpace(accessToken))
+                // ==================================================
+                // ATTACH JWT
+                // ==================================================
+
+                if (!string.IsNullOrWhiteSpace(token))
                 {
                     request.Headers.Authorization =
                         new AuthenticationHeaderValue(
                             "Bearer",
-                            accessToken);
+                            token);
                 }
             }
 
