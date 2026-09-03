@@ -164,21 +164,18 @@ public class PaymentController : Controller
     // CASH ON DELIVERY
     // =========================================================
 
-    private async Task<IActionResult> ProcessCashOnDelivery(
-        int orderId)
+    private async Task<IActionResult> ProcessCashOnDelivery(int orderId)
     {
         try
         {
-            var request =
-                new PaymentRequestDto
-                {
-                    OrderId = orderId,
-                    Method = 1
-                };
+            var request = new PaymentRequestDto
+            {
+                OrderId = orderId,
+                Method = 1
+            };
 
             var payment =
-                await _paymentApiService
-                    .CreatePaymentAsync(request);
+                await _paymentApiService.CreatePaymentAsync(request);
 
             if (payment == null)
             {
@@ -187,10 +184,7 @@ public class PaymentController : Controller
 
                 return RedirectToAction(
                     nameof(Select),
-                    new
-                    {
-                        id = orderId
-                    });
+                    new { id = orderId });
             }
 
             TempData["SuccessMessage"] =
@@ -199,10 +193,7 @@ public class PaymentController : Controller
             return RedirectToAction(
                 "Details",
                 "Orders",
-                new
-                {
-                    id = orderId
-                });
+                new { id = orderId });
         }
         catch (Exception ex)
         {
@@ -216,10 +207,7 @@ public class PaymentController : Controller
 
             return RedirectToAction(
                 nameof(Select),
-                new
-                {
-                    id = orderId
-                });
+                new { id = orderId });
         }
     }
 
