@@ -56,7 +56,7 @@
             <!-- Search Bar -->
             <div class="search-input-group flex-grow-1" style="max-width: 420px;">
                 <i class="bi bi-search"></i>
-                <input type="text" id="productSearchInput" class="form-control form-control-lg" placeholder="Search by achar name, spices, flavor..." aria-label="Search products" />
+                <input type="text" id="productSearchInput" class="form-control form-control-lg" placeholder="Search by achar name, spices, flavor..." aria-label="Search products" value="@ViewBag.SearchTerm" />
             </div>
 
             <!-- Toolbar Meta & Sort -->
@@ -78,6 +78,27 @@
             </div>
 
         </div>
+
+        @if (!string.IsNullOrWhiteSpace(ViewBag.CategoryName as string) || !string.IsNullOrWhiteSpace(ViewBag.SearchTerm as string))
+        {
+            <div class="d-flex align-items-center gap-2 mb-4 p-2 px-3 bg-light rounded-pill border w-auto d-inline-flex">
+                @if (!string.IsNullOrWhiteSpace(ViewBag.CategoryName as string))
+                {
+                    <span class="small fw-semibold text-dark">
+                        <i class="bi bi-tag-fill text-primary me-1"></i> Category: <strong>@ViewBag.CategoryName</strong>
+                    </span>
+                }
+                @if (!string.IsNullOrWhiteSpace(ViewBag.SearchTerm as string))
+                {
+                    <span class="small fw-semibold text-dark">
+                        <i class="bi bi-search text-primary me-1"></i> Search: <strong>"@ViewBag.SearchTerm"</strong>
+                    </span>
+                }
+                <a asp-controller="Products" asp-action="Index" class="btn btn-sm btn-outline-secondary rounded-pill py-0 px-2 ms-2 small" title="Clear all filters">
+                    <i class="bi bi-x"></i> Clear
+                </a>
+            </div>
+        }
 
         @if (!productList.Any())
         {
@@ -262,5 +283,4 @@
             </div>
         </div>
     </div>
-</section>
 </section>

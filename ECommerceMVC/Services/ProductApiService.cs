@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Json;
+using System.Net.Http.Json;
 using ECommerceMVC.Models.Api;
 
 namespace ECommerceMVC.Services
@@ -12,13 +12,37 @@ namespace ECommerceMVC.Services
             _httpClient = httpClient;
         }
 
-        public async Task<ProductListResponseDto> GetProductsAsync()
+        public async Task<ProductListResponseDto> GetProductsAsync(
+            string? search = null,
+            int? categoryId = null,
+            string sortBy = "createdAt",
+            string sortOrder = "desc",
+            int page = 1,
+            int pageSize = 100)
         {
             try
             {
+                var queryParams = new List<string>
+                {
+                    $"page={page}",
+                    $"pageSize={pageSize}",
+                    $"sortBy={Uri.EscapeDataString(sortBy)}",
+                    $"sortOrder={Uri.EscapeDataString(sortOrder)}"
+                };
+
+                if (!string.IsNullOrWhiteSpace(search))
+                {
+                    queryParams.Add($"search={Uri.EscapeDataString(search.Trim())}");
+                }
+
+                if (categoryId.HasValue && categoryId.Value > 0)
+                {
+                    queryParams.Add($"categoryId={categoryId.Value}");
+                }
+
+                var url = $"api/Products/search?{string.Join("&", queryParams)}";
                 var response =
-                    await _httpClient.GetFromJsonAsync<ProductListResponseDto>(
-                        "api/Products/search");
+                    await _httpClient.GetFromJsonAsync<ProductListResponseDto>(url);
 
                 return response ?? new ProductListResponseDto();
             }

@@ -33,7 +33,7 @@
                     </p>
 
                     <div class="d-flex flex-wrap justify-content-center gap-3 pt-3 border-top">
-                        <a asp-controller="Products" asp-action="Index" class="btn-primary-custom">
+                        <a asp-controller="Products" asp-action="Index" asp-route-categoryId="@Model.Id" class="btn-primary-custom">
                             <span>Browse Pickles in this Category</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -48,5 +48,4 @@
         </div>
 
     </div>
-</div>
 </div>

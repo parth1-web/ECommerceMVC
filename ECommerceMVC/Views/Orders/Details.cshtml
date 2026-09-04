@@ -389,11 +389,11 @@
                             </div>
                         }
 
-                        @if (payment?.PaymentDate != null)
+                        @if (payment != null && payment.PaymentDate != default)
                         {
-                            var paymentDate = payment.PaymentDate.Value.Kind == DateTimeKind.Utc
-                                ? payment.PaymentDate.Value.ToLocalTime()
-                                : payment.PaymentDate.Value;
+                            var paymentDate = payment.PaymentDate.Kind == DateTimeKind.Utc
+                                ? payment.PaymentDate.ToLocalTime()
+                                : payment.PaymentDate;
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="text-muted small">Payment Date</span>

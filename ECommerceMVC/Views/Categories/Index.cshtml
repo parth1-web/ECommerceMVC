@@ -66,7 +66,7 @@
                                 <a asp-controller="Categories" asp-action="Details" asp-route-id="@category.Id" class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold">
                                     <span>Explore Category</span> <i class="bi bi-arrow-right-short"></i>
                                 </a>
-                                <a asp-controller="Products" asp-action="Index" class="text-muted small text-decoration-none">
+                                <a asp-controller="Products" asp-action="Index" asp-route-categoryId="@category.Id" class="text-muted small text-decoration-none">
                                     View Products →
                                 </a>
                             </div>
@@ -78,4 +78,3 @@
 
     </div>
 </section>
-</div>

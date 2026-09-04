@@ -1,4 +1,4 @@
-﻿using System.Security.Claims;
+using System.Security.Claims;
 using ECommerceMVC.Models;
 using ECommerceMVC.Models.Api;
 using ECommerceMVC.Services;
@@ -209,9 +209,21 @@ namespace ECommerceMVC.Controllers
         // LOGOUT
         // ==================================================
 
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            return await PerformLogout();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
+        [ActionName("Logout")]
+        public async Task<IActionResult> LogoutPost()
+        {
+            return await PerformLogout();
+        }
+
+        private async Task<IActionResult> PerformLogout()
         {
             // Remove JWT from session.
             HttpContext.Session.Remove(
