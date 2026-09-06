@@ -14,6 +14,12 @@
 
         public string ImageUrl { get; set; } = string.Empty;
 
+        public string Ingredients { get; set; } = string.Empty;
+
+        public string BestPairings { get; set; } = string.Empty;
+
+        public string StorageAndShelfLife { get; set; } = string.Empty;
+
         public bool IsAvailable => Stock > 0;
     }
 }

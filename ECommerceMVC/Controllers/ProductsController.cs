@@ -26,7 +26,9 @@ namespace ECommerceMVC.Controllers
                 await _productApiService.GetProductsAsync(
                     search: search,
                     categoryId: categoryId,
-                    sortBy: string.IsNullOrWhiteSpace(sortBy) ? "createdAt" : sortBy,
+                    sortBy: string.IsNullOrWhiteSpace(sortBy)
+                        ? "createdAt"
+                        : sortBy,
                     pageSize: 100);
 
             var viewModels = response.Items
@@ -39,7 +41,11 @@ namespace ECommerceMVC.Controllers
                         Description = product.Description,
                         Price = product.Price,
                         Stock = product.Stock,
-                        ImageUrl = product.ImageUrl
+                        ImageUrl = product.ImageUrl,
+
+                        Ingredients = product.Ingredients,
+                        BestPairings = product.BestPairings,
+                        StorageAndShelfLife = product.StorageAndShelfLife
                     })
                 .ToList();
 
@@ -49,7 +55,10 @@ namespace ECommerceMVC.Controllers
 
             if (categoryId.HasValue && categoryId.Value > 0)
             {
-                var category = await _categoryApiService.GetCategoryByIdAsync(categoryId.Value);
+                var category =
+                    await _categoryApiService
+                        .GetCategoryByIdAsync(categoryId.Value);
+
                 ViewBag.CategoryName = category?.Name;
             }
 
@@ -59,7 +68,8 @@ namespace ECommerceMVC.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var product =
-                await _productApiService.GetProductByIdAsync(id);
+                await _productApiService
+                    .GetProductByIdAsync(id);
 
             if (product == null)
             {
@@ -73,7 +83,11 @@ namespace ECommerceMVC.Controllers
                 Description = product.Description,
                 Price = product.Price,
                 Stock = product.Stock,
-                ImageUrl = product.ImageUrl
+                ImageUrl = product.ImageUrl,
+
+                Ingredients = product.Ingredients,
+                BestPairings = product.BestPairings,
+                StorageAndShelfLife = product.StorageAndShelfLife
             };
 
             return View(viewModel);

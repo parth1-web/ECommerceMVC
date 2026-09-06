@@ -158,33 +158,101 @@
                     <!-- TASTE & INGREDIENT NOTES -->
                     <div class="details-tabs">
                         <ul class="nav nav-tabs border-bottom" id="productTab" role="tablist">
+
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active fw-bold small" id="ingredients-tab" data-bs-toggle="tab" data-bs-target="#ingredients" type="button" role="tab" aria-selected="true">
-                                    <i class="bi bi-egg-fried me-1"></i> Ingredients &amp; Spices
+                                <button class="nav-link active fw-bold small"
+                                        id="ingredients-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#ingredients"
+                                        type="button"
+                                        role="tab"
+                                        aria-selected="true">
+
+                                    <i class="bi bi-egg-fried me-1"></i>
+                                    Ingredients &amp; Spices
                                 </button>
                             </li>
+
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link fw-bold small" id="serving-tab" data-bs-toggle="tab" data-bs-target="#serving" type="button" role="tab" aria-selected="false">
-                                    <i class="bi bi-cup-hot me-1"></i> Best Pairings
+                                <button class="nav-link fw-bold small"
+                                        id="serving-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#serving"
+                                        type="button"
+                                        role="tab"
+                                        aria-selected="false">
+
+                                    <i class="bi bi-cup-hot me-1"></i>
+                                    Best Pairings
                                 </button>
                             </li>
+
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link fw-bold small" id="storage-tab" data-bs-toggle="tab" data-bs-target="#storage" type="button" role="tab" aria-selected="false">
-                                    <i class="bi bi-box2 me-1"></i> Storage &amp; Shelf Life
+                                <button class="nav-link fw-bold small"
+                                        id="storage-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#storage"
+                                        type="button"
+                                        role="tab"
+                                        aria-selected="false">
+
+                                    <i class="bi bi-box2 me-1"></i>
+                                    Storage &amp; Shelf Life
                                 </button>
                             </li>
+
                         </ul>
 
                         <div class="tab-content pt-3" id="productTabContent">
-                            <div class="tab-pane fade show active small text-muted" id="ingredients" role="tabpanel">
-                                Fresh hand-picked Himalayan produce, pure cold-pressed mustard oil, ground turmeric, Himalayan rock salt, roasted fenugreek (methi), wild timbur pepper, yellow mustard seeds, and natural spices. 100% free of artificial vinegar and chemical colors.
+
+                            <!-- INGREDIENTS -->
+                            <div class="tab-pane fade show active small text-muted"
+                                 id="ingredients"
+                                 role="tabpanel">
+
+                                @if (!string.IsNullOrWhiteSpace(Model.Ingredients))
+                                {
+                                    @Model.Ingredients
+                                }
+                                else
+                                {
+                                    <span>Ingredients information is currently unavailable.</span>
+                                }
+
                             </div>
-                            <div class="tab-pane fade small text-muted" id="serving" role="tabpanel">
-                                Pairs exceptionally well with steaming hot Dal Bhat Tarkari, fried Sel Roti, Chiura (beaten rice) &amp; Sekuwa, steaming Momos, or as a tangy companion to parathas.
+
+                            <!-- PAIRINGS -->
+                            <div class="tab-pane fade small text-muted"
+                                 id="serving"
+                                 role="tabpanel">
+
+                                @if (!string.IsNullOrWhiteSpace(Model.BestPairings))
+                                {
+                                    @Model.BestPairings
+                                }
+                                else
+                                {
+                                    <span>Pairing information is currently unavailable.</span>
+                                }
+
                             </div>
-                            <div class="tab-pane fade small text-muted" id="storage" role="tabpanel">
-                                Store in a cool, dry place away from direct moisture. Always use a clean, dry spoon to serve. Keep oil level slightly above pickles for natural preservation. Best consumed within 6 months of opening.
+
+                            <!-- STORAGE -->
+                            <div class="tab-pane fade small text-muted"
+                                 id="storage"
+                                 role="tabpanel">
+
+                                @if (!string.IsNullOrWhiteSpace(Model.StorageAndShelfLife))
+                                {
+                                    @Model.StorageAndShelfLife
+                                }
+                                else
+                                {
+                                    <span>Storage information is currently unavailable.</span>
+                                }
+
                             </div>
+
                         </div>
                     </div>
 
